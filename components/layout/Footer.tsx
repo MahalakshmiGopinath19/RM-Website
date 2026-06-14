@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { FaFacebookF, FaInstagram, FaWhatsapp, FaPhone, FaEnvelope } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaWhatsapp, FaPhone, FaEnvelope, FaMapMarkerAlt, FaRegClock } from 'react-icons/fa';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,35 +18,62 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-white text-gray-900 py-16 border-t border-gray-200">
-      <div className="container mx-auto px-6">
+    <footer 
+      className="relative text-white overflow-hidden"
+      style={{
+        backgroundImage: `url('/image/footbanner.webp')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      {/* Darker overlay with gradient for better depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#D32F2F]/95 to-[#B71C1C]/95 z-0"></div>
+
+      <div className="container mx-auto px-6 relative z-10 pt-16 pb-8">
         
-        {/* Main Grid: Added gap-x-16 to create more separation */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-12 gap-x-16 mb-16">
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 lg:gap-12 mb-14">
           
           {/* Logo & Bio */}
-          <div className="md:col-span-1">
-            <Image src="/logo.webp" alt="Rainbow Media" width={160} height={50} className="mb-6" />
-            <p className="text-gray-700 text-sm leading-relaxed font-medium">
-              Experience digital excellence crafted with elegance, modern AI‑driven strategies, and result‑oriented solutions for everyone.
+          <div className="space-y-5">
+            <p className="text-white/80 text-sm leading-relaxed">
+              Experience digital excellence crafted with elegance, modern strategies, and result‑oriented solutions for everyone.
             </p>
-            {/* Social Icons: Reduced size (p-2.5) */}
-            <div className="flex gap-3 mt-8">
-              {[FaFacebookF, FaInstagram, FaWhatsapp, FaPhone, FaEnvelope].map((Icon, i) => (
-                <div key={i} className="p-2.5 bg-gray-50 border border-gray-200 rounded-full hover:bg-[#D32F2F] hover:text-white transition-all duration-300 cursor-pointer text-[#D32F2F]">
-                  <Icon size={16} />
-                </div>
+            <div className="flex gap-3 pt-2">
+              {[
+                { icon: FaFacebookF, href: "#", label: "Facebook" },
+                { icon: FaInstagram, href: "#", label: "Instagram" },
+                { icon: FaWhatsapp, href: "https://wa.me/917305821333", label: "WhatsApp" },
+                { icon: FaPhone, href: "tel:+917305821333", label: "Call" },
+                { icon: FaEnvelope, href: "mailto:rainbowmedia@gmail.com", label: "Email" }
+              ].map((item, i) => (
+                <a 
+                  key={i} 
+                  href={item.href} 
+                  aria-label={item.label}
+                  className="w-10 h-10 flex items-center justify-center border border-white/30 rounded-full hover:bg-white hover:text-[#D32F2F] transition-all duration-300 hover:scale-110 hover:border-transparent"
+                >
+                  <item.icon size={16} />
+                </a>
               ))}
             </div>
           </div>
 
-          {/* Explore */}
-          <div>
-            <h4 className="text-[#D32F2F] font-bold text-sm uppercase tracking-[0.2em] mb-8">Explore</h4>
-            <ul className="space-y-4 text-gray-800 font-semibold text-sm">
+          {/* Explore - shifted exactly 1 inch (96px) to the right */}
+          <div className="md:ml-24">
+            <h4 className="font-bold uppercase tracking-wider text-lg mb-5 relative inline-block after:content-[''] after:absolute after:bottom-[-8px] after:left-0 after:w-8 after:h-0.5 after:bg-red-300">
+              Explore
+            </h4>
+            <ul className="space-y-3 text-sm text-white/80">
               {['About Us', 'Services', 'Products', 'Career', 'Blog', 'Contact Us'].map((item) => (
                 <li key={item}>
-                  <Link href={`/${item.toLowerCase().replace(' ', '')}`} className="hover:text-[#D32F2F] transition-colors">{item}</Link>
+                  <Link 
+                    href={`/${item.toLowerCase().replace(' ', '')}`} 
+                    className="hover:text-white hover:pl-1 transition-all duration-200 inline-block"
+                  >
+                    {item}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -55,32 +81,60 @@ export default function Footer() {
 
           {/* Experience Centers */}
           <div className="md:col-span-2">
-            <h4 className="text-[#D32F2F] font-bold text-sm uppercase tracking-[0.2em] mb-8">Experience Centers</h4>
-            <div className="flex flex-col md:flex-row gap-10">
-              <div className="text-gray-700 text-sm space-y-4 max-w-sm">
-                <p className="flex items-start gap-3"><span className="text-[#D32F2F] font-bold">📍</span> Old.No. 83, New no.112, 2nd floor, Anna salai, Manickam lane, Guindy, Chennai-600032</p>
-                <p className="flex items-center gap-3"><span className="text-[#D32F2F] font-bold">📧</span> rainbowmedia@gmail.com</p>
+            <h4 className="font-bold uppercase tracking-wider text-lg mb-5 relative inline-block after:content-[''] after:absolute after:bottom-[-8px] after:left-0 after:w-8 after:h-0.5 after:bg-red-300">
+              Experience Centers
+            </h4>
+            <div className="grid md:grid-cols-2 gap-6 text-sm">
+              <div className="space-y-3">
+                <div className="flex gap-3">
+                  <FaMapMarkerAlt className="text-red-300 mt-1 flex-shrink-0" size={14} />
+                  <p className="text-white/80 leading-relaxed">
+                    Old.No. 83, New no.112, 2nd floor, Anna salai, Manickam lane, Guindy, Chennai-600032
+                  </p>
+                </div>
+                <div className="flex gap-3">
+                  <FaEnvelope className="text-red-300 mt-1 flex-shrink-0" size={14} />
+                  <a href="mailto:rainbowmedia@gmail.com" className="text-white/80 hover:text-white transition-colors">
+                    rainbowmedia@gmail.com
+                  </a>
+                </div>
               </div>
-              <div className="border-l border-gray-200 pl-8 space-y-2 text-sm font-bold text-gray-900">
-                <div className="flex justify-between w-48"><span>GUINDY</span> <span className="text-[#D32F2F]">+91 73058 21333</span></div>
+              <div className="border-l border-white/20 pl-6 space-y-3">
+                <div className="flex gap-3">
+                  <FaRegClock className="text-red-300 mt-1" size={14} />
+                  <div>
+                    <p className="text-white/80 text-lg uppercase tracking-wider">Guindy</p>
+                    <a href="tel:+917305821333" className="text-2xl font-bold hover:text-red-200 transition-colors block">
+                      +91 73058 21333
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Specialties Box */}
-        <div className="border-t border-b border-gray-200 py-10 mb-12">
-          <h4 className="text-gray-900 text-center text-xs font-bold tracking-[0.2em] mb-8 uppercase">Discover our specialities</h4>
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-gray-500 text-[11px] font-medium uppercase tracking-wider">
+        {/* Specialties Badges */}
+        <div className="mb-14">
+          <h4 className="font-bold uppercase tracking-wider text-lg text-center mb-6 opacity-80">
+            Our Specialties
+          </h4>
+          <div className="flex flex-wrap gap-2 justify-center">
             {specialities.map((item, idx) => (
-              <span key={idx} className="hover:text-[#D32F2F] transition-colors cursor-default">{item}</span>
+              <Link 
+                href="/services" 
+                key={idx} 
+                className="px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-xs font-medium hover:bg-white hover:text-[#D32F2F] transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              >
+                {item}
+              </Link>
             ))}
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="text-center text-gray-400 text-[10px] font-bold uppercase tracking-widest">
-          <p>© Copyright {currentYear} Rainbow Media. All rights reserved. India (IN)</p>
+        {/* Footer Bottom */}
+        <div className="text-center pt-6 border-t border-white/15 text-xs text-white/60 uppercase tracking-wider">
+          <p>© Copyright © 2024 Rainbow media. All rights reserved</p>
         </div>
       </div>
     </footer>

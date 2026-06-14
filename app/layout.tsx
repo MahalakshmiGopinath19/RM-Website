@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
+import ScrollPopup from '@/components/ScrollPopup';
 import Footer from '@/components/layout/Footer';
-
 export const metadata: Metadata = {
   title: 'Rainbow Media - AI Integrated Digital & IT Services',
   description: 'Transforming Ideas into Digital Realities | Web Development, Social Media Marketing, SEO',
@@ -31,6 +31,7 @@ export default function RootLayout({
       <body className="bg-[#FCF6F6] text-[#425466] font-['Inter'] antialiased">
         <Header />
         <main>{children}</main>
+        <ScrollPopup />
         <Footer />
       </body>
     </html>

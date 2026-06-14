@@ -53,7 +53,7 @@ export default function Header() {
 
         <nav className="container mx-auto px-4 lg:px-6 py-3 flex justify-between items-center">
           <Link href="/" className="flex-shrink-0 transform transition duration-300 hover:scale-105">
-            <Image src="/logo.webp" alt="Rainbow Media" width={200} height={60} className="w-auto h-14 lg:h-16 brightness-110 contrast-125 drop-shadow-lg" priority />
+            <Image src="/image/logo.webp" alt="Rainbow Media" width={200} height={60} className="w-auto h-14 lg:h-16 brightness-110 contrast-125 drop-shadow-lg" priority />
           </Link>
 
           <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
@@ -137,7 +137,7 @@ export default function Header() {
       {/* Right side: Form matching image_48a5dd.png */}
       <div className="p-10 md:p-12 w-full md:w-[52%] bg-white flex flex-col justify-center">
         <div className="mb-8 self-end md:self-start">
-            <Image src="/logo.webp" alt="Logo" width={160} height={40} />
+            <Image src="/image/logo.webp" alt="Logo" width={160} height={40} />
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-6">
