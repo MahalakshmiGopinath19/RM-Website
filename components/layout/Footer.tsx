@@ -27,8 +27,8 @@ export default function Footer() {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Darker overlay with gradient for better depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#D32F2F]/95 to-[#B71C1C]/95 z-0"></div>
+      {/* Darker overlay with gradient - Updated to #FF0000 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#FF0000]/95 to-[#CC0000]/95 z-0"></div>
 
       <div className="container mx-auto px-6 relative z-10 pt-16 pb-8">
         
@@ -52,7 +52,7 @@ export default function Footer() {
                   key={i} 
                   href={item.href} 
                   aria-label={item.label}
-                  className="w-10 h-10 flex items-center justify-center border border-white/30 rounded-full hover:bg-white hover:text-[#D32F2F] transition-all duration-300 hover:scale-110 hover:border-transparent"
+                  className="w-10 h-10 flex items-center justify-center border border-white/30 rounded-full hover:bg-white hover:text-[#FF0000] transition-all duration-300 hover:scale-110 hover:border-transparent"
                 >
                   <item.icon size={16} />
                 </a>
@@ -124,7 +124,7 @@ export default function Footer() {
               <Link 
                 href="/services" 
                 key={idx} 
-                className="px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-xs font-medium hover:bg-white hover:text-[#D32F2F] transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                className="px-4 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-xs font-medium hover:bg-white hover:text-[#FF0000] transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
                 {item}
               </Link>
@@ -134,7 +134,7 @@ export default function Footer() {
 
         {/* Footer Bottom */}
         <div className="text-center pt-6 border-t border-white/15 text-xs text-white/60 uppercase tracking-wider">
-          <p>© Copyright © 2024 Rainbow media. All rights reserved</p>
+          <p>© Copyright © {currentYear} Rainbow media. All rights reserved</p>
         </div>
       </div>
     </footer>
