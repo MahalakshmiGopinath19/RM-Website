@@ -108,7 +108,7 @@ export default function ContactPage() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="bg-gradient-to-br from-red-600 to-red-700 rounded-2xl shadow-xl overflow-hidden text-white"
+              className="bg-gradient-to-br from-[#D18F5C] to-[#B8714A] rounded-2xl shadow-xl overflow-hidden text-white"
             >
               <div className="p-6 md:p-8 space-y-6">
                 <div>
@@ -181,7 +181,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         placeholder="First Name"
-                        className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:border-red-400 focus:ring-2 focus:ring-red-100 transition"
+                        className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:border-[#D18F5C] focus:ring-2 focus:ring-[#FDFBF8] transition"
                       />
                     </div>
                   </div>
@@ -196,7 +196,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         placeholder="Last Name"
-                        className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:border-red-400 focus:ring-2 focus:ring-red-100 transition"
+                        className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:border-[#D18F5C] focus:ring-2 focus:ring-[#FDFBF8] transition"
                       />
                     </div>
                   </div>
@@ -213,7 +213,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         placeholder="you@example.com"
-                        className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:border-red-400 focus:ring-2 focus:ring-red-100 transition"
+                        className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:border-[#D18F5C] focus:ring-2 focus:ring-[#FDFBF8] transition"
                       />
                     </div>
                   </div>
@@ -228,7 +228,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         placeholder="+91 12345 67890"
-                        className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:border-red-400 focus:ring-2 focus:ring-red-100 transition"
+                        className="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-500 focus:border-[#D18F5C] focus:ring-2 focus:ring-[#FDFBF8] transition"
                       />
                     </div>
                   </div>
@@ -241,8 +241,8 @@ export default function ContactPage() {
                         key={opt}
                         className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all duration-200 ${
                           formData.service === opt
-                            ? 'bg-red-600 text-white shadow-md'
-                            : 'bg-gray-100 text-gray-700 hover:bg-red-50 hover:text-red-600'
+                            ? 'bg-[#B8714A] text-white shadow-md'
+                            : 'bg-gray-100 text-gray-700 hover:bg-[#FDFBF8] hover:text-red-600'
                         }`}
                       >
                         <input
@@ -267,14 +267,14 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     placeholder="Tell us about your project or inquiry..."
-                    className="w-full p-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-500 resize-none focus:border-red-400 focus:ring-2 focus:ring-red-100 transition"
+                    className="w-full p-2.5 border border-gray-200 rounded-lg text-sm placeholder-gray-500 resize-none focus:border-[#D18F5C] focus:ring-2 focus:ring-[#FDFBF8] transition"
                   />
                 </div>
                 <div className="text-right">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-70"
+                    className="inline-flex items-center gap-2 bg-[#B8714A] hover:bg-red-700 text-white px-6 py-2.5 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-70"
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'} <FaPaperPlane />
                   </button>
@@ -291,7 +291,7 @@ export default function ContactPage() {
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-red-600 font-semibold uppercase tracking-wider text-sm">Find Us</span>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Our Location</h2>
-            <div className="w-16 h-1 bg-red-500 mx-auto mt-4 rounded-full"></div>
+            <div className="w-16 h-1 bg-[#D18F5C] mx-auto mt-4 rounded-full"></div>
             <p className="text-gray-600 mt-4">Visit us at our office in Guindy – we'd love to meet you in person.</p>
           </div>
           <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
@@ -311,14 +311,14 @@ export default function ContactPage() {
                   href="https://maps.google.com/?q=Rainbow+Media+Guindy+Chennai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-gray-800 hover:bg-red-600 hover:text-white px-4 py-2 rounded-full text-sm font-medium shadow-md transition-all duration-200"
+                  className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm text-gray-800 hover:bg-[#B8714A] hover:text-white px-4 py-2 rounded-full text-sm font-medium shadow-md transition-all duration-200"
                 >
                   <FaExternalLinkAlt className="text-xs" /> Get Directions
                 </a>
               </div>
             </div>
             <div className="p-4 bg-gray-50 text-center text-gray-600 border-t border-gray-100">
-              <p className="flex items-center justify-center gap-2"><FaMapMarkerAlt className="text-red-500" /> Rainbow Media, Old No.83, New no.112, 2nd floor, Anna salai, Manickam lane, Guindy, Chennai-600032</p>
+              <p className="flex items-center justify-center gap-2"><FaMapMarkerAlt className="text-[#D18F5C]" /> Rainbow Media, Old No.83, New no.112, 2nd floor, Anna salai, Manickam lane, Guindy, Chennai-600032</p>
             </div>
           </div>
         </div>
@@ -334,7 +334,7 @@ export default function ContactPage() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={scrollToTop}
-            className="fixed bottom-6 right-6 bg-red-600 text-white p-3 rounded-full shadow-lg z-40 hover:bg-red-700 transition-all"
+            className="fixed bottom-6 right-6 bg-[#B8714A] text-white p-3 rounded-full shadow-lg z-40 hover:bg-red-700 transition-all"
           >
             ↑
           </motion.button>

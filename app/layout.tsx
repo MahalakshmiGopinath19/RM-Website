@@ -49,7 +49,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className="bg-[#FCF6F6] text-[#425466] font-['Inter'] antialiased">
+      <body className="bg-[#0A0930] text-white font-['Inter'] antialiased">
         <Header />
 
         <main>{children}</main>

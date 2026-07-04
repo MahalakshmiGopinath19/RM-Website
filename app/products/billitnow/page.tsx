@@ -30,7 +30,7 @@ function DemoModal({ isOpen, onClose, onSubmit }: any) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6">
-          <h3 className="text-2xl font-bold text-[#D32F2F] mb-2">Book a Free Demo</h3>
+          <h3 className="text-2xl font-bold text-[#D18F5C] mb-2">Book a Free Demo</h3>
           <p className="text-gray-500 text-sm mb-4">Our AI billing expert will contact you on WhatsApp.</p>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input type="text" name="name" placeholder="Full Name" required value={form.name} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl text-sm" />
@@ -125,7 +125,7 @@ export default function BillitNowPage() {
       {/* Features Grid (simplified, no broken images) */}
       <div id="features" className="bg-gray-50 py-16">
         <div className="container mx-auto px-4 text-center">
-          <span className="text-[#D32F2F] font-semibold uppercase tracking-wide">Features</span>
+          <span className="text-[#D18F5C] font-semibold uppercase tracking-wide">Features</span>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mt-2">Empower your billing process with <span className="text-blue-600">next-gen</span> feature set</h2>
         </div>
         <div className="container mx-auto px-4 mt-12 space-y-8 max-w-5xl">
@@ -133,13 +133,13 @@ export default function BillitNowPage() {
             <div className="md:w-1/2">
               <h3 className="text-2xl font-bold text-gray-800">Go Paperless</h3>
               <p className="text-gray-600 mt-2">Streamline your billing process with our cutting-edge paperless billing software. Say goodbye to paperwork and hello to efficiency.</p>
-              <button onClick={() => setModalOpen(true)} className="mt-4 bg-[#D32F2F] text-white px-6 py-2 rounded-full">Book now</button>
+              <button onClick={() => setModalOpen(true)} className="mt-4 bg-[#D18F5C] text-white px-6 py-2 rounded-full">Book now</button>
             </div>
             <div className="md:w-1/2 bg-gray-100 h-40 rounded-xl flex items-center justify-center"><span className="text-3xl">📄➡️📱</span></div>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-2xl p-6 shadow-md text-center"><span className="text-3xl">📱</span><h4 className="text-xl font-bold mt-2">Mobile accessibility</h4><p className="text-gray-500 text-sm">Billing at your fingertips wherever you go!</p><button onClick={() => setModalOpen(true)} className="mt-3 text-[#D32F2F] font-semibold">Book now</button></div>
-            <div className="bg-white rounded-2xl p-6 shadow-md text-center"><span className="text-3xl">🤝</span><h4 className="text-xl font-bold mt-2">Instant customer integration</h4><p className="text-gray-500 text-sm">Seamless integration with your customer systems.</p><button onClick={() => setModalOpen(true)} className="mt-3 text-[#D32F2F] font-semibold">Book now</button></div>
+            <div className="bg-white rounded-2xl p-6 shadow-md text-center"><span className="text-3xl">📱</span><h4 className="text-xl font-bold mt-2">Mobile accessibility</h4><p className="text-gray-500 text-sm">Billing at your fingertips wherever you go!</p><button onClick={() => setModalOpen(true)} className="mt-3 text-[#D18F5C] font-semibold">Book now</button></div>
+            <div className="bg-white rounded-2xl p-6 shadow-md text-center"><span className="text-3xl">🤝</span><h4 className="text-xl font-bold mt-2">Instant customer integration</h4><p className="text-gray-500 text-sm">Seamless integration with your customer systems.</p><button onClick={() => setModalOpen(true)} className="mt-3 text-[#D18F5C] font-semibold">Book now</button></div>
           </div>
         </div>
       </div>
@@ -149,7 +149,7 @@ export default function BillitNowPage() {
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-[#D32F2F] font-semibold uppercase tracking-wide">Benefits</span>
+              <span className="text-[#D18F5C] font-semibold uppercase tracking-wide">Benefits</span>
               <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mt-2">Key benefits of our billing software</h3>
               <div className="mt-6 space-y-2">
                 {['User Friendly', 'Mobile Accessibility', 'Paperless Billing', 'Effortless Invoicing', 'Inventory Management', 'Customer Integration', 'Sales and expense Reports', 'Staff Sales Tracking'].map(b => <div key={b} className="flex items-center gap-2"><span className="text-green-500">✓</span><span>{b}</span></div>)}
@@ -203,7 +203,7 @@ export default function BillitNowPage() {
                     <h3 className="text-xl font-bold uppercase">{plan.name}</h3>
                     <div className="mt-4"><span className="text-4xl font-bold">{symbol}{price.toLocaleString()}</span><span className="text-gray-500 text-sm">/year</span></div>
                     <ul className="mt-4 space-y-1 text-sm">{plan.features.map(f => <li key={f}>✓ {f}</li>)}</ul>
-                    <button onClick={() => setModalOpen(true)} className="mt-6 w-full bg-[#D32F2F] hover:bg-[#B71C1C] text-white py-2 rounded-full">Book Now</button>
+                    <button onClick={() => setModalOpen(true)} className="mt-6 w-full bg-[#D18F5C] hover:bg-[#B8714A] text-white py-2 rounded-full">Book Now</button>
                   </div>
                 </div>
               );
@@ -215,7 +215,7 @@ export default function BillitNowPage() {
       {/* FAQ */}
       <div className="bg-gray-50 py-16">
         <div className="container mx-auto px-4 text-center">
-          <span className="text-[#D32F2F] font-semibold uppercase tracking-wide">FAQ</span>
+          <span className="text-[#D18F5C] font-semibold uppercase tracking-wide">FAQ</span>
           <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mt-2">Ready to get started?</h2>
           <div className="grid md:grid-cols-2 gap-6 mt-8 text-left">
             {[
@@ -246,7 +246,7 @@ export default function BillitNowPage() {
 
       {/* Back to Top */}
       <AnimatePresence>
-        {showBackToTop && <motion.button initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToTop} className="fixed bottom-4 right-4 bg-[#D32F2F] text-white p-3 rounded-full shadow-lg z-40 hover:bg-[#B71C1C] transition-all">↑</motion.button>}
+        {showBackToTop && <motion.button initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToTop} className="fixed bottom-4 right-4 bg-[#D18F5C] text-white p-3 rounded-full shadow-lg z-40 hover:bg-[#B8714A] transition-all">↑</motion.button>}
       </AnimatePresence>
 
       {/* Modal */}

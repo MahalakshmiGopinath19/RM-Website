@@ -12,6 +12,18 @@ import {
 } from 'react-icons/fa';
 
 /* ══════════════════════════════════════════════════════════
+   VAAVE DIGITAL — BRAND PALETTE
+   Navy      #0A0930  (deep background, matches logo backdrop)
+   Navy-Deep #12103D  (secondary depth layer, gradients)
+   Gold      #D18F5C  (primary copper/rose-gold accent)
+   Gold-D    #B8714A  (darker copper — hovers, on-white text)
+   Gold-L    #F0C9A0  (light gold tint — text/borders on navy)
+   Teal      #34D2C7  (paper-plane accent — signature network)
+   Cream     #FDFBF8  (warm light section background)
+   Ink       #12103D  (cooler near-black for cream-section text)
+══════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════
    ANIMATION VARIANTS
 ══════════════════════════════════════════════════════════ */
 const fadeUp: Variants = {
@@ -30,6 +42,80 @@ const slideR: Variants = {
   hidden: { opacity: 0, x: 60 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
 };
+
+/* ══════════════════════════════════════════════════════════
+   GLOBAL POLISH LAYERS — grain + scroll progress
+══════════════════════════════════════════════════════════ */
+function GrainOverlay() {
+  return (
+    <div
+      aria-hidden
+      className="fixed inset-0 z-[999] pointer-events-none opacity-[0.035] mix-blend-overlay"
+      style={{
+        backgroundImage:
+          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+      }}
+    />
+  );
+}
+
+function ScrollProgressBar() {
+  const { scrollYProgress } = useScroll();
+  return (
+    <motion.div
+      style={{ scaleX: scrollYProgress }}
+      className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[1000] bg-gradient-to-r from-[#B8714A] via-[#D18F5C] to-[#F0C9A0]"
+    />
+  );
+}
+
+/* ══════════════════════════════════════════════════════════
+   CURSOR SPOTLIGHT — subtle depth on dark panels
+══════════════════════════════════════════════════════════ */
+function useSpotlight() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const onMouseMove = (e: React.MouseEvent) => {
+    const el = containerRef.current;
+    const glow = glowRef.current;
+    if (!el || !glow) return;
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    glow.style.background = `radial-gradient(480px circle at ${x}% ${y}%, rgba(217,159,154,0.14), transparent 55%)`;
+  };
+  const onMouseLeave = () => {
+    if (glowRef.current) glowRef.current.style.background = 'transparent';
+  };
+  return { containerRef, glowRef, onMouseMove, onMouseLeave };
+}
+
+/* ══════════════════════════════════════════════════════════
+   MAGNETIC WRAPPER — for primary CTAs
+══════════════════════════════════════════════════════════ */
+function Magnetic({ children, strength = 0.35 }: { children: React.ReactNode; strength?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 150, damping: 12, mass: 0.4 });
+  const sy = useSpring(y, { stiffness: 150, damping: 12, mass: 0.4 });
+  return (
+    <motion.div
+      ref={ref}
+      style={{ x: sx, y: sy, display: 'inline-block' }}
+      onMouseMove={e => {
+        const r = ref.current;
+        if (!r) return;
+        const rect = r.getBoundingClientRect();
+        x.set((e.clientX - rect.left - rect.width / 2) * strength);
+        y.set((e.clientY - rect.top - rect.height / 2) * strength);
+      }}
+      onMouseLeave={() => { x.set(0); y.set(0); }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 /* ══════════════════════════════════════════════════════════
    CYCLING TYPEWRITER
@@ -52,9 +138,9 @@ function CyclingTypewriter() {
     return () => { if (t.current) clearTimeout(t.current); };
   }, [text, del, wi]);
   return (
-    <span>
+    <span className="relative inline-block bg-gradient-to-r from-[#FBD9BE] via-[#F0C9A0] to-[#D18F5C] bg-clip-text text-transparent">
       {text}
-      <span className="inline-block w-[4px] h-[0.8em] bg-white align-middle ml-1 animate-[blink_0.8s_step-end_infinite]" />
+      <span className="inline-block w-[4px] h-[0.8em] bg-[#F0C9A0] align-middle ml-1 animate-[blink_0.8s_step-end_infinite]" />
     </span>
   );
 }
@@ -75,7 +161,7 @@ function CountUp({ end, suffix = '' }: { end: number; suffix?: string }) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   ARC STAT
+   ARC STAT — glassy ring with glow
 ══════════════════════════════════════════════════════════ */
 function ArcStat({ pct, label, value }: { pct: number; label: string; value: string }) {
   const ref = useRef(null);
@@ -89,12 +175,14 @@ function ArcStat({ pct, label, value }: { pct: number; label: string; value: str
   const r = 44; const circ = 2 * Math.PI * r;
   const dash = (progress / 100) * circ;
   return (
-    <div ref={ref} className="flex flex-col items-center gap-2">
-      <div className="relative w-24 h-24">
-        <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
-          <circle cx="50" cy="50" r={r} fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="7" />
-          <circle cx="50" cy="50" r={r} fill="none" stroke="white" strokeWidth="7"
-            strokeDasharray={`${dash} ${circ}`} strokeLinecap="round" />
+    <div ref={ref} className="flex flex-col items-center gap-2 group">
+      <div className="relative w-24 h-24 transition-transform duration-300 group-hover:scale-110">
+        <div className="absolute inset-1 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 shadow-[0_0_24px_rgba(217,159,154,0.12)]" />
+        <svg viewBox="0 0 100 100" className="relative w-full h-full -rotate-90">
+          <circle cx="50" cy="50" r={r} fill="none" stroke="rgba(217,159,154,0.18)" strokeWidth="7" />
+          <circle cx="50" cy="50" r={r} fill="none" stroke="#F0C9A0" strokeWidth="7"
+            strokeDasharray={`${dash} ${circ}`} strokeLinecap="round"
+            style={{ filter: 'drop-shadow(0 0 6px rgba(217,159,154,0.55))' }} />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="font-data text-lg font-bold text-white">{value}</span>
@@ -106,10 +194,11 @@ function ArcStat({ pct, label, value }: { pct: number; label: string; value: str
 }
 
 /* ══════════════════════════════════════════════════════════
-   3D TILT CARD
+   3D TILT CARD — with light-glare sweep
 ══════════════════════════════════════════════════════════ */
 function TiltCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const glareRef = useRef<HTMLDivElement>(null);
   const rx = useMotionValue(0); const ry = useMotionValue(0);
   const srx = useSpring(rx, { stiffness: 180, damping: 22 });
   const sry = useSpring(ry, { stiffness: 180, damping: 22 });
@@ -118,14 +207,23 @@ function TiltCard({ children, className = '' }: { children: React.ReactNode; cla
       ref={ref}
       onMouseMove={e => {
         const rect = ref.current!.getBoundingClientRect();
-        ry.set(((e.clientX - rect.left) / rect.width - 0.5) * 16);
-        rx.set(-((e.clientY - rect.top) / rect.height - 0.5) * 16);
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        ry.set((px - 0.5) * 16);
+        rx.set(-(py - 0.5) * 16);
+        if (glareRef.current) {
+          glareRef.current.style.background = `radial-gradient(220px circle at ${px * 100}% ${py * 100}%, rgba(255,255,255,0.28), transparent 60%)`;
+        }
       }}
-      onMouseLeave={() => { rx.set(0); ry.set(0); }}
+      onMouseLeave={() => {
+        rx.set(0); ry.set(0);
+        if (glareRef.current) glareRef.current.style.background = 'transparent';
+      }}
       style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-      className={className}
+      className={`relative ${className}`}
     >
       {children}
+      <div ref={glareRef} className="absolute inset-0 rounded-2xl pointer-events-none transition-[background] duration-150" />
     </motion.div>
   );
 }
@@ -136,7 +234,9 @@ function TiltCard({ children, className = '' }: { children: React.ReactNode; cla
 function FlipCard({ front, back }: { front: React.ReactNode; back: React.ReactNode }) {
   const [flipped, setFlipped] = useState(false);
   return (
-    <div
+    <motion.div
+      whileHover={{ y: -6 }}
+      transition={{ type: 'spring', stiffness: 260, damping: 20 }}
       className="relative"
       style={{ perspective: 1000, height: 420 }}
       onMouseEnter={() => setFlipped(true)}
@@ -150,7 +250,7 @@ function FlipCard({ front, back }: { front: React.ReactNode; back: React.ReactNo
         <div style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', position: 'absolute', inset: 0 }}>{front}</div>
         <div style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden', position: 'absolute', inset: 0, transform: 'rotateY(180deg)' }}>{back}</div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -163,11 +263,11 @@ function ProcessConnector() {
   return (
     <div ref={ref} className="hidden md:flex items-center flex-1 px-2">
       <div className="w-full h-px bg-gray-200 relative overflow-hidden">
-        <motion.div className="absolute inset-y-0 left-0 bg-[#FF0000]"
+        <motion.div className="absolute inset-y-0 left-0 bg-[#D18F5C]"
           initial={{ width: 0 }} animate={inView ? { width: '100%' } : {}}
           transition={{ duration: 1.1, ease: 'easeInOut', delay: 0.3 }} />
       </div>
-      <motion.div className="w-2 h-2 rounded-full bg-[#FF0000] flex-shrink-0"
+      <motion.div className="w-2 h-2 rounded-full bg-[#D18F5C] flex-shrink-0"
         initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ delay: 1.4 }} />
     </div>
   );
@@ -176,31 +276,40 @@ function ProcessConnector() {
 /* ══════════════════════════════════════════════════════════
    SECTION BRIDGE (arrow connector between sections)
 ══════════════════════════════════════════════════════════ */
-function SectionBridge({ dark = false }: { dark?: boolean }) {
+function SectionBridge({ dark = false, bgClass = '' }: { dark?: boolean; bgClass?: string }) {
+  const bg = bgClass || (dark ? 'bg-[#FDFBF8]' : 'bg-[#0A0930]');
+  const line = dark ? 'bg-gray-300' : 'bg-white/10';
   return (
-    <div className={`flex justify-center py-6 ${dark ? 'bg-[#F5F5F5]' : 'bg-white'}`}>
+    <div className={`flex justify-center py-6 ${bg}`}>
       <motion.div
         animate={{ y: [0, 6, 0] }}
         transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
         className="flex flex-col items-center gap-1"
       >
-        <div className={`w-px h-8 ${dark ? 'bg-gray-300' : 'bg-gray-200'}`} />
-        <FaChevronDown size={12} className="text-[#FF0000]" />
+        <div className={`w-px h-8 ${line}`} />
+        <FaChevronDown size={12} className="text-[#D18F5C]" />
       </motion.div>
     </div>
   );
 }
 
 /* ══════════════════════════════════════════════════════════
-   HERO ANIMATED BACKGROUND CANVAS
+   SIGNATURE HERO CANVAS — "Neural Constellation"
+   A living network of nodes (echoing the brand's AI story) that
+   brightens near the cursor, threaded by a copper/teal courier
+   that periodically traces the wordmark's paper-plane arc.
 ══════════════════════════════════════════════════════════ */
-function HeroBgCanvas() {
+function NeuralHeroCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: -9999, y: -9999 });
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let animId: number;
     const resize = () => {
@@ -210,77 +319,117 @@ function HeroBgCanvas() {
     resize();
     window.addEventListener('resize', resize);
 
-    // Floating particles
-    const particles = Array.from({ length: 60 }, () => ({
+    const onMove = (e: MouseEvent) => {
+      const r = canvas.getBoundingClientRect();
+      mouseRef.current = { x: e.clientX - r.left, y: e.clientY - r.top };
+    };
+    const onLeave = () => { mouseRef.current = { x: -9999, y: -9999 }; };
+    canvas.addEventListener('mousemove', onMove);
+    canvas.addEventListener('mouseleave', onLeave);
+
+    const NODE_COUNT = 46;
+    const LINK_DIST = 130;
+    const nodes = Array.from({ length: NODE_COUNT }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      r: Math.random() * 2 + 0.5,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      opacity: Math.random() * 0.4 + 0.1,
+      vx: (Math.random() - 0.5) * 0.22,
+      vy: (Math.random() - 0.5) * 0.22,
+      r: Math.random() * 1.5 + 0.8,
     }));
 
-    // Moving light beams
-    const beams = Array.from({ length: 4 }, (_, i) => ({
-      x: canvas.width * (i / 4) + Math.random() * 100,
-      angle: -35 + Math.random() * 20,
-      width: 80 + Math.random() * 120,
-      speed: 0.2 + Math.random() * 0.3,
-      offset: Math.random() * Math.PI * 2,
-    }));
+    let plane = { active: false, from: 0, to: 0, t: 0, speed: 0.005 };
+    let planeTimer: ReturnType<typeof setTimeout>;
+    const launchPlane = () => {
+      const from = Math.floor(Math.random() * NODE_COUNT);
+      let to = Math.floor(Math.random() * NODE_COUNT);
+      if (to === from) to = (to + 1) % NODE_COUNT;
+      plane = { active: true, from, to, t: 0, speed: 0.004 + Math.random() * 0.003 };
+    };
+    planeTimer = setTimeout(launchPlane, 1200);
 
+    const rings = [280, 220, 160, 100, 50];
     let tick = 0;
+
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       tick += 0.008;
 
-      // Pulsing concentric rings (top right)
-      const rings = [280, 220, 160, 100, 50];
+      // Pulsing concentric rings (top right) — soft gold
       rings.forEach((r, i) => {
-        const pulse = Math.sin(tick * 1.2 - i * 0.4) * 0.06 + 0.06;
+        const pulse = Math.sin(tick * 1.2 - i * 0.4) * 0.05 + 0.05;
         ctx.beginPath();
-        ctx.arc(canvas.width - 60, -60, r + Math.sin(tick + i) * 12, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255,255,255,${pulse})`;
+        ctx.arc(canvas.width - 60, -60, r + Math.sin(tick + i) * 10, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(217,159,154,${pulse})`;
         ctx.lineWidth = 1.5;
         ctx.stroke();
       });
 
-      // Light diagonal beams
-      beams.forEach(b => {
-        const slide = Math.sin(tick * b.speed + b.offset) * 60;
-        const bx = b.x + slide;
-        const rad = (b.angle * Math.PI) / 180;
-        const len = canvas.height * 2;
-        const grd = ctx.createLinearGradient(bx, 0, bx + Math.sin(rad) * len, len);
-        grd.addColorStop(0, 'rgba(255,255,255,0)');
-        grd.addColorStop(0.4, `rgba(255,255,255,0.04)`);
-        grd.addColorStop(1, 'rgba(255,255,255,0)');
-        ctx.save();
-        ctx.translate(bx, 0);
-        ctx.rotate(rad);
-        ctx.fillStyle = grd;
-        ctx.fillRect(-b.width / 2, -100, b.width, len + 200);
-        ctx.restore();
+      // drift nodes
+      nodes.forEach(n => {
+        if (!reduced) { n.x += n.vx; n.y += n.vy; }
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
       });
 
-      // Floating dots
-      particles.forEach(p => {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < -5) p.x = canvas.width + 5;
-        if (p.x > canvas.width + 5) p.x = -5;
-        if (p.y < -5) p.y = canvas.height + 5;
-        if (p.y > canvas.height + 5) p.y = -5;
+      // connections — brighten near cursor
+      for (let i = 0; i < NODE_COUNT; i++) {
+        for (let j = i + 1; j < NODE_COUNT; j++) {
+          const a = nodes[i], b = nodes[j];
+          const d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < LINK_DIST) {
+            const mDist = Math.min(
+              Math.hypot(a.x - mouseRef.current.x, a.y - mouseRef.current.y),
+              Math.hypot(b.x - mouseRef.current.x, b.y - mouseRef.current.y)
+            );
+            const near = Math.max(0, 1 - mDist / 220);
+            const op = (1 - d / LINK_DIST) * (0.05 + near * 0.35);
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = near > 0.3 ? `rgba(3,101,140,${op})` : `rgba(217,159,154,${op})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // nodes
+      nodes.forEach(n => {
+        const mDist = Math.hypot(n.x - mouseRef.current.x, n.y - mouseRef.current.y);
+        const near = Math.max(0, 1 - mDist / 180);
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+        ctx.arc(n.x, n.y, n.r + near * 1.6, 0, Math.PI * 2);
+        ctx.fillStyle = near > 0.4 ? 'rgba(3,101,140,0.9)' : 'rgba(217,159,154,0.55)';
         ctx.fill();
       });
 
-      // Bottom-left glow blob
+      // paper-plane courier along a curved path between two nodes
+      if (plane.active) {
+        plane.t += plane.speed;
+        const a = nodes[plane.from], b = nodes[plane.to];
+        const mx = (a.x + b.x) / 2 - (b.y - a.y) * 0.18;
+        const my = (a.y + b.y) / 2 + (b.x - a.x) * 0.18;
+        const t = plane.t;
+        const px = (1 - t) * (1 - t) * a.x + 2 * (1 - t) * t * mx + t * t * b.x;
+        const py = (1 - t) * (1 - t) * a.y + 2 * (1 - t) * t * my + t * t * b.y;
+        ctx.beginPath();
+        ctx.arc(px, py, 2.6, 0, Math.PI * 2);
+        ctx.fillStyle = '#34D2C7';
+        ctx.shadowColor = '#34D2C7';
+        ctx.shadowBlur = 9;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        if (t >= 1) {
+          plane.active = false;
+          planeTimer = setTimeout(launchPlane, 2200 + Math.random() * 2600);
+        }
+      }
+
+      // bottom-left glow blob — gold
       const blobPulse = Math.sin(tick * 0.9) * 0.04 + 0.08;
       const gBlob = ctx.createRadialGradient(80, canvas.height - 80, 0, 80, canvas.height - 80, 300);
-      gBlob.addColorStop(0, `rgba(255,255,255,${blobPulse})`);
-      gBlob.addColorStop(1, 'rgba(255,255,255,0)');
+      gBlob.addColorStop(0, `rgba(217,159,154,${blobPulse})`);
+      gBlob.addColorStop(1, 'rgba(217,159,154,0)');
       ctx.fillStyle = gBlob;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -289,14 +438,17 @@ function HeroBgCanvas() {
     draw();
     return () => {
       cancelAnimationFrame(animId);
+      clearTimeout(planeTimer);
       window.removeEventListener('resize', resize);
+      canvas.removeEventListener('mousemove', onMove);
+      canvas.removeEventListener('mouseleave', onLeave);
     };
   }, []);
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
 }
 
 /* ══════════════════════════════════════════════════════════
-   PAGE COMPONENT
+   PAGE COMPONENT — VAAVE DIGITAL
 ══════════════════════════════════════════════════════════ */
 export default function ServicesPage() {
   const [showModal, setShowModal] = useState(false);
@@ -310,6 +462,11 @@ export default function ServicesPage() {
   const heroInView = useInView(heroRef, { once: true, amount: 0.1 });
   const { scrollYProgress } = useScroll({ target: containerRef });
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 60]);
+  const heroRotate = useTransform(scrollYProgress, [0, 0.3], [0, -2]);
+
+  const fsSpot = useSpotlight();
+  const adsSpot = useSpotlight();
+  const footerSpot = useSpotlight();
 
   useEffect(() => {
     const fn = () => setShowBackToTop(window.scrollY > 500);
@@ -344,7 +501,6 @@ export default function ServicesPage() {
     { icon: '/image/fs-4.png', title: 'Launch & Growth', desc: 'Cloud deployment, security hardening, and ongoing maintenance.' },
   ];
 
-  // Gallery project labels for the overlay
   const galleryProjects = [
     { id: 1, label: 'E-Commerce Revamp', category: 'Web Design' },
     { id: 2, label: 'Brand Campaign', category: 'Social Media' },
@@ -359,7 +515,7 @@ export default function ServicesPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `Hello! AI Consultation%0AService: ${formData.service}%0AName: ${formData.name}%0AContact: ${formData.contact}%0AMessage: ${formData.message}`;
+    const msg = `Hello Vaave Digital! AI Consultation%0AService: ${formData.service}%0AName: ${formData.name}%0AContact: ${formData.contact}%0AMessage: ${formData.message}`;
     window.open(`https://wa.me/917305821333?text=${encodeURIComponent(msg)}`, '_blank');
     setShowModal(false);
   };
@@ -367,7 +523,7 @@ export default function ServicesPage() {
   const handleQuickSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setQuickSubmitted(true);
-    window.open(`https://wa.me/917305821333?text=${encodeURIComponent(`Call me back: ${quickPhone}`)}`, '_blank');
+    window.open(`https://wa.me/917305821333?text=${encodeURIComponent(`Hi Vaave Digital, please call me back: ${quickPhone}`)}`, '_blank');
     setTimeout(() => { setQuickSubmitted(false); setQuickPhone(''); }, 2000);
   };
 
@@ -388,6 +544,7 @@ export default function ServicesPage() {
         @keyframes spinSlow    { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
         @keyframes spinSlowRev { from{transform:rotate(0deg)} to{transform:rotate(-360deg)} }
         @keyframes pulse-ring  { 0%{transform:scale(0.9);opacity:0.8} 100%{transform:scale(1.6);opacity:0} }
+        @keyframes shimmer     { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
 
         .animate-marquee    { animation: marquee 22s linear infinite; }
         .animate-floatY     { animation: floatY 5s ease-in-out infinite; }
@@ -404,50 +561,73 @@ export default function ServicesPage() {
 
         /* Hover border sweep */
         .sweep { position:relative; overflow:hidden; }
-        .sweep::after { content:''; position:absolute; inset:0; border:2px solid #FF0000; border-radius:inherit; opacity:0; transform:scale(0.95); transition:opacity .3s,transform .3s; }
+        .sweep::after { content:''; position:absolute; inset:0; border:2px solid #D18F5C; border-radius:inherit; opacity:0; transform:scale(0.95); transition:opacity .3s,transform .3s; }
         .sweep:hover::after { opacity:1; transform:scale(1); }
 
         /* Gallery hover overlay */
         .gallery-item .overlay {
-          position:absolute; inset:0; background:rgba(255,0,0,0);
+          position:absolute; inset:0; background:rgba(7,8,38,0);
           display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end;
           padding:1.25rem; transition:background .4s ease;
         }
-        .gallery-item:hover .overlay { background:rgba(255,0,0,0.75); }
+        .gallery-item:hover .overlay { background:rgba(7,8,38,0.86); }
         .gallery-item .overlay-text { opacity:0; transform:translateY(12px); transition:opacity .3s .1s, transform .3s .1s; }
         .gallery-item:hover .overlay-text { opacity:1; transform:translateY(0); }
+
+        /* Shimmering CTA border sheen */
+        .sheen { position:relative; overflow:hidden; }
+        .sheen::before {
+          content:''; position:absolute; inset:0; border-radius:inherit;
+          background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.55) 48%, transparent 66%);
+          background-size:200% 100%; opacity:0; transition:opacity .25s;
+        }
+        .sheen:hover::before { opacity:1; animation: shimmer 1.1s ease; }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-marquee, .animate-floatY, .animate-spinSlow, .animate-spinSlowRev { animation: none !important; }
+        }
       `}</style>
 
-      <div className="bg-white min-h-screen" ref={containerRef}>
+      <ScrollProgressBar />
+      <GrainOverlay />
+
+      <div className="bg-[#0A0930] min-h-screen" ref={containerRef}>
 
         {/* ══════════════════════════════════════════════════
-            HERO — Red + animated canvas bg
+            HERO — Deep Navy + Neural Constellation signature
         ══════════════════════════════════════════════════ */}
-        <section ref={heroRef} className="relative bg-[#FF0000] min-h-screen flex items-center overflow-hidden clip-wave">
-          {/* Animated canvas background */}
-          <HeroBgCanvas />
+        <section ref={heroRef} className="relative bg-gradient-to-b from-[#0A0930] to-[#12103D] min-h-screen flex items-center overflow-hidden clip-wave">
+          {/* Signature animated network background */}
+          <NeuralHeroCanvas />
 
           {/* Spinning decorative rings */}
           <div className="absolute right-[-100px] top-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="w-[600px] h-[600px] border border-white/10 rounded-full animate-spinSlow" />
-            <div className="absolute inset-[80px] border border-white/10 rounded-full animate-spinSlowRev" />
-            <div className="absolute inset-[160px] border-2 border-white/10 rounded-full animate-spinSlow" />
+            <div className="w-[600px] h-[600px] border border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
+            <div className="absolute inset-[80px] border border-[#F0C9A0]/10 rounded-full animate-spinSlowRev" />
+            <div className="absolute inset-[160px] border-2 border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
           </div>
 
           {/* Corner frame accents */}
-          <div className="absolute top-6 left-6 w-14 h-14 border-t-2 border-l-2 border-white/25 rounded-tl-lg" />
-          <div className="absolute top-6 right-6 w-14 h-14 border-t-2 border-r-2 border-white/25 rounded-tr-lg" />
-          <div className="absolute bottom-16 left-6 w-14 h-14 border-b-2 border-l-2 border-white/25 rounded-bl-lg" />
-          <div className="absolute bottom-16 right-6 w-14 h-14 border-b-2 border-r-2 border-white/25 rounded-br-lg" />
+          <div className="absolute top-6 left-6 w-14 h-14 border-t-2 border-l-2 border-[#F0C9A0]/25 rounded-tl-lg" />
+          <div className="absolute top-6 right-6 w-14 h-14 border-t-2 border-r-2 border-[#F0C9A0]/25 rounded-tr-lg" />
+          <div className="absolute bottom-16 left-6 w-14 h-14 border-b-2 border-l-2 border-[#F0C9A0]/25 rounded-bl-lg" />
+          <div className="absolute bottom-16 right-6 w-14 h-14 border-b-2 border-r-2 border-[#F0C9A0]/25 rounded-br-lg" />
 
-          <motion.div style={{ y: heroY }} className="container mx-auto px-6 lg:px-16 relative z-10 py-32">
+          <motion.div style={{ y: heroY, rotate: heroRotate }} className="container mx-auto px-6 lg:px-16 relative z-10 py-32">
             <motion.div initial="hidden" animate={heroInView ? 'visible' : 'hidden'} variants={stagger}>
+
+              {/* Brand wordmark */}
+              <motion.div variants={fadeUp} className="mb-6">
+                <span className="font-display text-2xl md:text-3xl font-black tracking-[0.15em] bg-gradient-to-r from-[#F6C9AE] via-[#E8875A] to-[#B8714A] bg-clip-text text-transparent">
+                  VAAVE <span className="font-light tracking-[0.4em]">DIGITAL</span>
+                </span>
+              </motion.div>
 
               {/* Pulsing live dot + eyebrow */}
               <motion.div variants={fadeUp} className="flex items-center gap-3 mb-8">
                 <div className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute h-full w-full rounded-full bg-white opacity-60" />
-                  <span className="relative rounded-full h-3 w-3 bg-white" />
+                  <span className="animate-ping absolute h-full w-full rounded-full bg-[#34D2C7] opacity-60" />
+                  <span className="relative rounded-full h-3 w-3 bg-[#34D2C7]" />
                 </div>
                 <span className="font-display text-white/80 text-xs tracking-[0.3em] uppercase font-semibold">
                   AI‑Integrated Digital Agency
@@ -457,7 +637,7 @@ export default function ServicesPage() {
               {/* Headline */}
               <motion.h1 variants={fadeUp}
                 className="font-display text-white leading-[0.95] font-black mb-8"
-                style={{ fontSize: 'clamp(3.2rem,8.5vw,8rem)' }}>
+                style={{ fontSize: 'clamp(3.2rem,8.5vw,8rem)', textShadow: '0 2px 0 rgba(217,159,154,0.15), 0 20px 60px rgba(0,0,0,0.45)' }}>
                 Ready to<br />
                 <CyclingTypewriter />
               </motion.h1>
@@ -471,21 +651,25 @@ export default function ServicesPage() {
 
               {/* CTAs */}
               <motion.div variants={fadeUp} className="flex flex-wrap gap-4 mb-20">
-                <motion.button
-                  whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-                  onClick={() => setShowModal(true)}
-                  className="group bg-white text-[#FF0000] px-10 py-4 rounded-full font-display font-bold text-base flex items-center gap-2 shadow-2xl">
-                  Get Free AI Audit
-                  <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.4 }}>
-                    <FaArrowRight size={13} />
-                  </motion.span>
-                </motion.button>
-                <motion.a
-                  whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-                  href="https://wa.me/917305821333" target="_blank"
-                  className="glass text-white px-10 py-4 rounded-full font-display font-bold text-base flex items-center gap-2 hover:bg-white hover:text-[#FF0000] transition-all duration-300">
-                  <FaWhatsapp size={17} /> WhatsApp Now
-                </motion.a>
+                <Magnetic>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
+                    onClick={() => setShowModal(true)}
+                    className="sheen group bg-white text-[#B8714A] px-10 py-4 rounded-full font-display font-bold text-base flex items-center gap-2 shadow-2xl shadow-black/40">
+                    Get Free AI Audit
+                    <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.4 }}>
+                      <FaArrowRight size={13} />
+                    </motion.span>
+                  </motion.button>
+                </Magnetic>
+                <Magnetic strength={0.25}>
+                  <motion.a
+                    whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
+                    href="https://wa.me/917305821333" target="_blank"
+                    className="glass text-white px-10 py-4 rounded-full font-display font-bold text-base flex items-center gap-2 hover:bg-white hover:text-[#B8714A] transition-all duration-300">
+                    <FaWhatsapp size={17} /> WhatsApp Now
+                  </motion.a>
+                </Magnetic>
               </motion.div>
 
               {/* Arc stats */}
@@ -498,7 +682,7 @@ export default function ServicesPage() {
               </motion.div>
             </motion.div>
           </motion.div>
-          
+
           {/* Scroll indicator */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
             className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2">
@@ -511,70 +695,78 @@ export default function ServicesPage() {
         </section>
 
         {/* ── Bridge: Hero → Ticker ── */}
-        <SectionBridge />
+        <SectionBridge bgClass="bg-[#12103D]" />
 
         {/* ══════════════════════════════════════════════════
-            TICKER — White
+            TICKER — White, subtle 3D marquee strip
         ══════════════════════════════════════════════════ */}
-        <div className="bg-white py-4 border-y border-gray-100 overflow-hidden">
-          <div className="whitespace-nowrap">
+        <div className="bg-white py-6 border-y border-gray-100 overflow-hidden" style={{ perspective: 800 }}>
+          <div
+            className="whitespace-nowrap"
+            style={{
+              transform: 'rotateX(6deg)',
+              transformStyle: 'preserve-3d',
+              maskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)',
+              WebkitMaskImage: 'linear-gradient(90deg, transparent, black 8%, black 92%, transparent)',
+            }}
+          >
             <div className="inline-flex gap-12 animate-marquee">
               {['Social Media Marketing', 'SEO Optimization', 'Google Ads', 'Website Creation',
                 'AI Automation', 'Branding & Design', 'YouTube Promotion', 'Content Strategy',
                 'Social Media Marketing', 'SEO Optimization', 'Google Ads', 'Website Creation',
                 'AI Automation', 'Branding & Design', 'YouTube Promotion', 'Content Strategy'].map((item, i) => (
                 <span key={i} className="font-display text-gray-400 text-xs font-bold tracking-[0.2em] uppercase inline-flex items-center gap-4">
-                  {item} <span className="text-[#FF0000] text-sm">◆</span>
+                  {item} <span className="text-[#D18F5C] text-sm">◆</span>
                 </span>
               ))}
             </div>
           </div>
         </div>
 
-        {/* ── Bridge ── */}
-        <SectionBridge />
+        {/* ── Bridge: Ticker → Intro ── */}
+        <SectionBridge bgClass="bg-[#FDFBF8]" dark />
 
         {/* ══════════════════════════════════════════════════
-            INTRO — Light Gray
-        ══════════════════════════════════════════════════ */}
-        <section className="bg-[#F5F5F5] py-24 relative overflow-hidden">
-          <div className="absolute right-6 top-1/2 -translate-y-1/2 font-display font-black leading-none select-none pointer-events-none"
-            style={{ fontSize: 'clamp(8rem,16vw,16rem)', color: 'rgba(0,0,0,0.04)' }}>01</div>
-          <div className="container mx-auto px-6 lg:px-16 relative z-10">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={stagger}
-              className="max-w-3xl">
-              <motion.span variants={fadeUp}
-                className="inline-block font-display text-[#FF0000] text-xs tracking-[0.35em] uppercase font-bold mb-5">
-                What We Do
-              </motion.span>
-              <motion.h2 variants={fadeUp}
-                className="font-display text-gray-900 font-extrabold leading-[1.05] mb-5"
-                style={{ fontSize: 'clamp(2rem,5vw,3.8rem)' }}>
-                Dominating the{' '}
-                <span className="relative inline-block text-[#FF0000]">
-                  AI‑Powered
-                  <motion.span className="absolute -bottom-1 left-0 h-1 bg-[#FF0000]/30 w-full rounded-full"
-                    initial={{ scaleX: 0, originX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }}
-                    transition={{ delay: 0.5, duration: 0.9 }} />
-                </span>{' '}
-                Digital Landscape
-              </motion.h2>
-              <motion.p variants={fadeUp}
-                className="text-gray-600 text-lg leading-relaxed max-w-2xl mb-10">
-                We build complete digital ecosystems powered by predictive analytics, smart automation, and data‑driven creativity — driving relentless revenue and trust for brands across India.
-              </motion.p>
-              <motion.div variants={stagger} className="flex flex-wrap gap-3">
-                {['100% Risk‑Free', 'No Contracts', 'Fast 24h Setup', 'AI‑Powered', '500+ Clients'].map((b, i) => (
-                  <motion.span key={i} variants={fadeUp}
-                    whileHover={{ scale: 1.07, backgroundColor: '#FF0000', color: '#fff', borderColor: '#FF0000' }}
-                    className="font-display text-xs font-bold uppercase tracking-widest border-2 border-gray-300 px-5 py-2.5 rounded-full text-gray-700 bg-white transition-all duration-200 cursor-default select-none">
-                    {b}
-                  </motion.span>
-                ))}
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
+                    INTRO — Warm Cream
+                ══════════════════════════════════════════════════ */}
+                <section className="bg-[#FDFBF8] py-24 relative overflow-hidden">
+                  <div className="absolute right-6 top-1/2 -translate-y-1/2 font-display font-black leading-none select-none pointer-events-none"
+                    style={{ fontSize: 'clamp(8rem,16vw,16rem)', color: 'rgba(10, 10, 41, 0.04)' }}>01</div>
+                  <div className="container mx-auto px-6 lg:px-16 relative z-10">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={stagger}
+                      className="max-w-3xl">
+                      <motion.span variants={fadeUp}
+                        className="inline-block font-display text-[#B8714A] text-xs tracking-[0.35em] uppercase font-bold mb-5">
+                        What We Do
+                      </motion.span>
+                      <motion.h2 variants={fadeUp}
+                        className="font-display text-[#0A0930] font-extrabold leading-[1.05] mb-5"
+                        style={{ fontSize: 'clamp(2rem,5vw,3.8rem)' }}>
+                        Dominating the{' '}
+                        <span className="relative inline-block text-[#B8714A]">
+                          AI‑Powered
+                          <motion.span className="absolute -bottom-1 left-0 h-1 bg-[#D18F5C]/30 w-full rounded-full"
+                            initial={{ scaleX: 0, originX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }}
+                            transition={{ delay: 0.5, duration: 0.9 }} />
+                        </span>{' '}
+                        Digital Landscape
+                      </motion.h2>
+                      <motion.p variants={fadeUp}
+                        className="text-gray-600 text-lg leading-relaxed max-w-2xl mb-10">
+                        We build complete digital ecosystems powered by predictive analytics, smart automation, and data‑driven creativity — driving relentless revenue and trust for brands across India.
+                      </motion.p>
+                      <motion.div variants={stagger} className="flex flex-wrap gap-3">
+                        {['100% Risk‑Free', 'No Contracts', 'Fast 24h Setup', 'AI‑Powered', '500+ Clients'].map((b, i) => (
+                          <motion.span key={i} variants={fadeUp}
+                            whileHover={{ scale: 1.07, backgroundColor: '#D18F5C', color: '#fff', borderColor: '#D18F5C' }}
+                            className="font-display text-xs font-bold uppercase tracking-widest border-2 border-gray-300 px-5 py-2.5 rounded-full text-gray-700 bg-white transition-all duration-200 cursor-default select-none">
+                            {b}
+                          </motion.span>
+                        ))}
+                      </motion.div>
+                    </motion.div>
+                  </div>
+                </section>
 
         {/* ── Bridge ── */}
         <SectionBridge dark />
@@ -582,19 +774,19 @@ export default function ServicesPage() {
         {/* ══════════════════════════════════════════════════
             SERVICES — White, Flip Cards
         ══════════════════════════════════════════════════ */}
-        <section className="bg-white py-24">
+        <section className="bg-[#0A0930] py-24">
           <div className="container mx-auto px-6 lg:px-16">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-14">
               <motion.span variants={fadeUp}
-                className="inline-block font-display text-[#FF0000] text-xs tracking-[0.35em] uppercase font-bold mb-3">
+                className="inline-block font-display text-[#D18F5C] text-xs tracking-[0.35em] uppercase font-bold mb-3">
                 Services
               </motion.span>
               <div className="flex items-end justify-between flex-wrap gap-4">
-                <motion.h2 variants={fadeUp} className="font-display text-gray-900 font-extrabold"
+                <motion.h2 variants={fadeUp} className="font-display text-white font-extrabold"
                   style={{ fontSize: 'clamp(1.8rem,4vw,3rem)' }}>
                   What We Offer
                 </motion.h2>
-                <motion.p variants={fadeUp} className="text-gray-500 text-sm font-display uppercase tracking-widest">
+                <motion.p variants={fadeUp} className="text-white/60 text-sm font-display uppercase tracking-widest">
                   Hover cards to explore →
                 </motion.p>
               </div>
@@ -606,36 +798,36 @@ export default function ServicesPage() {
                 <motion.div key={i} variants={fadeUp}>
                   <FlipCard
                     front={
-                      <div className="w-full h-full rounded-2xl overflow-hidden bg-[#F5F5F5] flex flex-col border border-gray-100">
-                        <div className="flex-1 flex items-center justify-center bg-white p-8">
-                          <img src={s.image} alt={s.title} className="max-h-48 w-auto object-contain" />
+                      <div className="w-full h-full rounded-2xl overflow-hidden bg-[#12103D] flex flex-col border border-white/10 shadow-sm">
+                        <div className="flex-1 flex items-center justify-center bg-white/5 p-8">
+                          <img src={s.image} alt={s.title} className="max-h-48 w-auto object-contain brightness-95" />
                         </div>
-                        <div className="p-6 flex items-center justify-between border-t border-gray-100">
+                        <div className="p-6 flex items-center justify-between border-t border-white/10">
                           <div>
-                            <span className="font-data text-[10px] font-bold text-[#FF0000] tracking-[0.3em] uppercase">{s.tag}</span>
-                            <h3 className="font-display text-gray-900 font-bold text-lg mt-0.5">{s.title}</h3>
+                            <span className="font-data text-[10px] font-bold text-[#D18F5C] tracking-[0.3em] uppercase">{s.tag}</span>
+                            <h3 className="font-display text-white font-bold text-lg mt-0.5">{s.title}</h3>
                           </div>
-                          <div className="w-10 h-10 rounded-full bg-[#FF0000]/8 border border-[#FF0000]/20 flex items-center justify-center flex-shrink-0">
-                            <FaArrowRight size={11} className="text-[#FF0000]" />
+                          <div className="w-10 h-10 rounded-full bg-[#D18F5C]/10 border border-[#D18F5C]/25 flex items-center justify-center flex-shrink-0">
+                            <FaArrowRight size={11} className="text-[#D18F5C]" />
                           </div>
                         </div>
                       </div>
                     }
                     back={
-                      <div className="w-full h-full rounded-2xl overflow-hidden bg-[#FF0000] flex flex-col justify-between p-8">
+                      <div className="w-full h-full rounded-2xl overflow-hidden bg-[#12103D] flex flex-col justify-between p-8 shadow-xl shadow-black/30 border border-white/10">
                         <div>
-                          <span className="font-data text-[10px] font-bold text-white/60 tracking-[0.3em] uppercase">{s.tag}</span>
+                          <span className="font-data text-[10px] font-bold text-[#F0C9A0]/70 tracking-[0.3em] uppercase">{s.tag}</span>
                           <h3 className="font-display text-white font-bold text-2xl mt-2 mb-4 leading-tight">{s.title}</h3>
-                          <p className="text-white/85 text-sm leading-relaxed">{s.desc}</p>
+                          <p className="text-white/80 text-sm leading-relaxed">{s.desc}</p>
                         </div>
                         {s.href ? (
                           <a href={s.href} target="_blank" rel="noopener noreferrer"
-                            className="group inline-flex items-center gap-2 bg-white text-[#FF0000] px-6 py-3 rounded-full font-display font-bold text-sm mt-6 w-fit hover:bg-gray-100 transition-colors shadow-lg">
+                            className="group inline-flex items-center gap-2 bg-white text-[#B8714A] px-6 py-3 rounded-full font-display font-bold text-sm mt-6 w-fit hover:bg-gray-100 transition-colors shadow-lg">
                             {s.cta} <FaArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
                           </a>
                         ) : (
                           <button onClick={() => setShowModal(true)}
-                            className="group inline-flex items-center gap-2 bg-white text-[#FF0000] px-6 py-3 rounded-full font-display font-bold text-sm mt-6 w-fit hover:bg-gray-100 transition-colors shadow-lg">
+                            className="group inline-flex items-center gap-2 bg-white text-[#B8714A] px-6 py-3 rounded-full font-display font-bold text-sm mt-6 w-fit hover:bg-gray-100 transition-colors shadow-lg">
                             {s.cta} <FaArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
                           </button>
                         )}
@@ -648,19 +840,19 @@ export default function ServicesPage() {
               {/* Ghost +more card */}
               <motion.div variants={fadeUp}>
                 <motion.div whileHover={{ y: -6 }}
-                  className="h-[420px] rounded-2xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center gap-5 group hover:border-[#FF0000]/40 transition-all duration-300">
+                  className="h-[420px] rounded-2xl border-2 border-dashed border-white/10 flex flex-col items-center justify-center gap-5 group hover:border-[#D18F5C]/40 transition-all duration-300 bg-[#12103D]/20">
                   <motion.div
                     whileHover={{ rotate: 90 }}
                     transition={{ duration: 0.3 }}
-                    className="w-14 h-14 rounded-full bg-[#F5F5F5] group-hover:bg-[#FF0000] flex items-center justify-center transition-colors duration-300">
-                    <span className="font-display text-2xl font-black text-gray-400 group-hover:text-white leading-none">+</span>
+                    className="w-14 h-14 rounded-full bg-[#12103D] group-hover:bg-[#D18F5C] flex items-center justify-center transition-colors duration-300">
+                    <span className="font-display text-2xl font-black text-white/50 group-hover:text-white leading-none">+</span>
                   </motion.div>
                   <div className="text-center px-8">
-                    <p className="font-display font-bold text-gray-500 group-hover:text-gray-800 transition-colors text-lg">More Services</p>
-                    <p className="text-sm text-gray-400 mt-1 leading-relaxed">Custom solutions for any business need</p>
+                    <p className="font-display font-bold text-white/70 group-hover:text-white transition-colors text-lg">More Services</p>
+                    <p className="text-sm text-white/40 mt-1 leading-relaxed">Custom solutions for any business need</p>
                   </div>
                   <button onClick={() => setShowModal(true)}
-                    className="font-display text-xs font-bold tracking-widest uppercase text-gray-400 group-hover:text-[#FF0000] transition-colors">
+                    className="font-display text-xs font-bold tracking-widest uppercase text-white/40 group-hover:text-[#D18F5C] transition-colors">
                     Get in touch →
                   </button>
                 </motion.div>
@@ -673,20 +865,20 @@ export default function ServicesPage() {
         <SectionBridge />
 
         {/* ══════════════════════════════════════════════════
-            PROCESS — Gray, horizontal stepper + 3D tilt cards
+            PROCESS — Cream, horizontal stepper + 3D tilt cards
         ══════════════════════════════════════════════════ */}
-        <section className="bg-[#F5F5F5] py-24 relative overflow-hidden">
+        <section className="bg-[#FDFBF8] py-24 relative overflow-hidden">
           <div className="absolute left-6 top-6 font-display font-black leading-none select-none pointer-events-none"
-            style={{ fontSize: 'clamp(8rem,14vw,14rem)', color: 'rgba(0,0,0,0.04)' }}>02</div>
+            style={{ fontSize: 'clamp(8rem,14vw,14rem)', color: 'rgba(7, 8, 38, 0.04)' }}>02</div>
           <div className="container mx-auto px-6 lg:px-16 relative z-10">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-16">
               <motion.span variants={fadeUp}
-                className="inline-block font-display text-[#FF0000] text-xs tracking-[0.35em] uppercase font-bold mb-3">
+                className="inline-block font-display text-[#D18F5C] text-xs tracking-[0.35em] uppercase font-bold mb-3">
                 How We Work
               </motion.span>
-              <motion.h2 variants={fadeUp} className="font-display text-gray-900 font-extrabold"
+              <motion.h2 variants={fadeUp} className="font-display text-[#0A0930] font-extrabold"
                 style={{ fontSize: 'clamp(1.8rem,4vw,3rem)' }}>
-                Our <span className="text-[#FF0000]">Process</span>
+                Our <span className="text-[#D18F5C]">Process</span>
               </motion.h2>
               <motion.p variants={fadeUp} className="text-gray-600 text-base mt-3 max-w-xl mx-auto">
                 Human-centered design from research to launch — every step informed by data.
@@ -698,7 +890,7 @@ export default function ServicesPage() {
               {uxSteps.map((_, i) => (
                 <div key={i} className="flex items-center flex-1">
                   <motion.div
-                    className="w-12 h-12 rounded-full bg-white border-2 border-[#FF0000] flex items-center justify-center flex-shrink-0 font-data font-bold text-[#FF0000] shadow-md"
+                    className="w-12 h-12 rounded-full bg-white border-2 border-[#D18F5C] flex items-center justify-center flex-shrink-0 font-data font-bold text-[#D18F5C] shadow-md"
                     initial={{ scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
@@ -716,13 +908,13 @@ export default function ServicesPage() {
               {uxSteps.map((step, i) => (
                 <TiltCard key={i}>
                   <motion.div variants={fadeUp}
-                    className="bg-white rounded-2xl overflow-hidden group hover:shadow-xl transition-shadow duration-300 sweep">
-                    <div className="bg-[#F5F5F5] h-56 flex items-center justify-center p-6 overflow-hidden">
+                    className="bg-white rounded-2xl overflow-hidden group hover:shadow-xl transition-shadow duration-300 sweep border border-gray-100">
+                    <div className="bg-[#FDFBF8] h-56 flex items-center justify-center p-6 overflow-hidden">
                       <img src={step.image} alt={step.title}
                         className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <div className="p-7">
-                      <div className="inline-block font-data text-[10px] font-bold text-[#FF0000] tracking-[0.3em] uppercase bg-red-50 px-3 py-1 rounded-full mb-4">
+                      <div className="inline-block font-data text-[10px] font-bold text-[#D18F5C] tracking-[0.3em] uppercase bg-[#D18F5C]/10 px-3 py-1 rounded-full mb-4">
                         Step 0{i + 1}
                       </div>
                       <h3 className="font-display text-gray-900 text-xl font-bold mb-2">{step.title}</h3>
@@ -739,18 +931,25 @@ export default function ServicesPage() {
         <SectionBridge dark />
 
         {/* ══════════════════════════════════════════════════
-            FULL‑STACK — Red
+            FULL‑STACK — Deep Navy, cursor spotlight
         ══════════════════════════════════════════════════ */}
-        <section className="bg-[#FF0000] py-28 relative overflow-hidden">
+        <section
+          ref={fsSpot.containerRef}
+          onMouseMove={fsSpot.onMouseMove}
+          onMouseLeave={fsSpot.onMouseLeave}
+          className="bg-[#0A0930] py-28 relative overflow-hidden"
+        >
           {/* bg canvas dots */}
           <div className="absolute inset-0 pointer-events-none" style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.12) 1.5px, transparent 1.5px)',
+            backgroundImage: 'radial-gradient(circle, rgba(217,159,154,0.12) 1.5px, transparent 1.5px)',
             backgroundSize: '38px 38px',
           }} />
+          {/* cursor spotlight */}
+          <div ref={fsSpot.glowRef} className="absolute inset-0 pointer-events-none transition-[background] duration-200" />
           {/* spinning rings */}
           <div className="absolute left-[-160px] bottom-[-160px] pointer-events-none">
-            <div className="w-[500px] h-[500px] border border-white/10 rounded-full animate-spinSlow" />
-            <div className="absolute inset-[80px] border border-white/10 rounded-full animate-spinSlowRev" />
+            <div className="w-[500px] h-[500px] border border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
+            <div className="absolute inset-[80px] border border-[#F0C9A0]/10 rounded-full animate-spinSlowRev" />
           </div>
 
           <div className="container mx-auto px-6 lg:px-16 relative z-10">
@@ -767,11 +966,13 @@ export default function ServicesPage() {
                 <p className="text-white/80 text-lg max-w-md mb-8 leading-relaxed font-light">
                   Modern digital solutions with seamless AI integrations tailored precisely to your business needs.
                 </p>
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-                  onClick={() => setShowModal(true)}
-                  className="bg-white text-[#FF0000] px-9 py-3.5 rounded-full font-display font-bold text-sm shadow-xl hover:shadow-2xl transition-shadow">
-                  Build Your Project →
-                </motion.button>
+                <Magnetic strength={0.25}>
+                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
+                    onClick={() => setShowModal(true)}
+                    className="sheen bg-white text-[#B8714A] px-9 py-3.5 rounded-full font-display font-bold text-sm shadow-xl hover:shadow-2xl transition-shadow">
+                    Build Your Project →
+                  </motion.button>
+                </Magnetic>
               </motion.div>
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideR} className="flex-1 w-full">
                 <div className="relative">
@@ -808,20 +1009,20 @@ export default function ServicesPage() {
         {/* ══════════════════════════════════════════════════
             QUICK CONNECT — White
         ══════════════════════════════════════════════════ */}
-        <section className="bg-white py-20">
+        <section className="bg-[#0A0930] py-20">
           <div className="container mx-auto px-6 lg:px-16">
             <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.7 }}
-              className="relative bg-[#F5F5F5] rounded-3xl overflow-hidden">
-              {/* Left red bar */}
-              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#FF0000]" />
+              className="relative bg-white rounded-3xl overflow-hidden shadow-2xl">
+              {/* Left gold bar */}
+              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#D18F5C]" />
               {/* Watermark */}
               <div className="absolute right-8 top-1/2 -translate-y-1/2 font-display font-black leading-none pointer-events-none select-none"
-                style={{ fontSize: '14rem', color: 'rgba(0,0,0,0.04)' }}>?</div>
+                style={{ fontSize: '14rem', color: 'rgba(7, 8, 38, 0.04)' }}>?</div>
               <div className="p-12 md:p-16 relative z-10">
                 <div className="max-w-lg">
-                  <span className="inline-block font-display text-[#FF0000] text-xs tracking-[0.35em] uppercase font-bold mb-4">Let's Talk</span>
-                  <h2 className="font-display text-gray-900 font-extrabold mb-3"
+                  <span className="inline-block font-display text-[#D18F5C] text-xs tracking-[0.35em] uppercase font-bold mb-4">Let's Talk</span>
+                  <h2 className="font-display text-[#0A0930] font-extrabold mb-3"
                     style={{ fontSize: 'clamp(1.6rem,3.5vw,2.8rem)' }}>
                     Ready to transform your ideas into reality?
                   </h2>
@@ -831,12 +1032,14 @@ export default function ServicesPage() {
                   <form onSubmit={handleQuickSubmit} className="flex flex-col sm:flex-row gap-3">
                     <input type="tel" value={quickPhone} onChange={e => setQuickPhone(e.target.value)}
                       placeholder="+91 your phone number…"
-                      className="flex-1 px-6 py-4 rounded-xl border-2 border-gray-200 bg-white text-gray-800 placeholder:text-gray-400 text-sm font-display focus:outline-none focus:border-[#FF0000] transition-colors"
+                      className="flex-1 px-6 py-4 rounded-xl border-2 border-gray-200 bg-[#FDFBF8] text-gray-800 placeholder:text-gray-400 text-sm font-display focus:outline-none focus:border-[#D18F5C] transition-colors"
                       required />
-                    <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} type="submit"
-                      className="bg-[#FF0000] text-white px-8 py-4 rounded-xl font-display font-bold text-sm hover:bg-red-600 transition-colors whitespace-nowrap shadow-lg">
-                      {quickSubmitted ? '✅ Sent!' : 'Call Me Back'}
-                    </motion.button>
+                    <Magnetic strength={0.2}>
+                      <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} type="submit"
+                        className="bg-[#D18F5C] text-white px-8 py-4 rounded-xl font-display font-bold text-sm hover:bg-[#B8714A] transition-colors whitespace-nowrap shadow-lg">
+                        {quickSubmitted ? '✅ Sent!' : 'Call Me Back'}
+                      </motion.button>
+                    </Magnetic>
                   </form>
                   <AnimatePresence>
                     {quickSubmitted && (
@@ -856,19 +1059,17 @@ export default function ServicesPage() {
         <SectionBridge />
 
         {/* ══════════════════════════════════════════════════
-            GALLERY — Gray
-            UPDATED: uniform fixed-height cells, object-cover,
-            category pill always visible, named project overlays
+            GALLERY — Cream
         ══════════════════════════════════════════════════ */}
-        <section className="bg-[#F5F5F5] py-24">
+        <section className="bg-[#FDFBF8] py-24">
           <div className="container mx-auto px-6 lg:px-16">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
               <motion.span variants={fadeUp}
-                className="inline-block font-display text-[#FF0000] text-xs tracking-[0.35em] uppercase font-bold mb-3">
+                className="inline-block font-display text-[#D18F5C] text-xs tracking-[0.35em] uppercase font-bold mb-3">
                 Our Work
               </motion.span>
               <div className="flex items-end justify-between flex-wrap gap-4">
-                <motion.h2 variants={fadeUp} className="font-display text-gray-900 font-extrabold"
+                <motion.h2 variants={fadeUp} className="font-display text-[#0A0930] font-extrabold"
                   style={{ fontSize: 'clamp(1.8rem,4vw,3rem)' }}>
                   Projects for Beloved Clients
                 </motion.h2>
@@ -886,7 +1087,8 @@ export default function ServicesPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.15 }}
                   transition={{ duration: 0.55, delay: idx * 0.07 }}
-                  className="gallery-item group relative rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-shadow duration-300"
+                  whileHover={{ y: -4 }}
+                  className="gallery-item group relative rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-300"
                   style={{ height: 280 }}
                 >
                   {/* Image fills the fixed-height cell with cover — no gaps, no bleed */}
@@ -904,11 +1106,11 @@ export default function ServicesPage() {
                     </span>
                   </div>
 
-                  {/* Red hover overlay with project name */}
+                  {/* Navy hover overlay with project name */}
                   <div className="overlay">
                     <div className="overlay-text">
                       <p className="font-display text-white font-bold text-base leading-tight">{proj.label}</p>
-                      <p className="font-display text-white/80 text-xs mt-1 flex items-center gap-1">
+                      <p className="font-display text-[#F0C9A0] text-xs mt-1 flex items-center gap-1">
                         View case study <FaArrowRight size={9} />
                       </p>
                     </div>
@@ -923,22 +1125,27 @@ export default function ServicesPage() {
         <SectionBridge dark />
 
         {/* ══════════════════════════════════════════════════
-            ADS — White, split panel
+            ADS — White, split panel, cursor spotlight on navy side
         ══════════════════════════════════════════════════ */}
-        <section className="bg-white py-24 overflow-hidden">
+        <section className="bg-[#0A0930] py-24 overflow-hidden">
           <div className="container mx-auto px-6 lg:px-16">
             <div className="grid lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden shadow-2xl">
-              {/* Left — Red */}
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideL}
-                className="bg-[#FF0000] p-12 md:p-16 relative overflow-hidden">
+              {/* Left — Navy */}
+              <motion.div
+                ref={adsSpot.containerRef}
+                onMouseMove={adsSpot.onMouseMove}
+                onMouseLeave={adsSpot.onMouseLeave}
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideL}
+                className="bg-[#0A0930] p-12 md:p-16 relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none" style={{
-                  backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.09) 1.5px, transparent 1.5px)',
+                  backgroundImage: 'radial-gradient(circle, rgba(217,159,154,0.09) 1.5px, transparent 1.5px)',
                   backgroundSize: '32px 32px',
                 }} />
-                <div className="absolute right-[-60px] top-[-60px] w-64 h-64 border border-white/10 rounded-full animate-spinSlow pointer-events-none" />
+                <div ref={adsSpot.glowRef} className="absolute inset-0 pointer-events-none transition-[background] duration-200" />
+                <div className="absolute right-[-60px] top-[-60px] w-64 h-64 border border-[#F0C9A0]/10 rounded-full animate-spinSlow pointer-events-none" />
                 <div className="relative z-10">
                   <div className="inline-flex items-center gap-2 glass text-white/80 px-4 py-1.5 rounded-full text-[10px] font-display font-bold tracking-[0.3em] uppercase mb-8">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> Scaling Results
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#34D2C7] animate-pulse" /> Scaling Results
                   </div>
                   <h2 className="font-display text-white font-black leading-[1.0] mb-5"
                     style={{ fontSize: 'clamp(2rem,4vw,3.2rem)' }}>
@@ -963,25 +1170,27 @@ export default function ServicesPage() {
                       </motion.div>
                     ))}
                   </div>
-                  <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                    onClick={() => setShowModal(true)}
-                    className="group bg-white text-[#FF0000] px-8 py-3.5 rounded-full font-display font-bold text-sm inline-flex items-center gap-2 shadow-xl">
-                    Scale My Returns
-                    <FaArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
-                  </motion.button>
+                  <Magnetic strength={0.25}>
+                    <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                      onClick={() => setShowModal(true)}
+                      className="sheen group bg-white text-[#B8714A] px-8 py-3.5 rounded-full font-display font-bold text-sm inline-flex items-center gap-2 shadow-xl">
+                      Scale My Returns
+                      <FaArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
+                    </motion.button>
+                  </Magnetic>
                 </div>
               </motion.div>
 
-              {/* Right — Gray */}
+              {/* Right — Cream */}
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideR}
-                className="bg-[#F5F5F5] p-12 md:p-16 flex flex-col justify-center gap-8">
+                className="bg-[#FDFBF8] p-12 md:p-16 flex flex-col justify-center gap-8 border-l border-gray-100">
                 <div className="rounded-2xl overflow-hidden shadow-xl border-4 border-white">
                   <img src="/image/era.webp" alt="Dashboard Analytics" className="w-full h-auto" />
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   {[{ n: 500, s: '+', l: 'Clients' }, { n: 2000, s: '+', l: 'Campaigns' }, { n: 99, s: '%', l: 'Satisfaction' }]
                     .map((st, i) => (
-                      <div key={i} className="bg-white rounded-xl p-4 text-center shadow-sm">
+                      <div key={i} className="bg-white border border-gray-100 rounded-xl p-4 text-center shadow-sm">
                         <div className="font-data text-2xl font-bold text-gray-900">
                           <CountUp end={st.n} suffix={st.s} />
                         </div>
@@ -997,48 +1206,150 @@ export default function ServicesPage() {
         {/* ── Bridge ── */}
         <SectionBridge />
 
-        {/* ══════════════════════════════════════════════════
-            FOOTER CTA — Red
-        ══════════════════════════════════════════════════ */}
-        <section className="bg-[#FF0000] py-24 relative overflow-hidden">
-          {/* Animated bg */}
-          <div className="absolute inset-0 pointer-events-none" style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.09) 1.5px, transparent 1.5px)',
-            backgroundSize: '38px 38px',
-          }} />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="w-[700px] h-[700px] border border-white/10 rounded-full animate-spinSlow" />
-            <div className="absolute inset-[120px] border border-white/10 rounded-full animate-spinSlowRev" />
-          </div>
-          {/* Corner accents */}
-          <div className="absolute top-6 left-6 w-14 h-14 border-t-2 border-l-2 border-white/20 rounded-tl-lg" />
-          <div className="absolute bottom-6 right-6 w-14 h-14 border-b-2 border-r-2 border-white/20 rounded-br-lg" />
+        {/* ════════════════════════════════════════════════════════
+                    PREMIUM FOOTER CTA
+════════════════════════════════════════════════════════ */}
+<section
+  ref={footerSpot.containerRef}
+  onMouseMove={footerSpot.onMouseMove}
+  onMouseLeave={footerSpot.onMouseLeave}
+  className="relative overflow-hidden bg-[#0A0930] py-24"
+>
+  {/* Cursor Glow */}
+  <div
+    ref={footerSpot.glowRef}
+    className="absolute inset-0 pointer-events-none transition-all duration-200"
+  />
 
-          <div className="container mx-auto px-6 lg:px-16 text-center relative z-10">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.span variants={fadeUp}
-                className="inline-block font-display text-white/60 text-xs tracking-[0.35em] uppercase font-bold mb-5">
-                Start Today
-              </motion.span>
-              <motion.h2 variants={fadeUp} className="font-display text-white font-black mb-8"
-                style={{ fontSize: 'clamp(2rem,5vw,3.8rem)' }}>
-                Let's Build Something<br />Great Together
-              </motion.h2>
-              <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
-                <motion.button whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.96 }}
-                  onClick={() => setShowModal(true)}
-                  className="bg-white text-[#FF0000] px-10 py-4 rounded-full font-display font-bold shadow-2xl hover:shadow-white/30 transition-shadow">
-                  Get Started Free
-                </motion.button>
-                <motion.a whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.96 }}
-                  href="https://wa.me/917305821333" target="_blank"
-                  className="glass text-white border-2 border-white/30 px-10 py-4 rounded-full font-display font-bold hover:bg-white hover:text-[#FF0000] transition-all duration-300">
-                  Chat on WhatsApp
-                </motion.a>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
+  {/* Dotted Background */}
+  <div
+    className="absolute inset-0 opacity-30"
+    style={{
+      backgroundImage:
+        "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)",
+      backgroundSize: "34px 34px",
+    }}
+  />
+
+  {/* Decorative Circles */}
+  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div className="w-[750px] h-[750px] rounded-full border border-white/5 animate-[spin_45s_linear_infinite]" />
+
+    <div className="absolute w-[520px] h-[520px] rounded-full border border-white/5 animate-[spin_60s_linear_infinite_reverse]" />
+  </div>
+
+  {/* Top Left Accent */}
+  <div className="absolute -top-20 -left-20 w-48 h-48 rounded-full border border-[#F0C9A0]/10" />
+
+  {/* Bottom Right Accent */}
+  <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full border border-[#F0C9A0]/10" />
+
+  <div className="container mx-auto px-6 lg:px-16 relative z-10">
+
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={stagger}
+      className="text-center"
+    >
+      {/* Subtitle */}
+      <motion.span
+        variants={fadeUp}
+        className="inline-block uppercase tracking-[0.35em] text-white/60 text-xs font-semibold mb-6"
+      >
+        START TODAY
+      </motion.span>
+
+      {/* Heading */}
+      <motion.h2
+        variants={fadeUp}
+        className="font-display font-black text-white leading-tight mb-12"
+        style={{
+          fontSize: "clamp(2.3rem,5vw,4rem)",
+        }}
+      >
+        Let's Build Something
+        <br />
+        Great Together
+      </motion.h2>
+
+      {/* Buttons */}
+      <motion.div
+        variants={fadeUp}
+        className="flex flex-wrap justify-center items-center gap-6"
+      >
+        {/* Get Started */}
+        <Magnetic strength={0.25}>
+          <motion.button
+            whileHover={{
+              scale: 1.05,
+              y: -3,
+            }}
+            whileTap={{
+              scale: 0.96,
+            }}
+            onClick={() => setShowModal(true)}
+            className="
+              w-[235px]
+              h-[60px]
+              rounded-full
+              bg-white
+              text-[#9C6734]
+              text-lg
+              font-semibold
+              shadow-[0_10px_30px_rgba(255,255,255,0.12)]
+              transition-all
+              duration-300
+              hover:shadow-[0_20px_45px_rgba(255,255,255,0.18)]
+            "
+          >
+            Get Started Free
+          </motion.button>
+        </Magnetic>
+
+        {/* WhatsApp */}
+        <Magnetic strength={0.20}>
+          <motion.a
+            whileHover={{
+              scale: 1.05,
+              y: -3,
+            }}
+            whileTap={{
+              scale: 0.96,
+            }}
+            href="https://wa.me/917305821333"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+              flex
+              items-center
+              justify-center
+              w-[235px]
+              h-[60px]
+              rounded-full
+              border
+              border-white/20
+              bg-gradient-to-b
+              from-[#23284B]
+              to-[#161B39]
+              text-white
+              text-lg
+              font-semibold
+              transition-all
+              duration-300
+              hover:border-[#F0C9A0]
+              hover:text-[#F0C9A0]
+              hover:shadow-[0_15px_40px_rgba(217,159,154,0.18)]
+            "
+          >
+            Chat on WhatsApp
+          </motion.a>
+        </Magnetic>
+      </motion.div>
+    </motion.div>
+  </div>
+</section>
 
       </div>
 
@@ -1049,7 +1360,7 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
             whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-6 right-6 bg-[#FF0000] text-white p-4 rounded-full shadow-xl z-40 hover:bg-red-600 transition-colors">
+            className="fixed bottom-6 right-6 bg-[#D18F5C] text-white p-4 rounded-full shadow-xl z-40 hover:bg-[#B8714A] transition-colors">
             <FaChevronUp size={16} />
           </motion.button>
         )}
@@ -1072,13 +1383,13 @@ export default function ServicesPage() {
                 ✕
               </button>
 
-              {/* Left */}
-              <div className="bg-[#FF0000] text-white p-10 md:p-12 w-full md:w-[44%] flex flex-col justify-center relative overflow-hidden">
+              {/* Left — Navy */}
+              <div className="bg-[#0A0930] text-white p-10 md:p-12 w-full md:w-[44%] flex flex-col justify-center relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none" style={{
-                  backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.08) 1.5px, transparent 1.5px)',
+                  backgroundImage: 'radial-gradient(circle, rgba(217,159,154,0.08) 1.5px, transparent 1.5px)',
                   backgroundSize: '28px 28px',
                 }} />
-                <div className="absolute right-[-50px] top-1/2 -translate-y-1/2 w-52 h-52 border border-white/10 rounded-full animate-spinSlow pointer-events-none" />
+                <div className="absolute right-[-50px] top-1/2 -translate-y-1/2 w-52 h-52 border border-[#F0C9A0]/10 rounded-full animate-spinSlow pointer-events-none" />
                 <div className="relative z-10">
                   <span className="inline-block glass text-white/80 px-3 py-1.5 rounded-full text-[10px] font-display font-bold uppercase tracking-widest mb-6">
                     Why Choose Us
@@ -1091,7 +1402,7 @@ export default function ServicesPage() {
                       { icon: <FaLayerGroup size={12} />, l: 'Multi‑Platform Expertise' },
                       { icon: <FaSync size={12} />, l: 'Continuous AI Optimization' },
                     ].map((it, i) => (
-                      <div key={i} className="flex items-center gap-3 bg-white text-[#FF0000] px-4 py-3 rounded-full text-xs font-display font-bold shadow-sm">
+                      <div key={i} className="flex items-center gap-3 bg-white text-[#B8714A] px-4 py-3 rounded-full text-xs font-display font-bold shadow-sm">
                         {it.icon} {it.l}
                       </div>
                     ))}
@@ -1102,26 +1413,26 @@ export default function ServicesPage() {
               {/* Right */}
               <div className="p-10 md:p-12 w-full md:w-[56%] bg-white flex flex-col justify-center">
                 <div className="mb-8">
-                  <Image src="/image/logo.webp" alt="Logo" width={150} height={38} />
+                  <Image src="/image/logo.webp" alt="Vaave Digital" width={150} height={38} />
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <select name="service" value={formData.service} onChange={handleChange}
-                    className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#FF0000] text-gray-800 bg-transparent text-sm font-display transition-colors">
+                    className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#D18F5C] text-gray-800 bg-transparent text-sm font-display transition-colors">
                     {serviceOptions.map(o => <option key={o}>{o}</option>)}
                   </select>
                   {(['name', 'contact'] as const).map(field => (
                     <input key={field} type={field === 'contact' ? 'tel' : 'text'} name={field}
                       placeholder={field === 'name' ? 'Your Name' : 'Contact Number'}
                       value={formData[field]} onChange={handleChange}
-                      className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#FF0000] text-gray-800 placeholder:text-gray-400 text-sm font-display transition-colors"
+                      className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#D18F5C] text-gray-800 placeholder:text-gray-400 text-sm font-display transition-colors"
                       required />
                   ))}
                   <textarea name="message" placeholder="Message / Requirements" value={formData.message}
                     onChange={handleChange} rows={2}
-                    className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#FF0000] text-gray-800 placeholder:text-gray-400 text-sm font-display resize-none transition-colors" />
+                    className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#D18F5C] text-gray-800 placeholder:text-gray-400 text-sm font-display resize-none transition-colors" />
                   <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} type="submit"
-                    className="w-full bg-[#FF0000] text-white py-4 rounded-full font-display font-bold text-sm hover:bg-red-600 transition-colors shadow-lg">
-                    Submit & Get Started →
+                    className="w-full bg-[#D18F5C] text-white py-4 rounded-full font-display font-bold text-sm hover:bg-[#B8714A] transition-colors shadow-lg">
+                    Submit & Get Started    →
                   </motion.button>
                 </form>
               </div>

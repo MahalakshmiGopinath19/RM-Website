@@ -59,7 +59,7 @@ export default function ScrollPopup() {
             alt="Consultation"
             className="w-full h-40 object-cover"
           />
-          <div className="bg-[#D32F2F] text-white px-6 py-3 flex justify-between items-center">
+          <div className="bg-[#0A0930] text-white px-6 py-3 flex justify-between items-center">
             <h4 className="text-xl font-semibold">Book a Consultation</h4>
             <button
               onClick={closeModal}
@@ -77,7 +77,7 @@ export default function ScrollPopup() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#D32F2F]"
+                className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#D18F5C]"
               />
               <input
                 type="tel"
@@ -86,7 +86,7 @@ export default function ScrollPopup() {
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#D32F2F]"
+                className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#D18F5C]"
               />
               <textarea
                 name="message"
@@ -95,11 +95,11 @@ export default function ScrollPopup() {
                 value={formData.message}
                 onChange={handleChange}
                 required
-                className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#D32F2F] resize-none"
+                className="w-full border border-gray-300 rounded-md px-4 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#D18F5C] resize-none"
               />
               <button
                 type="submit"
-                className="w-full bg-[#D32F2F] text-white font-bold py-3 rounded-md hover:bg-[#B71C1C] transition shadow-md"
+                className="w-full bg-[#D18F5C] text-white font-bold py-3 rounded-md hover:bg-[#B8714A] transition shadow-md"
               >
                 Request Call Back on WhatsApp
               </button>
