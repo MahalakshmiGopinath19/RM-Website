@@ -11,6 +11,9 @@ function getReadTime(content: string): number {
 
 export async function generateStaticParams() {
   const blogs = await getAllBlogs();
+  if (blogs.length === 0) {
+    return [{ id: '1' }]; // Return fallback ID to keep Next.js static site builder happy
+  }
   return blogs.map((blog) => ({ id: String(blog.id) }));
 }
 
@@ -22,14 +25,11 @@ export default async function BlogDetailPage({
   // ✅ Must await params
   const { id } = await params;
 
-  const blogId = parseInt(id, 10);
-  if (isNaN(blogId)) notFound();
-
-  const blog = await getBlogById(blogId);
+  const blog = await getBlogById(id);
   if (!blog) notFound();
 
   const allBlogs = await getAllBlogs();
-  const recentBlogs = allBlogs.filter((b) => b.id !== blogId).slice(0, 3);
+  const recentBlogs = allBlogs.filter((b) => String(b.id) !== id).slice(0, 3);
   const readTime = getReadTime(blog.description);
   const isHtml = /<[a-z][\s\S]*>/i.test(blog.description);
 
@@ -43,7 +43,7 @@ export default async function BlogDetailPage({
           </h1>
           <div className="flex flex-wrap justify-center gap-4 text-gray-500 text-sm mt-4">
             <span className="flex items-center gap-1">
-              <FaCalendarAlt className="text-[#e52423]" />
+              <FaCalendarAlt className="text-[#D18F5C]" />
               {new Date(blog.created_at).toLocaleDateString('en-US', {
                 month: 'short',
                 day: 'numeric',
@@ -51,11 +51,11 @@ export default async function BlogDetailPage({
               })}
             </span>
             <span className="flex items-center gap-1">
-              <FaClock className="text-[#e52423]" />
+              <FaClock className="text-[#D18F5C]" />
               {readTime} min read
             </span>
           </div>
-          <div className="mt-6 text-left bg-orange-50/60 border-l-4 border-[#e52423] rounded-r-xl p-4 text-gray-700 text-lg font-medium">
+          <div className="mt-6 text-left bg-[#fdf8f5] border-l-4 border-[#D18F5C] rounded-r-xl p-4 text-gray-700 text-lg font-medium">
             {blog.meta_description}
           </div>
         </header>
@@ -83,11 +83,11 @@ export default async function BlogDetailPage({
         <section className="bg-gray-50/80 py-12 md:py-16 border-t border-gray-200 mt-12">
           <div className="container mx-auto px-4">
             <h4 className="text-2xl md:text-3xl font-bold text-center mb-8">
-              More <span className="bg-gradient-to-r from-[#e52423] to-[#b91c1c] bg-clip-text text-transparent">Case Studies</span>
+              More <span className="bg-gradient-to-r from-[#D18F5C] to-[#B8714A] bg-clip-text text-transparent">Case Studies</span>
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {recentBlogs.map((recent) => (
-                <div key={recent.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all hover:-translate-y-1.5 hover:shadow-lg hover:border-red-200/50">
+                <div key={recent.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all hover:-translate-y-1.5 hover:shadow-lg hover:border-[#D18F5C]/50">
                   <div className="bg-gray-50 flex items-center justify-center p-4 h-40 border-b border-gray-100">
                     <Image
                       src={`/uploads/${recent.banner_image}`}
@@ -101,7 +101,7 @@ export default async function BlogDetailPage({
                     <h5 className="font-bold text-gray-900 line-clamp-2">{recent.title}</h5>
                     <Link
                       href={`/blog/${recent.id}`}
-                      className="mt-auto font-bold text-sm text-gray-900 inline-flex items-center gap-1.5 border-b-2 border-[#e52423] pb-1 w-fit transition-all hover:text-[#e52423] hover:gap-2.5"
+                      className="mt-auto font-bold text-sm text-gray-900 inline-flex items-center gap-1.5 border-b-2 border-[#D18F5C] pb-1 w-fit transition-all hover:text-[#D18F5C] hover:gap-2.5"
                     >
                       Read Story <FaArrowRight className="text-xs" />
                     </Link>

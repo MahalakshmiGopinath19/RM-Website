@@ -1,6 +1,7 @@
-// lib/db.ts – Mock data (no database connection)
+import { MongoClient, ObjectId } from 'mongodb';
+
 export interface Blog {
-  id: number;
+  id: string;
   title: string;
   meta_title: string;
   meta_description: string;
@@ -9,32 +10,161 @@ export interface Blog {
   created_at: string;
 }
 
-const mockBlogs: Blog[] = [
-  {
-    id: 1,
-    title: '10 AI Tools That Will Transform Your Marketing',
-    meta_title: 'AI Marketing Tools',
-    meta_description: 'Discover the latest AI-powered tools reshaping digital marketing.',
-    description: `<p>Artificial intelligence is no longer a futuristic concept—it's here and it's changing how we market.</p><p>From chatbots to predictive analytics, AI tools can automate tasks and give you deeper insights into your customers.</p><h2>Why AI matters</h2><p>... full content ...</p>`,
-    banner_image: 'ai-tools.jpg',
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: 2,
-    title: 'How to Build a Scalable Brand with Data',
-    meta_title: 'Data-Driven Branding',
-    meta_description: 'Learn how data-driven decisions can help your brand grow sustainably.',
-    description: '<p>Data is the new oil. Learn how to refine it for growth.</p>',
-    banner_image: 'data-brand.jpg',
-    created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
-  },
-  // Add more entries as needed
-];
+// MongoDB configuration
+const uri = process.env.MONGODB_URI || process.env.MONGO_URI || 'mongodb://127.0.0.1:27017';
+const dbName = 'vaave_digital';
 
-export async function getAllBlogs(): Promise<Blog[]> {
-  return mockBlogs;
+let client: MongoClient | null = null;
+
+async function getMongoClient(): Promise<MongoClient> {
+  if (!client) {
+    client = new MongoClient(uri, {
+      connectTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 5000,
+    });
+    await client.connect();
+  }
+  return client;
 }
 
-export async function getBlogById(id: number): Promise<Blog | null> {
-  return mockBlogs.find((b) => b.id === id) || null;
+export async function getAllBlogs(): Promise<Blog[]> {
+  try {
+    const mongoClient = await getMongoClient();
+    const db = mongoClient.db(dbName);
+    const docs = await db.collection('blogs').find({}).sort({ created_at: -1, createdAt: -1 }).toArray();
+    
+    if (docs.length > 0) {
+      return docs.map(doc => ({
+        id: doc.id ? String(doc.id) : doc._id.toString(),
+        title: doc.title || '',
+        meta_title: doc.meta_title || '',
+        meta_description: doc.meta_description || '',
+        description: doc.description || '',
+        banner_image: doc.banner_image || '',
+        created_at: String(doc.created_at || doc.createdAt || new Date().toISOString()),
+      }));
+    }
+    return [];
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn('Error connecting to MongoDB database:', message);
+    return [];
+  }
+}
+
+export async function getBlogById(id: string): Promise<Blog | null> {
+  try {
+    const mongoClient = await getMongoClient();
+    const db = mongoClient.db(dbName);
+    
+    let query: any = {};
+    if (ObjectId.isValid(id)) {
+      query = { _id: new ObjectId(id) };
+    } else {
+      // Query by string ID or parsed integer ID (fallback for MySQL / mock IDs)
+      const parsedId = parseInt(id, 10);
+      query = { $or: [{ id: id }, { id: isNaN(parsedId) ? -1 : parsedId }] };
+    }
+    
+    const doc = await db.collection('blogs').findOne(query);
+    if (doc) {
+      return {
+        id: doc.id ? String(doc.id) : doc._id.toString(),
+        title: doc.title || '',
+        meta_title: doc.meta_title || '',
+        meta_description: doc.meta_description || '',
+        description: doc.description || '',
+        banner_image: doc.banner_image || '',
+        created_at: String(doc.created_at || doc.createdAt || new Date().toISOString()),
+      };
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`Error querying MongoDB for blog ID ${id}:`, message);
+  }
+  return null;
+}
+
+export async function addBlog(blog: {
+  title: string;
+  meta_title: string;
+  meta_description: string;
+  description: string;
+  banner_image: string;
+}): Promise<boolean> {
+  try {
+    const mongoClient = await getMongoClient();
+    const db = mongoClient.db(dbName);
+    const result = await db.collection('blogs').insertOne({
+      ...blog,
+      created_at: new Date().toISOString(),
+    });
+    return result.acknowledged;
+  } catch (error) {
+    console.error('Error adding blog to MongoDB:', error);
+    return false;
+  }
+}
+
+export async function updateBlog(
+  id: string,
+  blog: {
+    title: string;
+    meta_title: string;
+    meta_description: string;
+    description: string;
+    banner_image?: string;
+  }
+): Promise<boolean> {
+  try {
+    const mongoClient = await getMongoClient();
+    const db = mongoClient.db(dbName);
+    
+    let query: any = {};
+    if (ObjectId.isValid(id)) {
+      query = { _id: new ObjectId(id) };
+    } else {
+      const parsedId = parseInt(id, 10);
+      query = { id: isNaN(parsedId) ? id : parsedId };
+    }
+    
+    const updateDoc: any = {
+      $set: {
+        title: blog.title,
+        meta_title: blog.meta_title,
+        meta_description: blog.meta_description,
+        description: blog.description,
+      }
+    };
+    if (blog.banner_image) {
+      updateDoc.$set.banner_image = blog.banner_image;
+    }
+    
+    const result = await db.collection('blogs').updateOne(query, updateDoc);
+    return result.modifiedCount > 0 || result.matchedCount > 0;
+  } catch (error) {
+    console.error(`Error updating blog ID ${id} in MongoDB:`, error);
+    return false;
+  }
+}
+
+export async function deleteBlog(id: string): Promise<boolean> {
+  try {
+    const mongoClient = await getMongoClient();
+    const db = mongoClient.db(dbName);
+    
+    let query: any = {};
+    if (ObjectId.isValid(id)) {
+      query = { _id: new ObjectId(id) };
+    } else {
+      const parsedId = parseInt(id, 10);
+      query = { id: isNaN(parsedId) ? id : parsedId };
+    }
+    
+    const result = await db.collection('blogs').deleteOne(query);
+    return result.deletedCount > 0;
+  } catch (error) {
+    console.error(`Error deleting blog ID ${id} from MongoDB:`, error);
+    return false;
+  }
 }

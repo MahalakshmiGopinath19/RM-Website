@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Header from '@/components/layout/Header';
-import ScrollPopup from '@/components/ScrollPopup';
-import Footer from '@/components/layout/Footer';
+import ConditionalLayout from '@/components/layout/ConditionalLayout';
 
 export const metadata: Metadata = {
   title: 'Rainbow Media - AI Integrated Digital & IT Services',
@@ -50,13 +48,9 @@ export default function RootLayout({
       </head>
 
       <body className="bg-[#0A0930] text-white font-['Inter'] antialiased">
-        <Header />
-
-        <main>{children}</main>
-
-        <ScrollPopup />
-
-        <Footer />
+        <ConditionalLayout>
+          {children}
+        </ConditionalLayout>
       </body>
     </html>
   );

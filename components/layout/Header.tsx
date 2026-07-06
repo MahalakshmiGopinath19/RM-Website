@@ -53,16 +53,16 @@ export default function Header() {
         --sky:       #34D2C7   accent blue from the paper-plane icon
       */}
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'shadow-lg' : 'shadow-md'}`}>
-        {/* Top Banner — solid navy */}
-        <div className="bg-[#0A0930] text-white text-center py-2.5 text-sm font-medium tracking-wide">
+        {/* Top Banner — copper gradient */}
+        <div className="bg-gradient-to-r from-[#F0C9A0] via-[#D18F5C] to-[#B8714A] text-[#0A0930] text-center py-2.5 text-sm font-medium tracking-wide">
           <div className="container mx-auto px-4">
             ✨ Limited Time Offer: Boost Your Business with 20% Off Our Marketing Packages!
-            <Link href="#" className="ml-3 underline font-semibold text-[#F0C9A0] hover:text-white transition">Get early access →</Link>
+            <Link href="#" className="ml-3 underline font-semibold text-[#0A0930] hover:text-white transition">Get early access →</Link>
           </div>
         </div>
 
-        {/* Main nav — copper gradient */}
-        <div className={`bg-gradient-to-r from-[#F0C9A0] via-[#D18F5C] to-[#B8714A] transition-all duration-300 ${scrolled ? 'backdrop-blur-md' : ''}`}>
+        {/* Main nav — solid navy to blend with logo */}
+        <div className={`bg-[#0A0930]/95 backdrop-blur-md border-b border-white/10 transition-all duration-300`}>
           <nav className="container mx-auto px-4 lg:px-6 py-3 flex justify-between items-center">
             <Link href="/" className="flex-shrink-0 transform transition duration-300 hover:scale-105">
               <Image src="/image/logo.webp" alt="Vaave Digital" width={200} height={60} className="w-auto h-14 lg:h-16 drop-shadow-lg" priority />
@@ -73,52 +73,52 @@ export default function Header() {
                 <Link
                   key={item}
                   href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                  className="relative text-[#0A0930] font-semibold group text-sm xl:text-base transition-colors duration-255 hover:text-white"
+                  className="relative text-white font-semibold group text-sm xl:text-base transition-colors duration-255 hover:text-[#F0C9A0]"
                 >
                   {item}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#0A0930] transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F0C9A0] transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               ))}
             </div>
 
             <div className="hidden lg:flex items-center space-x-4 xl:space-x-5">
-              <div className="flex items-center space-x-3 border-r border-[#0A0930]/25 pr-4 xl:pr-5 text-[#0A0930]/70">
-                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition transform hover:scale-110"><FaFacebookF /></a>
-                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition transform hover:scale-110"><FaInstagram /></a>
-                <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-white transition transform hover:scale-110"><FaYoutube /></a>
-                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition transform hover:scale-110"><FaLinkedinIn /></a>
-                <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition transform hover:scale-110"><FaTwitter /></a>
+              <div className="flex items-center space-x-3 border-r border-white/25 pr-4 xl:pr-5 text-white/70">
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#F0C9A0] transition transform hover:scale-110"><FaFacebookF /></a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#F0C9A0] transition transform hover:scale-110"><FaInstagram /></a>
+                <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-[#F0C9A0] transition transform hover:scale-110"><FaYoutube /></a>
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#F0C9A0] transition transform hover:scale-110"><FaLinkedinIn /></a>
+                <a href="https://x.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#F0C9A0] transition transform hover:scale-110"><FaTwitter /></a>
               </div>
               <button
                 onClick={() => setShowModal(true)}
-                className="bg-[#0A0930] hover:bg-[#12103D] text-[#F0C9A0] px-5 py-2 rounded-full font-bold text-sm shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+                className="bg-gradient-to-r from-[#F0C9A0] via-[#D18F5C] to-[#B8714A] hover:brightness-110 text-[#0A0930] px-5 py-2 rounded-full font-bold text-sm shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
               >
                 Get started
               </button>
             </div>
 
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden text-2xl text-[#0A0930] focus:outline-none">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden text-2xl text-white focus:outline-none">
               {mobileMenuOpen ? '✕' : '☰'}
             </button>
           </nav>
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-[#F0C9A0] to-[#D18F5C] shadow-xl border-t border-[#0A0930]/15 z-40 p-5 animate-slideDown">
+          <div className="lg:hidden absolute top-full left-0 w-full bg-[#0A0930]/95 backdrop-blur-md shadow-xl border-t border-white/10 z-40 p-5 animate-slideDown">
             <div className="flex flex-col space-y-3">
               {['Home', 'Services', 'Products', 'Career', 'About', 'Blog', 'Contact'].map(i => (
                 <Link
                   key={i}
                   href={i === 'Home' ? '/' : `/${i.toLowerCase()}`}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-[#0A0930] hover:text-white font-medium transition-colors"
+                  className="text-white hover:text-[#F0C9A0] font-medium transition-colors"
                 >
                   {i}
                 </Link>
               ))}
               <button
                 onClick={() => { setShowModal(true); setMobileMenuOpen(false); }}
-                className="mt-2 bg-[#0A0930] text-[#F0C9A0] py-2.5 rounded-full font-bold transition hover:bg-[#12103D]"
+                className="mt-2 bg-gradient-to-r from-[#F0C9A0] via-[#D18F5C] to-[#B8714A] text-[#0A0930] py-2.5 rounded-full font-bold transition hover:brightness-110"
               >
                 Get started
               </button>
