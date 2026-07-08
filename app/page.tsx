@@ -10,15 +10,16 @@ import {
   FaArrowRight, FaWhatsapp, FaBrain, FaChevronUp,
   FaHeartbeat, FaLayerGroup, FaSync, FaChevronDown,
 } from 'react-icons/fa';
+import Stepper, { Step } from '@/components/ui/Stepper';
 
 /* ══════════════════════════════════════════════════════════
    VAAVE DIGITAL — BRAND PALETTE
    Navy      #0A0930  (deep background, matches logo backdrop)
    Navy-Deep #12103D  (secondary depth layer, gradients)
-   Gold      #D18F5C  (primary copper/rose-gold accent)
-   Gold-D    #B8714A  (darker copper — hovers, on-white text)
-   Gold-L    #F0C9A0  (light gold tint — text/borders on navy)
-   Teal      #34D2C7  (paper-plane accent — signature network)
+   Gold      #E0A36A  (primary copper/rose-gold accent)
+   Gold-D    #9C5B5A  (darker copper — hovers, on-white text)
+   Gold-L    #EFD3C9  (light gold tint — text/borders on navy)
+   Teal      #E0A36A  (paper-plane accent — signature network)
    Cream     #FDFBF8  (warm light section background)
    Ink       #12103D  (cooler near-black for cream-section text)
 ══════════════════════════════════════════════════════════ */
@@ -64,7 +65,7 @@ function ScrollProgressBar() {
   return (
     <motion.div
       style={{ scaleX: scrollYProgress }}
-      className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[1000] bg-gradient-to-r from-[#B8714A] via-[#D18F5C] to-[#F0C9A0]"
+      className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[1000] bg-gradient-to-r from-[#9C5B5A] via-[#E0A36A] to-[#EFD3C9]"
     />
   );
 }
@@ -138,9 +139,9 @@ function CyclingTypewriter() {
     return () => { if (t.current) clearTimeout(t.current); };
   }, [text, del, wi]);
   return (
-    <span className="relative inline-block bg-gradient-to-r from-[#FBD9BE] via-[#F0C9A0] to-[#D18F5C] bg-clip-text text-transparent">
+    <span className="relative inline-block bg-gradient-to-r from-[#FBD9BE] via-[#EFD3C9] to-[#E0A36A] bg-clip-text text-transparent">
       {text}
-      <span className="inline-block w-[4px] h-[0.8em] bg-[#F0C9A0] align-middle ml-1 animate-[blink_0.8s_step-end_infinite]" />
+      <span className="inline-block w-[4px] h-[0.8em] bg-[#EFD3C9] align-middle ml-1 animate-[blink_0.8s_step-end_infinite]" />
     </span>
   );
 }
@@ -180,7 +181,7 @@ function ArcStat({ pct, label, value }: { pct: number; label: string; value: str
         <div className="absolute inset-1 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 shadow-[0_0_24px_rgba(217,159,154,0.12)]" />
         <svg viewBox="0 0 100 100" className="relative w-full h-full -rotate-90">
           <circle cx="50" cy="50" r={r} fill="none" stroke="rgba(217,159,154,0.18)" strokeWidth="7" />
-          <circle cx="50" cy="50" r={r} fill="none" stroke="#F0C9A0" strokeWidth="7"
+          <circle cx="50" cy="50" r={r} fill="none" stroke="#EFD3C9" strokeWidth="7"
             strokeDasharray={`${dash} ${circ}`} strokeLinecap="round"
             style={{ filter: 'drop-shadow(0 0 6px rgba(217,159,154,0.55))' }} />
         </svg>
@@ -237,8 +238,8 @@ function FlipCard({ front, back }: { front: React.ReactNode; back: React.ReactNo
     <motion.div
       whileHover={{ y: -6 }}
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-      className="relative"
-      style={{ perspective: 1000, height: 420 }}
+      className="relative h-[250px] sm:h-[420px] w-full"
+      style={{ perspective: 1000 }}
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
     >
@@ -263,11 +264,11 @@ function ProcessConnector() {
   return (
     <div ref={ref} className="hidden md:flex items-center flex-1 px-2">
       <div className="w-full h-px bg-gray-200 relative overflow-hidden">
-        <motion.div className="absolute inset-y-0 left-0 bg-[#D18F5C]"
+        <motion.div className="absolute inset-y-0 left-0 bg-[#E0A36A]"
           initial={{ width: 0 }} animate={inView ? { width: '100%' } : {}}
           transition={{ duration: 1.1, ease: 'easeInOut', delay: 0.3 }} />
       </div>
-      <motion.div className="w-2 h-2 rounded-full bg-[#D18F5C] flex-shrink-0"
+      <motion.div className="w-2 h-2 rounded-full bg-[#E0A36A] flex-shrink-0"
         initial={{ scale: 0 }} animate={inView ? { scale: 1 } : {}} transition={{ delay: 1.4 }} />
     </div>
   );
@@ -287,7 +288,7 @@ function SectionBridge({ dark = false, bgClass = '' }: { dark?: boolean; bgClass
         className="flex flex-col items-center gap-1"
       >
         <div className={`w-px h-8 ${line}`} />
-        <FaChevronDown size={12} className="text-[#D18F5C]" />
+        <FaChevronDown size={12} className="text-[#E0A36A]" />
       </motion.div>
     </div>
   );
@@ -386,7 +387,7 @@ function NeuralHeroCanvas() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = near > 0.3 ? `rgba(3,101,140,${op})` : `rgba(217,159,154,${op})`;
+            ctx.strokeStyle = near > 0.3 ? `rgba(224,163,106,${op})` : `rgba(217,159,154,${op})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -399,7 +400,7 @@ function NeuralHeroCanvas() {
         const near = Math.max(0, 1 - mDist / 180);
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r + near * 1.6, 0, Math.PI * 2);
-        ctx.fillStyle = near > 0.4 ? 'rgba(3,101,140,0.9)' : 'rgba(217,159,154,0.55)';
+        ctx.fillStyle = near > 0.4 ? 'rgba(224,163,106,0.9)' : 'rgba(217,159,154,0.55)';
         ctx.fill();
       });
 
@@ -414,8 +415,8 @@ function NeuralHeroCanvas() {
         const py = (1 - t) * (1 - t) * a.y + 2 * (1 - t) * t * my + t * t * b.y;
         ctx.beginPath();
         ctx.arc(px, py, 2.6, 0, Math.PI * 2);
-        ctx.fillStyle = '#34D2C7';
-        ctx.shadowColor = '#34D2C7';
+        ctx.fillStyle = '#E0A36A';
+        ctx.shadowColor = '#E0A36A';
         ctx.shadowBlur = 9;
         ctx.fill();
         ctx.shadowBlur = 0;
@@ -452,8 +453,6 @@ function NeuralHeroCanvas() {
 ══════════════════════════════════════════════════════════ */
 export default function ServicesPage() {
   const [showModal, setShowModal] = useState(false);
-  const [quickPhone, setQuickPhone] = useState('');
-  const [quickSubmitted, setQuickSubmitted] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [formData, setFormData] = useState({ service: 'Social Media Marketing', name: '', contact: '', message: '' });
 
@@ -464,7 +463,6 @@ export default function ServicesPage() {
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, 60]);
   const heroRotate = useTransform(scrollYProgress, [0, 0.3], [0, -2]);
 
-  const fsSpot = useSpotlight();
   const adsSpot = useSpotlight();
   const footerSpot = useSpotlight();
 
@@ -481,33 +479,27 @@ export default function ServicesPage() {
   ];
 
   const services = [
-    { image: '/image/sm-img.webp', title: 'Social Media Marketing', tag: 'SMM', desc: 'Data-driven social strategies with AI insights to boost engagement, reach, and campaign performance across all platforms.', cta: 'Free Audit' },
-    { image: '/image/wb.webp', title: 'Website Creation', tag: 'WEB', desc: 'Modern, responsive websites with AI-powered features and smart integrations tailored to your business goals.', cta: 'Chat with Dev', href: 'https://wa.me/917305821333' },
-    { image: '/image/gmb.webp', title: 'Google My Business', tag: 'GMB', desc: 'Optimized business profiles with AI-powered insights to dominate local search and drive more foot traffic.', cta: 'Call for Local SEO', href: 'tel:+917305821333' },
+    { image: '/image/sm-img.webp', title: 'Social Media Marketing', tag: 'SMM', desc: 'Data-driven social strategies with smart insights to boost engagement, reach, and campaign performance across all platforms.', cta: 'Free Audit' },
+    { image: '/image/wb.webp', title: 'Website Creation', tag: 'WEB', desc: 'Modern, responsive websites with interactive features and smart integrations tailored to your business goals.', cta: 'Chat with Dev', href: 'https://wa.me/917305821333' },
+    { image: '/image/gmb.webp', title: 'Google My Business', tag: 'GMB', desc: 'Optimized business profiles with data-driven insights to dominate local search and drive more foot traffic.', cta: 'Call for Local SEO', href: 'tel:+917305821333' },
     { image: '/image/seo.webp', title: 'Search Engine Optimization', tag: 'SEO', desc: 'Comprehensive SEO strategies that enhance visibility and drive sustained organic traffic for long-term growth.', cta: 'Request SEO Analysis' },
-    { image: '/image/bcd.webp', title: 'Branding & Design', tag: 'BRD', desc: 'Creative branding solutions enhanced by AI-powered tools for faster ideation and impactful visual identities.', cta: 'Email Design Team', href: 'mailto:rmedia1123.info@gmail.com' },
+    { image: '/image/bcd.webp', title: 'Branding & Design', tag: 'BRD', desc: 'Creative branding solutions enhanced by modern tools for faster ideation and impactful visual identities.', cta: 'Email Design Team', href: 'mailto:rmedia1123.info@gmail.com' },
   ];
 
   const uxSteps = [
-    { image: '/image/uxui-1.webp', title: 'Research & Planning', desc: 'We learn about your business, users, and goals. AI helps us gather insights and find the best direction fast.' },
-    { image: '/image/uxui-2.webp', title: 'Wireframes & Prototypes', desc: 'Clickable prototypes so you see exactly how your site or app works before a single line of code is written.' },
-    { image: '/image/uxui-3.webp', title: 'Design & Improvement', desc: 'Beautiful, user-friendly screens refined with AI insights for better engagement and measurable results.' },
-  ];
-
-  const fullstackSteps = [
-    { icon: '/image/fs-1.png', title: 'UI/UX Design', desc: 'Responsive interfaces built for seamless cross-device experiences.' },
-    { icon: '/image/fs-2.png', title: 'App Development', desc: 'Secure APIs and server solutions engineered to scale reliably.' },
-    { icon: '/image/fs-3.png', title: 'AI & Automation', desc: 'Smart chatbots and AI capabilities integrated into your platform.' },
-    { icon: '/image/fs-4.png', title: 'Launch & Growth', desc: 'Cloud deployment, security hardening, and ongoing maintenance.' },
+    { image: '/image/process1.webp', title: 'Research & Development', desc: 'We understand your business, audience, and goals to create the right digital solution.' },
+    { image: '/image/process2.webp', title: 'Competitive Analysis', desc: 'We study your competitors and market trends to identify opportunities and give your brand a competitive edge.' },
+    { image: '/image/process3.webp', title: 'Strategic Planning', desc: 'We create a customized strategy that helps your business stand out and achieve measurable growth.' },
+    { image: '/image/process4.webp', title: 'Tracking & Monitoring', desc: 'We continuously monitor performance, measure results, and optimize strategies for long-term success.' }
   ];
 
   const galleryProjects = [
-    { id: 1, label: 'E-Commerce Revamp', category: 'Web Design' },
-    { id: 2, label: 'Brand Campaign', category: 'Social Media' },
-    { id: 3, label: 'SEO Growth 3×', category: 'SEO / Content' },
-    { id: 4, label: 'Google Ads ROAS 8×', category: 'Paid Media' },
-    { id: 5, label: 'App UI/UX', category: 'Design' },
-    { id: 6, label: 'GMB Local Push', category: 'Local SEO' },
+    { id: 1, label: 'E-Commerce Revamp' },
+    { id: 2, label: 'Brand Campaign' },
+    { id: 3, label: 'SEO Growth 3×' },
+    { id: 4, label: 'Google Ads ROAS 8×' },
+    { id: 5, label: 'App UI/UX'},
+    { id: 6, label: 'GMB Local Push' },
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -515,16 +507,9 @@ export default function ServicesPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `Hello Vaave Digital! AI Consultation%0AService: ${formData.service}%0AName: ${formData.name}%0AContact: ${formData.contact}%0AMessage: ${formData.message}`;
+    const msg = `Hello Vaave Digital! Consultation Request%0AService: ${formData.service}%0AName: ${formData.name}%0AContact: ${formData.contact}%0AMessage: ${formData.message}`;
     window.open(`https://wa.me/917305821333?text=${encodeURIComponent(msg)}`, '_blank');
     setShowModal(false);
-  };
-
-  const handleQuickSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setQuickSubmitted(true);
-    window.open(`https://wa.me/917305821333?text=${encodeURIComponent(`Hi Vaave Digital, please call me back: ${quickPhone}`)}`, '_blank');
-    setTimeout(() => { setQuickSubmitted(false); setQuickPhone(''); }, 2000);
   };
 
   return (
@@ -557,11 +542,11 @@ export default function ServicesPage() {
         /* Clip paths for section transitions */
         .clip-down { clip-path: polygon(0 0, 100% 0, 100% 92%, 50% 100%, 0 92%); padding-bottom: 5rem; }
         .clip-up   { clip-path: polygon(50% 0%, 100% 8%, 100% 100%, 0 100%, 0 8%); padding-top: 5rem; }
-        .clip-wave { clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); }
+        .clip-wave { clip-path: polygon(0 0, 100% 0, 100% 93%, 0 100%); }
 
         /* Hover border sweep */
         .sweep { position:relative; overflow:hidden; }
-        .sweep::after { content:''; position:absolute; inset:0; border:2px solid #D18F5C; border-radius:inherit; opacity:0; transform:scale(0.95); transition:opacity .3s,transform .3s; }
+        .sweep::after { content:''; position:absolute; inset:0; border:2px solid #E0A36A; border-radius:inherit; opacity:0; transform:scale(0.95); transition:opacity .3s,transform .3s; }
         .sweep:hover::after { opacity:1; transform:scale(1); }
 
         /* Gallery hover overlay */
@@ -596,29 +581,35 @@ export default function ServicesPage() {
         {/* ══════════════════════════════════════════════════
             HERO — Deep Navy + Neural Constellation signature
         ══════════════════════════════════════════════════ */}
-        <section ref={heroRef} className="relative bg-gradient-to-b from-[#0A0930] to-[#12103D] min-h-screen flex items-center overflow-hidden clip-wave">
+        <section ref={heroRef} className="relative bg-gradient-to-b from-[#0A0930] to-[#12103D] overflow-hidden clip-wave -mt-[108px] lg:-mt-[124px] pt-[108px] lg:pt-[124px]">
           {/* Signature animated network background */}
           <NeuralHeroCanvas />
 
           {/* Spinning decorative rings */}
           <div className="absolute right-[-100px] top-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="w-[600px] h-[600px] border border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
-            <div className="absolute inset-[80px] border border-[#F0C9A0]/10 rounded-full animate-spinSlowRev" />
-            <div className="absolute inset-[160px] border-2 border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
+            <div className="w-[600px] h-[600px] border border-[#EFD3C9]/10 rounded-full animate-spinSlow" />
+            <div className="absolute inset-[80px] border border-[#EFD3C9]/10 rounded-full animate-spinSlowRev" />
+            <div className="absolute inset-[160px] border-2 border-[#EFD3C9]/10 rounded-full animate-spinSlow" />
           </div>
 
           {/* Corner frame accents */}
-          <div className="absolute top-6 left-6 w-14 h-14 border-t-2 border-l-2 border-[#F0C9A0]/25 rounded-tl-lg" />
-          <div className="absolute top-6 right-6 w-14 h-14 border-t-2 border-r-2 border-[#F0C9A0]/25 rounded-tr-lg" />
-          <div className="absolute bottom-16 left-6 w-14 h-14 border-b-2 border-l-2 border-[#F0C9A0]/25 rounded-bl-lg" />
-          <div className="absolute bottom-16 right-6 w-14 h-14 border-b-2 border-r-2 border-[#F0C9A0]/25 rounded-br-lg" />
+          <div className="absolute top-6 left-6 w-14 h-14 border-t-2 border-l-2 border-[#EFD3C9]/25 rounded-tl-lg mt-[108px] lg:mt-[124px]" />
+          <div className="absolute top-6 right-6 w-14 h-14 border-t-2 border-r-2 border-[#EFD3C9]/25 rounded-tr-lg mt-[108px] lg:mt-[124px]" />
+          <div className="absolute bottom-16 left-6 w-14 h-14 border-b-2 border-l-2 border-[#EFD3C9]/25 rounded-bl-lg" />
+          <div className="absolute bottom-16 right-6 w-14 h-14 border-b-2 border-r-2 border-[#EFD3C9]/25 rounded-br-lg" />
 
-          <motion.div style={{ y: heroY, rotate: heroRotate }} className="container mx-auto px-6 lg:px-16 relative z-10 py-32">
-            <motion.div initial="hidden" animate={heroInView ? 'visible' : 'hidden'} variants={stagger}>
+          <div className="min-h-[calc(100vh-108px)] lg:min-h-[calc(100vh-124px)] w-full flex items-center">
+            <motion.div style={{ y: heroY, rotate: heroRotate }} className="container mx-auto px-6 lg:px-16 relative z-10 py-8 lg:py-12">
+              <motion.div initial="hidden" animate={heroInView ? 'visible' : 'hidden'} variants={stagger}>
 
               {/* Brand wordmark */}
               <motion.div variants={fadeUp} className="mb-6">
-                <span className="font-display text-2xl md:text-3xl font-black tracking-[0.15em] bg-gradient-to-r from-[#F6C9AE] via-[#E8875A] to-[#B8714A] bg-clip-text text-transparent">
+                <span 
+                  className="font-display text-2xl md:text-3xl font-black tracking-[0.15em] bg-clip-text text-transparent animate-shimmer"
+                  style={{
+                    backgroundImage: 'linear-gradient(135deg, #E0A36A 0%, #EFD3C9 25%, #CD8E83 50%, #9C5B5A 75%, #E0A36A 100%)'
+                  }}
+                >
                   VAAVE <span className="font-light tracking-[0.4em]">DIGITAL</span>
                 </span>
               </motion.div>
@@ -626,8 +617,8 @@ export default function ServicesPage() {
               {/* Pulsing live dot + eyebrow */}
               <motion.div variants={fadeUp} className="flex items-center gap-3 mb-8">
                 <div className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute h-full w-full rounded-full bg-[#34D2C7] opacity-60" />
-                  <span className="relative rounded-full h-3 w-3 bg-[#34D2C7]" />
+                  <span className="animate-ping absolute h-full w-full rounded-full bg-[#E0A36A] opacity-60" />
+                  <span className="relative rounded-full h-3 w-3 bg-[#E0A36A]" />
                 </div>
                 <span className="font-display text-white/80 text-xs tracking-[0.3em] uppercase font-semibold">
                   AI‑Integrated Digital Agency
@@ -655,8 +646,8 @@ export default function ServicesPage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
                     onClick={() => setShowModal(true)}
-                    className="sheen group bg-white text-[#B8714A] px-10 py-4 rounded-full font-display font-bold text-base flex items-center gap-2 shadow-2xl shadow-black/40">
-                    Get Free AI Audit
+                    className="sheen group bg-white text-[#9C5B5A] px-10 py-4 rounded-full font-display font-bold text-base flex items-center gap-2 shadow-2xl shadow-black/40">
+                    Get Free Audit
                     <motion.span animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.4 }}>
                       <FaArrowRight size={13} />
                     </motion.span>
@@ -666,7 +657,7 @@ export default function ServicesPage() {
                   <motion.a
                     whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
                     href="https://wa.me/917305821333" target="_blank"
-                    className="glass text-white px-10 py-4 rounded-full font-display font-bold text-base flex items-center gap-2 hover:bg-white hover:text-[#B8714A] transition-all duration-300">
+                    className="glass text-white px-10 py-4 rounded-full font-display font-bold text-base flex items-center gap-2 hover:bg-white hover:text-[#9C5B5A] transition-all duration-300">
                     <FaWhatsapp size={17} /> WhatsApp Now
                   </motion.a>
                 </Magnetic>
@@ -680,18 +671,19 @@ export default function ServicesPage() {
                 <ArcStat pct={90} label="On‑Time Delivery" value="90%" />
                 <ArcStat pct={100} label="Risk Free" value="100%" />
               </motion.div>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Scroll indicator */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
+          {/* <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
             className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2">
             <span className="font-display text-white/40 text-[9px] tracking-[0.3em] uppercase">Scroll</span>
             <div className="w-5 h-8 border border-white/25 rounded-full flex justify-center pt-1.5">
               <motion.div className="w-1 h-1 bg-white/60 rounded-full"
                 animate={{ y: [0, 12, 0] }} transition={{ duration: 1.4, repeat: Infinity }} />
             </div>
-          </motion.div>
+          </motion.div> */}
         </section>
 
         {/* ── Bridge: Hero → Ticker ── */}
@@ -700,7 +692,7 @@ export default function ServicesPage() {
         {/* ══════════════════════════════════════════════════
             TICKER — White, subtle 3D marquee strip
         ══════════════════════════════════════════════════ */}
-        <div className="bg-white py-6 border-y border-gray-100 overflow-hidden" style={{ perspective: 800 }}>
+        <div className="bg-[#050821] py-6 border-y border-white/10 overflow-hidden" style={{ perspective: 800 }}>
           <div
             className="whitespace-nowrap"
             style={{
@@ -712,11 +704,11 @@ export default function ServicesPage() {
           >
             <div className="inline-flex gap-12 animate-marquee">
               {['Social Media Marketing', 'SEO Optimization', 'Google Ads', 'Website Creation',
-                'AI Automation', 'Branding & Design', 'YouTube Promotion', 'Content Strategy',
+                'Web Development', 'Branding & Design', 'YouTube Promotion', 'Content Strategy',
                 'Social Media Marketing', 'SEO Optimization', 'Google Ads', 'Website Creation',
-                'AI Automation', 'Branding & Design', 'YouTube Promotion', 'Content Strategy'].map((item, i) => (
-                <span key={i} className="font-display text-gray-400 text-xs font-bold tracking-[0.2em] uppercase inline-flex items-center gap-4">
-                  {item} <span className="text-[#D18F5C] text-sm">◆</span>
+                'Web Development', 'Branding & Design', 'YouTube Promotion', 'Content Strategy'].map((item, i) => (
+                <span key={i} className="font-display text-[#EFD3C9] text-xs font-bold tracking-[0.2em] uppercase inline-flex items-center gap-4">
+                  {item} <span className="text-[#E0A36A] text-sm">◆</span>
                 </span>
               ))}
             </div>
@@ -729,23 +721,23 @@ export default function ServicesPage() {
         {/* ══════════════════════════════════════════════════
                     INTRO — Warm Cream
                 ══════════════════════════════════════════════════ */}
-                <section className="bg-[#FDFBF8] py-24 relative overflow-hidden">
+                <section className="bg-[#FDFBF8] py-14 md:py-16 relative overflow-hidden">
                   <div className="absolute right-6 top-1/2 -translate-y-1/2 font-display font-black leading-none select-none pointer-events-none"
                     style={{ fontSize: 'clamp(8rem,16vw,16rem)', color: 'rgba(10, 10, 41, 0.04)' }}>01</div>
                   <div className="container mx-auto px-6 lg:px-16 relative z-10">
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={stagger}
                       className="max-w-3xl">
                       <motion.span variants={fadeUp}
-                        className="inline-block font-display text-[#B8714A] text-xs tracking-[0.35em] uppercase font-bold mb-5">
+                        className="inline-block font-display text-[#9C5B5A] text-xs tracking-[0.35em] uppercase font-bold mb-5">
                         What We Do
                       </motion.span>
                       <motion.h2 variants={fadeUp}
                         className="font-display text-[#0A0930] font-extrabold leading-[1.05] mb-5"
                         style={{ fontSize: 'clamp(2rem,5vw,3.8rem)' }}>
                         Dominating the{' '}
-                        <span className="relative inline-block text-[#B8714A]">
+                        <span className="relative inline-block text-[#9C5B5A]">
                           AI‑Powered
-                          <motion.span className="absolute -bottom-1 left-0 h-1 bg-[#D18F5C]/30 w-full rounded-full"
+                          <motion.span className="absolute -bottom-1 left-0 h-1 bg-[#E0A36A]/30 w-full rounded-full"
                             initial={{ scaleX: 0, originX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }}
                             transition={{ delay: 0.5, duration: 0.9 }} />
                         </span>{' '}
@@ -758,7 +750,7 @@ export default function ServicesPage() {
                       <motion.div variants={stagger} className="flex flex-wrap gap-3">
                         {['100% Risk‑Free', 'No Contracts', 'Fast 24h Setup', 'AI‑Powered', '500+ Clients'].map((b, i) => (
                           <motion.span key={i} variants={fadeUp}
-                            whileHover={{ scale: 1.07, backgroundColor: '#D18F5C', color: '#fff', borderColor: '#D18F5C' }}
+                            whileHover={{ scale: 1.07, backgroundColor: '#E0A36A', color: '#fff', borderColor: '#E0A36A' }}
                             className="font-display text-xs font-bold uppercase tracking-widest border-2 border-gray-300 px-5 py-2.5 rounded-full text-gray-700 bg-white transition-all duration-200 cursor-default select-none">
                             {b}
                           </motion.span>
@@ -774,11 +766,11 @@ export default function ServicesPage() {
         {/* ══════════════════════════════════════════════════
             SERVICES — White, Flip Cards
         ══════════════════════════════════════════════════ */}
-        <section className="bg-[#0A0930] py-24">
+        <section className="bg-[#0A0930] py-14 md:py-16">
           <div className="container mx-auto px-6 lg:px-16">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-14">
               <motion.span variants={fadeUp}
-                className="inline-block font-display text-[#D18F5C] text-xs tracking-[0.35em] uppercase font-bold mb-3">
+                className="inline-block font-display text-[#E0A36A] text-xs tracking-[0.35em] uppercase font-bold mb-3">
                 Services
               </motion.span>
               <div className="flex items-end justify-between flex-wrap gap-4">
@@ -793,42 +785,42 @@ export default function ServicesPage() {
             </motion.div>
 
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
               {services.map((s, i) => (
                 <motion.div key={i} variants={fadeUp}>
                   <FlipCard
                     front={
                       <div className="w-full h-full rounded-2xl overflow-hidden bg-[#12103D] flex flex-col border border-white/10 shadow-sm">
-                        <div className="flex-1 flex items-center justify-center bg-white/5 p-8">
-                          <img src={s.image} alt={s.title} className="max-h-48 w-auto object-contain brightness-95" />
+                        <div className="flex-1 w-full relative overflow-hidden bg-white/5">
+                          <img src={s.image} alt={s.title} className="w-full h-full object-cover brightness-95" />
                         </div>
-                        <div className="p-6 flex items-center justify-between border-t border-white/10">
+                        <div className="p-3 sm:p-6 flex items-center justify-between border-t border-white/10">
                           <div>
-                            <span className="font-data text-[10px] font-bold text-[#D18F5C] tracking-[0.3em] uppercase">{s.tag}</span>
-                            <h3 className="font-display text-white font-bold text-lg mt-0.5">{s.title}</h3>
+                            <span className="font-data text-[8px] sm:text-[10px] font-bold text-[#E0A36A] tracking-[0.2em] sm:tracking-[0.3em] uppercase">{s.tag}</span>
+                            <h3 className="font-display text-white font-bold text-xs sm:text-lg mt-0.5 leading-tight">{s.title}</h3>
                           </div>
-                          <div className="w-10 h-10 rounded-full bg-[#D18F5C]/10 border border-[#D18F5C]/25 flex items-center justify-center flex-shrink-0">
-                            <FaArrowRight size={11} className="text-[#D18F5C]" />
+                          <div className="w-6 h-6 sm:w-10 sm:h-10 rounded-full bg-[#E0A36A]/10 border border-[#E0A36A]/25 flex items-center justify-center flex-shrink-0">
+                            <FaArrowRight className="text-[#E0A36A] text-[9px] sm:text-[11px]" />
                           </div>
                         </div>
                       </div>
                     }
                     back={
-                      <div className="w-full h-full rounded-2xl overflow-hidden bg-[#12103D] flex flex-col justify-between p-8 shadow-xl shadow-black/30 border border-white/10">
+                      <div className="w-full h-full rounded-2xl overflow-hidden bg-[#12103D] flex flex-col justify-between p-3 sm:p-8 shadow-xl shadow-black/30 border border-white/10">
                         <div>
-                          <span className="font-data text-[10px] font-bold text-[#F0C9A0]/70 tracking-[0.3em] uppercase">{s.tag}</span>
-                          <h3 className="font-display text-white font-bold text-2xl mt-2 mb-4 leading-tight">{s.title}</h3>
-                          <p className="text-white/80 text-sm leading-relaxed">{s.desc}</p>
+                          <span className="font-data text-[8px] sm:text-[10px] font-bold text-[#EFD3C9]/70 tracking-[0.2em] sm:tracking-[0.3em] uppercase">{s.tag}</span>
+                          <h3 className="font-display text-white font-bold text-xs sm:text-2xl mt-1 sm:mt-2 mb-1 sm:mb-4 leading-tight">{s.title}</h3>
+                          <p className="text-white/80 text-[10px] sm:text-sm leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none">{s.desc}</p>
                         </div>
                         {s.href ? (
                           <a href={s.href} target="_blank" rel="noopener noreferrer"
-                            className="group inline-flex items-center gap-2 bg-white text-[#B8714A] px-6 py-3 rounded-full font-display font-bold text-sm mt-6 w-fit hover:bg-gray-100 transition-colors shadow-lg">
-                            {s.cta} <FaArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
+                            className="group inline-flex items-center gap-1 sm:gap-2 bg-white text-[#9C5B5A] px-3 py-1.5 sm:px-6 sm:py-3 rounded-full font-display font-bold text-[9px] sm:text-sm mt-2 sm:mt-6 w-fit hover:bg-gray-100 transition-colors shadow-lg">
+                            {s.cta} <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px] sm:text-[11px]" />
                           </a>
                         ) : (
                           <button onClick={() => setShowModal(true)}
-                            className="group inline-flex items-center gap-2 bg-white text-[#B8714A] px-6 py-3 rounded-full font-display font-bold text-sm mt-6 w-fit hover:bg-gray-100 transition-colors shadow-lg">
-                            {s.cta} <FaArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
+                            className="group inline-flex items-center gap-1 sm:gap-2 bg-white text-[#9C5B5A] px-3 py-1.5 sm:px-6 sm:py-3 rounded-full font-display font-bold text-[9px] sm:text-sm mt-2 sm:mt-6 w-fit hover:bg-gray-100 transition-colors shadow-lg">
+                            {s.cta} <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px] sm:text-[11px]" />
                           </button>
                         )}
                       </div>
@@ -840,19 +832,19 @@ export default function ServicesPage() {
               {/* Ghost +more card */}
               <motion.div variants={fadeUp}>
                 <motion.div whileHover={{ y: -6 }}
-                  className="h-[420px] rounded-2xl border-2 border-dashed border-white/10 flex flex-col items-center justify-center gap-5 group hover:border-[#D18F5C]/40 transition-all duration-300 bg-[#12103D]/20">
+                  className="h-[250px] sm:h-[420px] rounded-2xl border-2 border-dashed border-white/10 flex flex-col items-center justify-center gap-2 sm:gap-5 group hover:border-[#E0A36A]/40 transition-all duration-300 bg-[#12103D]/20">
                   <motion.div
                     whileHover={{ rotate: 90 }}
                     transition={{ duration: 0.3 }}
-                    className="w-14 h-14 rounded-full bg-[#12103D] group-hover:bg-[#D18F5C] flex items-center justify-center transition-colors duration-300">
-                    <span className="font-display text-2xl font-black text-white/50 group-hover:text-white leading-none">+</span>
+                    className="w-9 h-9 sm:w-14 sm:h-14 rounded-full bg-[#12103D] group-hover:bg-[#E0A36A] flex items-center justify-center transition-colors duration-300">
+                    <span className="font-display text-sm sm:text-2xl font-black text-white/50 group-hover:text-white leading-none">+</span>
                   </motion.div>
-                  <div className="text-center px-8">
-                    <p className="font-display font-bold text-white/70 group-hover:text-white transition-colors text-lg">More Services</p>
-                    <p className="text-sm text-white/40 mt-1 leading-relaxed">Custom solutions for any business need</p>
+                  <div className="text-center px-2 sm:px-8">
+                    <p className="font-display font-bold text-white/70 group-hover:text-white transition-colors text-xs sm:text-lg">More Services</p>
+                    <p className="text-[9px] sm:text-sm text-white/40 mt-0.5 sm:mt-1 leading-normal sm:leading-relaxed line-clamp-2 sm:line-clamp-none">Custom solutions for any business need</p>
                   </div>
                   <button onClick={() => setShowModal(true)}
-                    className="font-display text-xs font-bold tracking-widest uppercase text-white/40 group-hover:text-[#D18F5C] transition-colors">
+                    className="font-display text-[9px] sm:text-xs font-bold tracking-wider sm:tracking-widest uppercase text-white/40 group-hover:text-[#E0A36A] transition-colors">
                     Get in touch →
                   </button>
                 </motion.div>
@@ -867,205 +859,81 @@ export default function ServicesPage() {
         {/* ══════════════════════════════════════════════════
             PROCESS — Cream, horizontal stepper + 3D tilt cards
         ══════════════════════════════════════════════════ */}
-        <section className="bg-[#FDFBF8] py-24 relative overflow-hidden">
+        <section className="bg-[#EFE6DB] py-14 md:py-16 relative overflow-hidden shadow-inner">
           <div className="absolute left-6 top-6 font-display font-black leading-none select-none pointer-events-none"
-            style={{ fontSize: 'clamp(8rem,14vw,14rem)', color: 'rgba(7, 8, 38, 0.04)' }}>02</div>
+            style={{ fontSize: 'clamp(8rem,14vw,14rem)', color: 'rgba(7, 8, 38, 0.03)' }}>02</div>
           <div className="container mx-auto px-6 lg:px-16 relative z-10">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-16">
               <motion.span variants={fadeUp}
-                className="inline-block font-display text-[#D18F5C] text-xs tracking-[0.35em] uppercase font-bold mb-3">
+                className="inline-block font-display text-[#9C5B5A] text-xs tracking-[0.35em] uppercase font-bold mb-3">
                 How We Work
               </motion.span>
               <motion.h2 variants={fadeUp} className="font-display text-[#0A0930] font-extrabold"
                 style={{ fontSize: 'clamp(1.8rem,4vw,3rem)' }}>
-                Our <span className="text-[#D18F5C]">Process</span>
+                Our <span className="text-[#E0A36A]">Process</span>
               </motion.h2>
-              <motion.p variants={fadeUp} className="text-gray-600 text-base mt-3 max-w-xl mx-auto">
+              <motion.p variants={fadeUp} className="text-[#0A0930]/70 text-base mt-3 max-w-xl mx-auto">
                 Human-centered design from research to launch — every step informed by data.
               </motion.p>
             </motion.div>
 
-            {/* Step number connector row */}
-            <div className="hidden md:flex items-center justify-between mb-10 px-12">
-              {uxSteps.map((_, i) => (
-                <div key={i} className="flex items-center flex-1">
-                  <motion.div
-                    className="w-12 h-12 rounded-full bg-white border-2 border-[#D18F5C] flex items-center justify-center flex-shrink-0 font-data font-bold text-[#D18F5C] shadow-md"
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.25, type: 'spring', stiffness: 300 }}>
-                    {i + 1}
-                  </motion.div>
-                  {i < uxSteps.length - 1 && <ProcessConnector />}
-                </div>
-              ))}
-            </div>
-
-            {/* Tilt cards */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-              className="grid md:grid-cols-3 gap-6">
+            {/* Interactive Stepper */}
+            <Stepper
+              initialStep={1}
+              backButtonText="← Previous"
+              nextButtonText="Next Step →"
+            >
               {uxSteps.map((step, i) => (
-                <TiltCard key={i}>
-                  <motion.div variants={fadeUp}
-                    className="bg-white rounded-2xl overflow-hidden group hover:shadow-xl transition-shadow duration-300 sweep border border-gray-100">
-                    <div className="bg-[#FDFBF8] h-56 flex items-center justify-center p-6 overflow-hidden">
-                      <img src={step.image} alt={step.title}
-                        className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-                    <div className="p-7">
-                      <div className="inline-block font-data text-[10px] font-bold text-[#D18F5C] tracking-[0.3em] uppercase bg-[#D18F5C]/10 px-3 py-1 rounded-full mb-4">
-                        Step 0{i + 1}
+                <Step key={i}>
+                  <div className="flex flex-col md:flex-row gap-4 sm:gap-6 items-stretch">
+                    {/* Image */}
+                    <div className="w-full md:w-5/12 relative group">
+                      <div className="relative rounded-xl overflow-hidden border border-gray-100 shadow-sm">
+                        <img src={step.image} alt={step.title} className="w-full h-28 sm:h-40 object-cover transition-transform duration-500 group-hover:scale-105" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                        <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-br from-[#E0A36A] to-[#9C5B5A] flex items-center justify-center shadow-md">
+                          <span className="font-data text-xs sm:text-sm font-black text-white">0{i + 1}</span>
+                        </div>
                       </div>
-                      <h3 className="font-display text-gray-900 text-xl font-bold mb-2">{step.title}</h3>
-                      <p className="text-gray-600 text-sm leading-relaxed">{step.desc}</p>
                     </div>
-                  </motion.div>
-                </TiltCard>
-              ))}
-            </motion.div>
-          </div>
-        </section>
 
-        {/* ── Bridge ── */}
-        <SectionBridge dark />
+                    {/* Text */}
+                    <div className="w-full md:w-7/12 flex flex-col justify-center">
+                      <span className="font-data text-[9px] sm:text-[10px] font-bold text-[#E0A36A] tracking-[0.3em] uppercase mb-2">Step 0{i + 1} of 04</span>
+                      <h3 className="font-display text-gray-900 text-base sm:text-2xl font-bold mb-1.5 sm:mb-3 leading-tight">{step.title}</h3>
+                      <p className="text-gray-700 text-[11px] sm:text-sm leading-relaxed mb-3 sm:mb-4">{step.desc}</p>
 
-        {/* ══════════════════════════════════════════════════
-            FULL‑STACK — Deep Navy, cursor spotlight
-        ══════════════════════════════════════════════════ */}
-        <section
-          ref={fsSpot.containerRef}
-          onMouseMove={fsSpot.onMouseMove}
-          onMouseLeave={fsSpot.onMouseLeave}
-          className="bg-[#0A0930] py-28 relative overflow-hidden"
-        >
-          {/* bg canvas dots */}
-          <div className="absolute inset-0 pointer-events-none" style={{
-            backgroundImage: 'radial-gradient(circle, rgba(217,159,154,0.12) 1.5px, transparent 1.5px)',
-            backgroundSize: '38px 38px',
-          }} />
-          {/* cursor spotlight */}
-          <div ref={fsSpot.glowRef} className="absolute inset-0 pointer-events-none transition-[background] duration-200" />
-          {/* spinning rings */}
-          <div className="absolute left-[-160px] bottom-[-160px] pointer-events-none">
-            <div className="w-[500px] h-[500px] border border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
-            <div className="absolute inset-[80px] border border-[#F0C9A0]/10 rounded-full animate-spinSlowRev" />
-          </div>
-
-          <div className="container mx-auto px-6 lg:px-16 relative z-10">
-            {/* Top — headline + image */}
-            <div className="flex flex-col lg:flex-row gap-16 items-center mb-24">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideL} className="flex-1">
-                <div className="inline-flex items-center gap-2 glass text-white/80 px-4 py-2 rounded-full text-xs font-display font-bold tracking-widest uppercase mb-6">
-                  <FaBrain size={11} /> Engineering Excellence
-                </div>
-                <h2 className="font-display text-white font-extrabold leading-[1.0] mb-5"
-                  style={{ fontSize: 'clamp(2rem,4.5vw,3.8rem)' }}>
-                  AI‑Integrated<br />Full‑Stack Workflow
-                </h2>
-                <p className="text-white/80 text-lg max-w-md mb-8 leading-relaxed font-light">
-                  Modern digital solutions with seamless AI integrations tailored precisely to your business needs.
-                </p>
-                <Magnetic strength={0.25}>
-                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-                    onClick={() => setShowModal(true)}
-                    className="sheen bg-white text-[#B8714A] px-9 py-3.5 rounded-full font-display font-bold text-sm shadow-xl hover:shadow-2xl transition-shadow">
-                    Build Your Project →
-                  </motion.button>
-                </Magnetic>
-              </motion.div>
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={slideR} className="flex-1 w-full">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-white/10 rounded-3xl blur-3xl transform scale-95" />
-                  <img src="/image/fsdw.webp" alt="Full Stack" className="relative rounded-2xl shadow-2xl w-full animate-floatY" />
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Phase cards — 3D tilt */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-              className="grid grid-cols-2 md:grid-cols-4 gap-5">
-              {fullstackSteps.map((step, i) => (
-                <TiltCard key={i}>
-                  <motion.div variants={fadeUp}
-                    className="glass rounded-2xl p-7 text-center group hover:bg-white/15 transition-all duration-300 h-full">
-                    <div className="w-16 h-16 mx-auto rounded-xl bg-white/15 group-hover:bg-white flex items-center justify-center mb-5 transition-all duration-300 shadow-lg group-hover:shadow-2xl">
-                      <img src={step.icon} alt={step.title}
-                        className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-300" />
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                        {(i === 0
+                          ? ['Business goals', 'Audience insights', 'Market research']
+                          : i === 1
+                          ? ['Competitor review', 'Market trends', 'Gap analysis']
+                          : i === 2
+                          ? ['Custom strategy', 'Brand positioning', 'Growth roadmap']
+                          : ['Performance tracking', 'Data analytics', 'Continuous optimization']
+                        ).map((tag, ti) => (
+                          <span key={ti} className="inline-flex items-center gap-1 text-[9px] sm:text-xs text-gray-800 bg-[#E0A36A]/10 border border-[#E0A36A]/30 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full font-medium shadow-sm">
+                            <svg className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#E0A36A]" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                    <div className="font-data text-[9px] font-bold text-white/50 tracking-[0.25em] uppercase mb-2">Phase 0{i + 1}</div>
-                    <h4 className="font-display text-white font-bold text-base mb-2">{step.title}</h4>
-                    <p className="text-white/75 text-xs leading-relaxed">{step.desc}</p>
-                  </motion.div>
-                </TiltCard>
+                  </div>
+                </Step>
               ))}
-            </motion.div>
+            </Stepper>
           </div>
         </section>
-
-        {/* ── Bridge ── */}
-        <SectionBridge />
-
-        {/* ══════════════════════════════════════════════════
-            QUICK CONNECT — White
-        ══════════════════════════════════════════════════ */}
-        <section className="bg-[#0A0930] py-20">
-          <div className="container mx-auto px-6 lg:px-16">
-            <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ duration: 0.7 }}
-              className="relative bg-white rounded-3xl overflow-hidden shadow-2xl">
-              {/* Left gold bar */}
-              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#D18F5C]" />
-              {/* Watermark */}
-              <div className="absolute right-8 top-1/2 -translate-y-1/2 font-display font-black leading-none pointer-events-none select-none"
-                style={{ fontSize: '14rem', color: 'rgba(7, 8, 38, 0.04)' }}>?</div>
-              <div className="p-12 md:p-16 relative z-10">
-                <div className="max-w-lg">
-                  <span className="inline-block font-display text-[#D18F5C] text-xs tracking-[0.35em] uppercase font-bold mb-4">Let's Talk</span>
-                  <h2 className="font-display text-[#0A0930] font-extrabold mb-3"
-                    style={{ fontSize: 'clamp(1.6rem,3.5vw,2.8rem)' }}>
-                    Ready to transform your ideas into reality?
-                  </h2>
-                  <p className="text-gray-600 text-base mb-10">
-                    Leave your number — our AI strategist calls back within 24 hours.
-                  </p>
-                  <form onSubmit={handleQuickSubmit} className="flex flex-col sm:flex-row gap-3">
-                    <input type="tel" value={quickPhone} onChange={e => setQuickPhone(e.target.value)}
-                      placeholder="+91 your phone number…"
-                      className="flex-1 px-6 py-4 rounded-xl border-2 border-gray-200 bg-[#FDFBF8] text-gray-800 placeholder:text-gray-400 text-sm font-display focus:outline-none focus:border-[#D18F5C] transition-colors"
-                      required />
-                    <Magnetic strength={0.2}>
-                      <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} type="submit"
-                        className="bg-[#D18F5C] text-white px-8 py-4 rounded-xl font-display font-bold text-sm hover:bg-[#B8714A] transition-colors whitespace-nowrap shadow-lg">
-                        {quickSubmitted ? '✅ Sent!' : 'Call Me Back'}
-                      </motion.button>
-                    </Magnetic>
-                  </form>
-                  <AnimatePresence>
-                    {quickSubmitted && (
-                      <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                        className="mt-4 text-green-700 font-display font-semibold text-sm">
-                        ✅ Thanks! We'll call you back shortly.
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ── Bridge ── */}
-        <SectionBridge />
 
         {/* ══════════════════════════════════════════════════
             GALLERY — Cream
         ══════════════════════════════════════════════════ */}
-        <section className="bg-[#FDFBF8] py-24">
+        <section className="bg-[#FDFBF8] py-14 md:py-16">
           <div className="container mx-auto px-6 lg:px-16">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
               <motion.span variants={fadeUp}
-                className="inline-block font-display text-[#D18F5C] text-xs tracking-[0.35em] uppercase font-bold mb-3">
+                className="inline-block font-display text-[#E0A36A] text-xs tracking-[0.35em] uppercase font-bold mb-3">
                 Our Work
               </motion.span>
               <div className="flex items-end justify-between flex-wrap gap-4">
@@ -1100,21 +968,21 @@ export default function ServicesPage() {
                   />
 
                   {/* Category pill — always visible top-left */}
-                  <div className="absolute top-3 left-3 z-10">
+                  {/* <div className="absolute top-3 left-3 z-10">
                     <span className="bg-white/90 backdrop-blur-sm text-gray-800 font-display text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-gray-200 shadow-sm">
                       {proj.category}
                     </span>
-                  </div>
+                  </div> */}
 
                   {/* Navy hover overlay with project name */}
-                  <div className="overlay">
+                  {/* <div className="overlay">
                     <div className="overlay-text">
                       <p className="font-display text-white font-bold text-base leading-tight">{proj.label}</p>
-                      <p className="font-display text-[#F0C9A0] text-xs mt-1 flex items-center gap-1">
+                      <p className="font-display text-[#EFD3C9] text-xs mt-1 flex items-center gap-1">
                         View case study <FaArrowRight size={9} />
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </motion.div>
               ))}
             </div>
@@ -1127,7 +995,7 @@ export default function ServicesPage() {
         {/* ══════════════════════════════════════════════════
             ADS — White, split panel, cursor spotlight on navy side
         ══════════════════════════════════════════════════ */}
-        <section className="bg-[#0A0930] py-24 overflow-hidden">
+        <section className="bg-[#0A0930] py-14 md:py-16 overflow-hidden">
           <div className="container mx-auto px-6 lg:px-16">
             <div className="grid lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden shadow-2xl">
               {/* Left — Navy */}
@@ -1142,10 +1010,10 @@ export default function ServicesPage() {
                   backgroundSize: '32px 32px',
                 }} />
                 <div ref={adsSpot.glowRef} className="absolute inset-0 pointer-events-none transition-[background] duration-200" />
-                <div className="absolute right-[-60px] top-[-60px] w-64 h-64 border border-[#F0C9A0]/10 rounded-full animate-spinSlow pointer-events-none" />
+                <div className="absolute right-[-60px] top-[-60px] w-64 h-64 border border-[#EFD3C9]/10 rounded-full animate-spinSlow pointer-events-none" />
                 <div className="relative z-10">
                   <div className="inline-flex items-center gap-2 glass text-white/80 px-4 py-1.5 rounded-full text-[10px] font-display font-bold tracking-[0.3em] uppercase mb-8">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#34D2C7] animate-pulse" /> Scaling Results
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E0A36A] animate-pulse" /> Scaling Results
                   </div>
                   <h2 className="font-display text-white font-black leading-[1.0] mb-5"
                     style={{ fontSize: 'clamp(2rem,4vw,3.2rem)' }}>
@@ -1173,7 +1041,7 @@ export default function ServicesPage() {
                   <Magnetic strength={0.25}>
                     <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
                       onClick={() => setShowModal(true)}
-                      className="sheen group bg-white text-[#B8714A] px-8 py-3.5 rounded-full font-display font-bold text-sm inline-flex items-center gap-2 shadow-xl">
+                      className="sheen group bg-white text-[#9C5B5A] px-8 py-3.5 rounded-full font-display font-bold text-sm inline-flex items-center gap-2 shadow-xl">
                       Scale My Returns
                       <FaArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
                     </motion.button>
@@ -1213,7 +1081,7 @@ export default function ServicesPage() {
   ref={footerSpot.containerRef}
   onMouseMove={footerSpot.onMouseMove}
   onMouseLeave={footerSpot.onMouseLeave}
-  className="relative overflow-hidden bg-[#0A0930] py-24"
+  className="relative overflow-hidden bg-[#0A0930] py-14 md:py-16"
 >
   {/* Cursor Glow */}
   <div
@@ -1239,10 +1107,10 @@ export default function ServicesPage() {
   </div>
 
   {/* Top Left Accent */}
-  <div className="absolute -top-20 -left-20 w-48 h-48 rounded-full border border-[#F0C9A0]/10" />
+  <div className="absolute -top-20 -left-20 w-48 h-48 rounded-full border border-[#EFD3C9]/10" />
 
   {/* Bottom Right Accent */}
-  <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full border border-[#F0C9A0]/10" />
+  <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full border border-[#EFD3C9]/10" />
 
   <div className="container mx-auto px-6 lg:px-16 relative z-10">
 
@@ -1338,8 +1206,8 @@ export default function ServicesPage() {
               font-semibold
               transition-all
               duration-300
-              hover:border-[#F0C9A0]
-              hover:text-[#F0C9A0]
+              hover:border-[#EFD3C9]
+              hover:text-[#EFD3C9]
               hover:shadow-[0_15px_40px_rgba(217,159,154,0.18)]
             "
           >
@@ -1360,7 +1228,7 @@ export default function ServicesPage() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
             whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-6 right-6 bg-[#D18F5C] text-white p-4 rounded-full shadow-xl z-40 hover:bg-[#B8714A] transition-colors">
+            className="fixed bottom-6 right-6 bg-[#E0A36A] text-white p-4 rounded-full shadow-xl z-40 hover:bg-[#9C5B5A] transition-colors">
             <FaChevronUp size={16} />
           </motion.button>
         )}
@@ -1389,7 +1257,7 @@ export default function ServicesPage() {
                   backgroundImage: 'radial-gradient(circle, rgba(217,159,154,0.08) 1.5px, transparent 1.5px)',
                   backgroundSize: '28px 28px',
                 }} />
-                <div className="absolute right-[-50px] top-1/2 -translate-y-1/2 w-52 h-52 border border-[#F0C9A0]/10 rounded-full animate-spinSlow pointer-events-none" />
+                <div className="absolute right-[-50px] top-1/2 -translate-y-1/2 w-52 h-52 border border-[#EFD3C9]/10 rounded-full animate-spinSlow pointer-events-none" />
                 <div className="relative z-10">
                   <span className="inline-block glass text-white/80 px-3 py-1.5 rounded-full text-[10px] font-display font-bold uppercase tracking-widest mb-6">
                     Why Choose Us
@@ -1400,9 +1268,9 @@ export default function ServicesPage() {
                     {[
                       { icon: <FaHeartbeat size={12} />, l: 'Results‑Driven Strategy' },
                       { icon: <FaLayerGroup size={12} />, l: 'Multi‑Platform Expertise' },
-                      { icon: <FaSync size={12} />, l: 'Continuous AI Optimization' },
+                      { icon: <FaSync size={12} />, l: 'Continuous Campaign Optimization' },
                     ].map((it, i) => (
-                      <div key={i} className="flex items-center gap-3 bg-white text-[#B8714A] px-4 py-3 rounded-full text-xs font-display font-bold shadow-sm">
+                      <div key={i} className="flex items-center gap-3 bg-white text-[#9C5B5A] px-4 py-3 rounded-full text-xs font-display font-bold shadow-sm">
                         {it.icon} {it.l}
                       </div>
                     ))}
@@ -1413,25 +1281,25 @@ export default function ServicesPage() {
               {/* Right */}
               <div className="p-10 md:p-12 w-full md:w-[56%] bg-white flex flex-col justify-center">
                 <div className="mb-8">
-                  <Image src="/image/logo.webp" alt="Vaave Digital" width={150} height={38} />
+                  <Image src="/image/vaave-digital.webp" alt="Vaave Digital" width={150} height={38} />
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <select name="service" value={formData.service} onChange={handleChange}
-                    className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#D18F5C] text-gray-800 bg-transparent text-sm font-display transition-colors">
+                    className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#E0A36A] text-gray-800 bg-transparent text-sm font-display transition-colors">
                     {serviceOptions.map(o => <option key={o}>{o}</option>)}
                   </select>
                   {(['name', 'contact'] as const).map(field => (
                     <input key={field} type={field === 'contact' ? 'tel' : 'text'} name={field}
                       placeholder={field === 'name' ? 'Your Name' : 'Contact Number'}
                       value={formData[field]} onChange={handleChange}
-                      className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#D18F5C] text-gray-800 placeholder:text-gray-400 text-sm font-display transition-colors"
+                      className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#E0A36A] text-gray-800 placeholder:text-gray-400 text-sm font-display transition-colors"
                       required />
                   ))}
                   <textarea name="message" placeholder="Message / Requirements" value={formData.message}
                     onChange={handleChange} rows={2}
-                    className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#D18F5C] text-gray-800 placeholder:text-gray-400 text-sm font-display resize-none transition-colors" />
+                    className="w-full border-b-2 border-gray-100 py-3 focus:outline-none focus:border-[#E0A36A] text-gray-800 placeholder:text-gray-400 text-sm font-display resize-none transition-colors" />
                   <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} type="submit"
-                    className="w-full bg-[#D18F5C] text-white py-4 rounded-full font-display font-bold text-sm hover:bg-[#B8714A] transition-colors shadow-lg">
+                    className="w-full bg-[#E0A36A] text-white py-4 rounded-full font-display font-bold text-sm hover:bg-[#9C5B5A] transition-colors shadow-lg">
                     Submit & Get Started    →
                   </motion.button>
                 </form>

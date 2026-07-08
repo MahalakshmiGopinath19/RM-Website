@@ -7,8 +7,8 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useInView, animate 
 import { FaArrowRight, FaCheckCircle } from 'react-icons/fa';
 
 /* ══════════════════════════════════════════════════════════
-   PALETTE — Navy #0A0930 · Gold #D18F5C · Gold-D #B8714A
-   Gold-L #F0C9A0 · Teal #34D2C7 · Cream #FDFBF8
+   PALETTE — Navy #0A0930 · Gold #E0A36A · Gold-D #9C5B5A
+   Gold-L #EFD3C9 · Teal #E0A36A · Cream #FDFBF8
 ══════════════════════════════════════════════════════════ */
 
 /* ── Ambient layers ───────────────────────────────────────── */
@@ -180,7 +180,7 @@ export default function ProductsPage() {
         .sheen:hover::before { opacity: 1; animation: shimmer 1s ease; }
 
         .underline-hover { position: relative; }
-        .underline-hover::after { content:''; position:absolute; left:0; bottom:-2px; width:100%; height:2px; background:#D18F5C; transform:scaleX(0); transform-origin:right; transition:transform .3s ease; }
+        .underline-hover::after { content:''; position:absolute; left:0; bottom:-2px; width:100%; height:2px; background:#E0A36A; transform:scaleX(0); transform-origin:right; transition:transform .3s ease; }
         .underline-hover:hover::after { transform:scaleX(1); transform-origin:left; }
 
         @media (prefers-reduced-motion: reduce) {
@@ -190,7 +190,7 @@ export default function ProductsPage() {
 
       <GrainOverlay />
 
-      <div className="bg-white min-h-screen">
+      <div className="bg-[#FDFBF8] min-h-screen">
 
         {/* ══════════════════════════════════════════════
             HERO — navy + pulse canvas + spotlight
@@ -206,16 +206,16 @@ export default function ProductsPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0A0930] via-[#0A0930]/85 to-transparent" />
 
           <div className="absolute right-[-140px] top-1/2 -translate-y-1/2 pointer-events-none hidden md:block">
-            <div className="w-[380px] h-[380px] border border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
-            <div className="absolute inset-[60px] border border-[#F0C9A0]/10 rounded-full animate-spinSlowRev" />
+            <div className="w-[380px] h-[380px] border border-[#EFD3C9]/10 rounded-full animate-spinSlow" />
+            <div className="absolute inset-[60px] border border-[#EFD3C9]/10 rounded-full animate-spinSlowRev" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             <motion.div initial="hidden" animate={heroInView ? 'visible' : 'hidden'} variants={stagger} className="max-w-3xl">
               <motion.span variants={fadeUp} className="inline-flex items-center gap-2 glass text-white/85 text-xs font-display font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute h-full w-full rounded-full bg-[#34D2C7] opacity-60" />
-                  <span className="relative rounded-full h-2 w-2 bg-[#34D2C7]" />
+                  <span className="animate-ping absolute h-full w-full rounded-full bg-[#E0A36A] opacity-60" />
+                  <span className="relative rounded-full h-2 w-2 bg-[#E0A36A]" />
                 </span>
                 IT Products
               </motion.span>
@@ -237,7 +237,7 @@ export default function ProductsPage() {
                 <motion.span
                   key={idx}
                   variants={fadeUp}
-                  whileHover={{ scale: 1.06, backgroundColor: '#D18F5C', color: '#fff', borderColor: '#D18F5C' }}
+                  whileHover={{ scale: 1.06, backgroundColor: '#E0A36A', color: '#fff', borderColor: '#E0A36A' }}
                   className="px-6 py-2.5 text-[#0A0930] bg-white rounded-full text-sm md:text-base font-display font-semibold border-2 border-gray-200 transition-all duration-200 cursor-default select-none shadow-sm"
                 >
                   {feature}
@@ -250,7 +250,7 @@ export default function ProductsPage() {
         {/* ══════════════════════════════════════════════
             PRODUCT SHOWCASE — tilt card + gold accents
         ══════════════════════════════════════════════ */}
-        <div className="bg-white py-16 md:py-20">
+        <div className="bg-[#FDFBF8] py-16 md:py-20">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="flex flex-col md:flex-row items-center gap-14">
               <motion.div
@@ -262,7 +262,7 @@ export default function ProductsPage() {
               >
                 <TiltCard>
                   <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-white border border-gray-100">
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#D18F5C]/10 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#E0A36A]/10 to-transparent pointer-events-none" />
                     <img
                       src="/image/imageprod.webp"
                       alt="BILL IT NOW Dashboard"
@@ -279,8 +279,8 @@ export default function ProductsPage() {
                 variants={stagger}
                 className="md:w-1/2 w-full text-center md:text-left"
               >
-                <motion.div variants={fadeUp} className="inline-block px-3 py-1 rounded-full bg-[#0A0930] text-[#F0C9A0] text-xs font-display font-bold uppercase tracking-widest mb-4">
-                  AI-Powered Billing
+                <motion.div variants={fadeUp} className="inline-block px-3 py-1 rounded-full bg-[#0A0930] text-[#EFD3C9] text-xs font-display font-bold uppercase tracking-widest mb-4">
+                  Smarter Automated Billing
                 </motion.div>
                 <motion.h2 variants={fadeUp} className="font-display text-4xl md:text-5xl font-extrabold text-[#0A0930] tracking-tight">BILL IT NOW —</motion.h2>
                 <motion.p variants={fadeUp} className="text-xl text-gray-600 font-medium mt-2">Redefine Your Billing Experience</motion.p>
@@ -291,7 +291,7 @@ export default function ProductsPage() {
                     'Your All-in-One Billing Solution',
                   ].map((text, idx) => (
                     <motion.li key={idx} variants={fadeUp} className="flex items-center gap-3 justify-center md:justify-start">
-                      <FaCheckCircle className="text-[#D18F5C] text-lg flex-shrink-0" />
+                      <FaCheckCircle className="text-[#E0A36A] text-lg flex-shrink-0" />
                       <span>{text}</span>
                     </motion.li>
                   ))}
@@ -303,7 +303,7 @@ export default function ProductsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-                      className="sheen group inline-flex items-center gap-2 bg-[#D18F5C] hover:bg-[#B8714A] text-white px-8 py-3.5 rounded-full font-display font-bold transition-colors duration-300 shadow-lg"
+                      className="sheen group inline-flex items-center gap-2 bg-[#E0A36A] hover:bg-[#9C5B5A] text-white px-8 py-3.5 rounded-full font-display font-bold transition-colors duration-300 shadow-lg"
                     >
                       Explore Now <FaArrowRight className="transition-transform group-hover:translate-x-1" />
                     </motion.a>
@@ -325,8 +325,8 @@ export default function ProductsPage() {
             <div className="w-[600px] h-[600px] rounded-full border border-white/5 animate-spinSlow" />
             <div className="absolute w-[420px] h-[420px] rounded-full border border-white/5 animate-spinSlowRev" />
           </div>
-          <div className="absolute -top-20 -left-20 w-48 h-48 rounded-full border border-[#F0C9A0]/10 pointer-events-none" />
-          <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full border border-[#F0C9A0]/10 pointer-events-none" />
+          <div className="absolute -top-20 -left-20 w-48 h-48 rounded-full border border-[#EFD3C9]/10 pointer-events-none" />
+          <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full border border-[#EFD3C9]/10 pointer-events-none" />
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
@@ -342,7 +342,7 @@ export default function ProductsPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.96 }}
-                      className="sheen group inline-flex items-center gap-2 bg-[#D18F5C] hover:bg-[#B8714A] text-white px-8 py-4 rounded-full font-display font-bold shadow-xl text-base"
+                      className="sheen group inline-flex items-center gap-2 bg-[#E0A36A] hover:bg-[#9C5B5A] text-white px-8 py-4 rounded-full font-display font-bold shadow-xl text-base"
                     >
                       Explore Now <FaArrowRight className="transition-transform group-hover:translate-x-1" />
                     </motion.a>
@@ -366,7 +366,7 @@ export default function ProductsPage() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={scrollToTop}
-            className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#D18F5C] text-white p-2.5 md:p-3.5 rounded-full shadow-xl z-40 hover:bg-[#B8714A] transition-colors text-sm md:text-base"
+            className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#E0A36A] text-white p-2.5 md:p-3.5 rounded-full shadow-xl z-40 hover:bg-[#9C5B5A] transition-colors text-sm md:text-base"
           >
             ↑
           </motion.button>

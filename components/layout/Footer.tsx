@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   FaFacebookF, FaInstagram, FaWhatsapp, FaLinkedinIn,
   FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock, FaPaperPlane
@@ -33,11 +34,11 @@ export default function Footer() {
       {/* Ambient copper glow, echoes the logo's light source — top right */}
       <div
         className="pointer-events-none absolute -top-40 -right-40 w-[560px] h-[560px] rounded-full opacity-25 blur-3xl"
-        style={{ background: 'radial-gradient(circle, #D18F5C 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, #E0A36A 0%, transparent 70%)' }}
       />
       <div
         className="pointer-events-none absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-10 blur-3xl"
-        style={{ background: 'radial-gradient(circle, #34D2C7 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, #E0A36A 0%, transparent 70%)' }}
       />
 
       <div className="relative z-10">
@@ -46,12 +47,12 @@ export default function Footer() {
         <div className="container mx-auto px-6 pt-16 pb-12 border-b border-white/10">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
             <div className="max-w-xl">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#F0C9A0]">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#EFD3C9]">
                 Start a project
               </span>
               <h2 className="mt-3 text-3xl md:text-[2.6rem] font-extrabold leading-[1.1] tracking-tight">
                 Have an idea? Let&apos;s turn it into{' '}
-                <span className="bg-gradient-to-r from-[#F0C9A0] via-[#D18F5C] to-[#B8714A] bg-clip-text text-transparent italic">
+                <span className="bg-gradient-to-r from-[#EFD3C9] via-[#E0A36A] to-[#9C5B5A] bg-clip-text text-transparent italic">
                   results.
                 </span>
               </h2>
@@ -60,9 +61,9 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <a
                 href="tel:+917305821333"
-                className="group flex items-center gap-3 rounded-full border border-white/20 px-5 py-3 hover:border-[#F0C9A0]/50 transition-colors"
+                className="group flex items-center gap-3 rounded-full border border-white/20 px-5 py-3 hover:border-[#EFD3C9]/50 transition-colors"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-[#F0C9A0]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-[#EFD3C9]">
                   <FaPhoneAlt size={13} />
                 </span>
                 <span className="text-sm">
@@ -73,7 +74,7 @@ export default function Footer() {
 
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#F0C9A0] via-[#D18F5C] to-[#B8714A] text-[#0A0930] font-bold text-sm px-6 py-3.5 hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-black/20"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#EFD3C9] via-[#E0A36A] to-[#9C5B5A] text-[#0A0930] font-bold text-sm px-6 py-3.5 hover:brightness-110 hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-black/20"
               >
                 Book a free consult
                 <FaPaperPlane size={12} className="-rotate-45" />
@@ -88,8 +89,8 @@ export default function Footer() {
 
             {/* Brand */}
             <div className="md:col-span-4 space-y-5">
-              <div className="text-2xl font-extrabold tracking-tight">
-                VAAVE <span className="text-[#F0C9A0]">DIGITAL</span>
+              <div className="flex items-center gap-3 mb-4">
+                <Image src="/image/vaave-digital.webp" alt="Vaave Digital" width={180} height={50} className="w-auto h-12" />
               </div>
               <p className="text-white/60 text-sm leading-relaxed max-w-xs">
                 A Chennai-based digital marketing studio helping brands grow with
@@ -97,16 +98,16 @@ export default function Footer() {
               </p>
               <div className="flex gap-3 pt-1">
                 {[
-                  { icon: FaFacebookF, href: '#', label: 'Facebook' },
-                  { icon: FaInstagram, href: '#', label: 'Instagram' },
-                  { icon: FaLinkedinIn, href: '#', label: 'LinkedIn' },
+                  { icon: FaFacebookF, href: 'https://www.facebook.com/', label: 'Facebook' },
+                  { icon: FaInstagram, href: 'https://www.instagram.com/', label: 'Instagram' },
+                  { icon: FaLinkedinIn, href: 'https://www.linkedin.com/', label: 'LinkedIn' },
                   { icon: FaWhatsapp, href: 'https://wa.me/917305821333', label: 'WhatsApp' },
                 ].map((item, i) => (
                   <a
                     key={i}
                     href={item.href}
                     aria-label={item.label}
-                    className="w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/70 hover:text-[#0A0930] hover:bg-gradient-to-r hover:from-[#F0C9A0] hover:to-[#B8714A] hover:border-transparent transition-all duration-300"
+                    className="w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/70 hover:text-[#0A0930] hover:bg-gradient-to-r hover:from-[#EFD3C9] hover:to-[#9C5B5A] hover:border-transparent transition-all duration-300"
                   >
                     <item.icon size={15} />
                   </a>
@@ -124,7 +125,7 @@ export default function Footer() {
                   <li key={item}>
                     <Link
                       href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '')}`}
-                      className="text-white/70 hover:text-[#F0C9A0] transition-colors"
+                      className="text-white/70 hover:text-[#EFD3C9] transition-colors"
                     >
                       {item}
                     </Link>
@@ -141,7 +142,7 @@ export default function Footer() {
               <ul className="space-y-3 text-sm">
                 {services.map((item) => (
                   <li key={item}>
-                    <Link href="/services" className="text-white/70 hover:text-[#F0C9A0] transition-colors">
+                    <Link href="/services" className="text-white/70 hover:text-[#EFD3C9] transition-colors">
                       {item}
                     </Link>
                   </li>
@@ -156,19 +157,19 @@ export default function Footer() {
               </h4>
               <ul className="space-y-4 text-sm text-white/70">
                 <li className="flex gap-3">
-                  <FaMapMarkerAlt className="text-[#F0C9A0] mt-0.5 flex-shrink-0" size={14} />
+                  <FaMapMarkerAlt className="text-[#EFD3C9] mt-0.5 flex-shrink-0" size={14} />
                   <span className="leading-relaxed">
                     2nd Floor, Manickam Lane, Anna Salai, Guindy, Chennai&nbsp;600032
                   </span>
                 </li>
                 <li className="flex gap-3">
-                  <FaEnvelope className="text-[#F0C9A0] mt-0.5 flex-shrink-0" size={14} />
-                  <a href="mailto:info@vaavedigital.com" className="hover:text-[#F0C9A0] transition-colors">
+                  <FaEnvelope className="text-[#EFD3C9] mt-0.5 flex-shrink-0" size={14} />
+                  <a href="mailto:info@vaavedigital.com" className="hover:text-[#EFD3C9] transition-colors">
                     info@vaavedigital.com
                   </a>
                 </li>
                 <li className="flex gap-3">
-                  <FaClock className="text-[#F0C9A0] mt-0.5 flex-shrink-0" size={14} />
+                  <FaClock className="text-[#EFD3C9] mt-0.5 flex-shrink-0" size={14} />
                   <span>Mon – Sat, 9:30 AM – 6:30 PM</span>
                 </li>
               </ul>
@@ -185,20 +186,20 @@ export default function Footer() {
             </p>
 
             <div className="flex items-center gap-6 order-1 md:order-2">
-              <Link href="/privacy" className="text-xs text-white/40 hover:text-[#F0C9A0] transition-colors">
+              <Link href="/privacy" className="text-xs text-white/40 hover:text-[#EFD3C9] transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-xs text-white/40 hover:text-[#F0C9A0] transition-colors">
+              <Link href="/terms" className="text-xs text-white/40 hover:text-[#EFD3C9] transition-colors">
                 Terms of Service
               </Link>
 
               <button
                 onClick={scrollToTop}
                 aria-label="Back to top"
-                className="group flex items-center gap-2 text-xs text-white/50 hover:text-[#F0C9A0] transition-colors"
+                className="group flex items-center gap-2 text-xs text-white/50 hover:text-[#EFD3C9] transition-colors"
               >
                 Back to top
-                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 group-hover:border-[#F0C9A0]/50 transition-all duration-300 group-hover:-translate-y-1">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 group-hover:border-[#EFD3C9]/50 transition-all duration-300 group-hover:-translate-y-1">
                   <FaPaperPlane size={11} className="-rotate-45" />
                 </span>
               </button>

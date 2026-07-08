@@ -10,8 +10,8 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 /* ══════════════════════════════════════════════════════════
-   PALETTE — Navy #0A0930 · Gold #D18F5C · Gold-D #B8714A
-   Gold-L #F0C9A0 · Teal #34D2C7 · Cream #FDFBF8
+   PALETTE — Navy #0A0930 · Gold #E0A36A · Gold-D #9C5B5A
+   Gold-L #EFD3C9 · Teal #E0A36A · Cream #FDFBF8
 ══════════════════════════════════════════════════════════ */
 
 /* ── Ambient layers ───────────────────────────────────────── */
@@ -24,7 +24,7 @@ function GrainOverlay() {
 
 function ScrollProgressBar() {
   const { scrollYProgress } = useScroll();
-  return <motion.div style={{ scaleX: scrollYProgress }} className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[1000] bg-gradient-to-r from-[#B8714A] via-[#D18F5C] to-[#F0C9A0]" />;
+  return <motion.div style={{ scaleX: scrollYProgress }} className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[1000] bg-gradient-to-r from-[#9C5B5A] via-[#E0A36A] to-[#EFD3C9]" />;
 }
 
 /* ── Magnetic CTA wrapper ─────────────────────────────────── */
@@ -109,7 +109,7 @@ function SectionBridge({ dark = false, bgClass = '' }: { dark?: boolean; bgClass
     <div className={`flex justify-center py-5 ${bg}`}>
       <motion.div animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }} className="flex flex-col items-center gap-1">
         <div className={`w-px h-7 ${line}`} />
-        <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1L6 6L11 1" stroke="#D18F5C" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1L6 6L11 1" stroke="#E0A36A" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </motion.div>
     </div>
   );
@@ -188,7 +188,7 @@ function ServiceModal({ isOpen, onClose, service, onSubmit }: any) {
               className="relative w-full h-44 md:h-52 rounded-xl overflow-hidden shadow-lg">
               <Image src={service.image} alt={service.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </motion.div>
-            <h3 className="font-display text-xl md:text-2xl font-bold text-[#F0C9A0] mt-5 mb-2 relative z-10">{service.title}</h3>
+            <h3 className="font-display text-xl md:text-2xl font-bold text-[#EFD3C9] mt-5 mb-2 relative z-10">{service.title}</h3>
             <p className="text-white/70 text-sm leading-relaxed relative z-10">{service.desc}</p>
           </div>
           <div className="md:w-1/2 bg-[#FDFBF8] p-6 md:p-8 rounded-b-2xl md:rounded-r-2xl md:rounded-l-none">
@@ -196,9 +196,9 @@ function ServiceModal({ isOpen, onClose, service, onSubmit }: any) {
             <p className="text-gray-500 text-xs mb-4">We reply on WhatsApp in minutes.</p>
             <form onSubmit={handleSubmit} className="space-y-3">
               <input type="text" value={service.title} readOnly className="w-full p-2.5 bg-white border-2 border-gray-100 rounded-xl text-gray-600 text-sm font-display" />
-              <input type="text" name="name" placeholder="Your Name" required value={form.name} onChange={handleChange} className="w-full p-2.5 border-2 border-gray-100 rounded-xl focus:outline-none focus:border-[#D18F5C] text-sm placeholder:text-gray-400 bg-white transition-colors" />
-              <input type="tel" name="phone" placeholder="Phone Number" required value={form.phone} onChange={handleChange} className="w-full p-2.5 border-2 border-gray-100 rounded-xl focus:outline-none focus:border-[#D18F5C] text-sm placeholder:text-gray-400 bg-white transition-colors" />
-              <textarea name="message" placeholder="Requirements" rows={3} required value={form.message} onChange={handleChange} className="w-full p-2.5 border-2 border-gray-100 rounded-xl resize-none focus:outline-none focus:border-[#D18F5C] text-sm placeholder:text-gray-400 bg-white transition-colors" />
+              <input type="text" name="name" placeholder="Your Name" required value={form.name} onChange={handleChange} className="w-full p-2.5 border-2 border-gray-100 rounded-xl focus:outline-none focus:border-[#E0A36A] text-sm placeholder:text-gray-400 bg-white transition-colors" />
+              <input type="tel" name="phone" placeholder="Phone Number" required value={form.phone} onChange={handleChange} className="w-full p-2.5 border-2 border-gray-100 rounded-xl focus:outline-none focus:border-[#E0A36A] text-sm placeholder:text-gray-400 bg-white transition-colors" />
+              <textarea name="message" placeholder="Requirements" rows={3} required value={form.message} onChange={handleChange} className="w-full p-2.5 border-2 border-gray-100 rounded-xl resize-none focus:outline-none focus:border-[#E0A36A] text-sm placeholder:text-gray-400 bg-white transition-colors" />
               <Magnetic strength={0.15}>
                 <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} type="submit"
                   className="w-full bg-[#25D366] hover:bg-green-600 text-white font-display font-bold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-lg text-sm">
@@ -243,15 +243,15 @@ export default function ServicesPage() {
 
   // Services data with crisp copy
   const marketingServices = useMemo(() => [
-    { title: 'Social Media Marketing', image: '/image/oms-1.webp', desc: 'AI-timed content that turns followers into customers.' },
-    { title: 'SEO', image: '/image/oms-2.webp', desc: 'AI keyword research, expert execution — you rank #1.' },
+    { title: 'Social Media Marketing', image: '/image/oms-1.webp', desc: 'Data-driven content that turns followers into customers.' },
+    { title: 'SEO', image: '/image/oms-2.webp', desc: 'Advanced keyword research, expert execution — you rank #1.' },
     { title: 'Google Ads & PPC', image: '/image/oms-3.webp', desc: 'Smart bidding, hands-on management, real ROI.' },
-    { title: 'AI Content Creation', image: '/image/oms-4.webp', desc: 'Blogs, ads, captions — fast, on-brand, human-polished.' },
+    { title: 'Creative Content Marketing', image: '/image/oms-4.webp', desc: 'Blogs, ads, captions — fast, on-brand, human-polished.' },
   ], []);
 
   const itServices = useMemo(() => [
-    { title: 'AI Web Development', image: '/image/it-1.webp', desc: 'Fast sites with built-in chatbots and smart SEO.' },
-    { title: 'AI Mobile Apps', image: '/image/it-2.webp', desc: 'Personalized, responsive apps that feel effortless.' },
+    { title: 'Custom Web Development', image: '/image/it-1.webp', desc: 'Fast sites with smart search performance and integrations.' },
+    { title: 'Custom Mobile App Development', image: '/image/it-2.webp', desc: 'Personalized, responsive apps that feel effortless.' },
   ], []);
 
   const openModal = useCallback((service: any) => { setSelectedService(service); setModalOpen(true); }, []);
@@ -287,15 +287,15 @@ export default function ServicesPage() {
         .sheen:hover::before { opacity: 1; animation: shimmer 1s ease; }
 
         .underline-hover { position: relative; }
-        .underline-hover::after { content:''; position:absolute; left:0; bottom:-2px; width:100%; height:2px; background:#D18F5C; transform:scaleX(0); transform-origin:right; transition:transform .3s ease; }
+        .underline-hover::after { content:''; position:absolute; left:0; bottom:-2px; width:100%; height:2px; background:#E0A36A; transform:scaleX(0); transform-origin:right; transition:transform .3s ease; }
         .underline-hover:hover::after { transform:scaleX(1); transform-origin:left; }
 
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
         .swiper-pagination-bullet { background: rgba(209,143,92,0.35); opacity: 1; width: 6px; height: 6px; transition: all 0.2s; }
-        .swiper-pagination-bullet-active { background: #D18F5C; width: 20px; border-radius: 3px; }
+        .swiper-pagination-bullet-active { background: #E0A36A; width: 20px; border-radius: 3px; }
         .it-swiper .swiper-pagination-bullet { background: rgba(240,201,160,0.3); }
-        .it-swiper .swiper-pagination-bullet-active { background: #F0C9A0; }
+        .it-swiper .swiper-pagination-bullet-active { background: #EFD3C9; }
         @media (min-width: 768px) { .swiper-pagination-bullet { width: 8px; height: 8px; } .swiper-pagination-bullet-active { width: 24px; } }
 
         @media (prefers-reduced-motion: reduce) {
@@ -306,7 +306,7 @@ export default function ServicesPage() {
       <ScrollProgressBar />
       <GrainOverlay />
 
-      <div className="bg-white" ref={containerRef}>
+      <div className="bg-[#FDFBF8]" ref={containerRef}>
 
         {/* ══════════════════════════════════════════════
             HERO — refined with better typography & glow
@@ -318,35 +318,35 @@ export default function ServicesPage() {
             <div ref={heroSpot.glowRef} className="absolute inset-0 pointer-events-none transition-[background] duration-200" />
           </div>
           <div className="absolute right-[-140px] top-1/2 -translate-y-1/2 pointer-events-none hidden md:block">
-            <div className="w-[420px] h-[420px] border border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
-            <div className="absolute inset-[60px] border border-[#F0C9A0]/10 rounded-full animate-spinSlowRev" />
+            <div className="w-[420px] h-[420px] border border-[#EFD3C9]/10 rounded-full animate-spinSlow" />
+            <div className="absolute inset-[60px] border border-[#EFD3C9]/10 rounded-full animate-spinSlowRev" />
           </div>
 
           <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-4 text-center relative z-10">
             <motion.div initial="hidden" animate={heroInView ? 'visible' : 'hidden'} variants={stagger}>
               {/* <motion.span variants={fadeUp} className="inline-flex items-center gap-2 glass text-white/85 text-xs font-display font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute h-full w-full rounded-full bg-[#34D2C7] opacity-60" />
-                  <span className="relative rounded-full h-2 w-2 bg-[#34D2C7]" />
+                  <span className="animate-ping absolute h-full w-full rounded-full bg-[#E0A36A] opacity-60" />
+                  <span className="relative rounded-full h-2 w-2 bg-[#E0A36A]" />
                 </span>
-                AI-Enhanced Digital Agency
+                Next-Gen Digital Marketing & Dev Studio
               </motion.span> */}
 
               <motion.h1 variants={fadeUp}
                 className="font-display text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.03] max-w-3xl mx-auto"
                 style={{ textShadow: '0 20px 60px rgba(0,0,0,0.45)' }}>
                 Chennai's Most Trusted{' '}
-                <span className="bg-gradient-to-r from-[#F6C9AE] via-[#E8875A] to-[#B8714A] bg-clip-text text-transparent">Digital Experts</span>
+                <span className="bg-gradient-to-r from-[#F6C9AE] via-[#E8875A] to-[#9C5B5A] bg-clip-text text-transparent">Digital Experts</span>
               </motion.h1>
 
               <motion.p variants={fadeUp} className="text-white/70 text-base md:text-lg max-w-lg mx-auto mt-5 font-light">
-                Marketing and IT, sped up by AI, delivered by people.
+                Next-gen marketing and IT solutions, powered by tech, delivered by experts.
               </motion.p>
 
               <motion.div variants={fadeUp} className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Magnetic>
                   <motion.a href="#marketing-slider" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-                    className="sheen inline-block bg-white text-[#B8714A] px-7 py-3.5 rounded-full font-display font-bold shadow-2xl shadow-black/40 text-sm md:text-base">
+                    className="sheen inline-block bg-white text-[#9C5B5A] px-7 py-3.5 rounded-full font-display font-bold shadow-2xl shadow-black/40 text-sm md:text-base">
                     Explore Services →
                   </motion.a>
                 </Magnetic>
@@ -369,9 +369,9 @@ export default function ServicesPage() {
             style={{ fontSize: 'clamp(6rem,12vw,12rem)', color: 'rgba(10,10,41,0.04)' }}>01</div>
           <div className="container mx-auto px-4 relative z-10">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-10">
-              <motion.span variants={fadeUp} className="inline-block font-display text-[#B8714A] text-xs tracking-[0.35em] uppercase font-bold mb-3">Marketing</motion.span>
+              <motion.span variants={fadeUp} className="inline-block font-display text-[#9C5B5A] text-xs tracking-[0.35em] uppercase font-bold mb-3">Marketing</motion.span>
               <motion.h2 variants={fadeUp} className="font-display text-2xl md:text-4xl font-extrabold text-[#0A0930]">Results-Driven Marketing</motion.h2>
-              <motion.div variants={fadeUp} className="w-14 h-1 bg-[#D18F5C] mx-auto mt-4 rounded-full" />
+              <motion.div variants={fadeUp} className="w-14 h-1 bg-[#E0A36A] mx-auto mt-4 rounded-full" />
             </motion.div>
             <Swiper modules={[Autoplay, Pagination]} spaceBetween={20} slidesPerView={1}
               breakpoints={{ 480: { slidesPerView: 1.2, spaceBetween: 16 }, 640: { slidesPerView: 2, spaceBetween: 20 }, 1024: { slidesPerView: 3, spaceBetween: 30 } }}
@@ -389,7 +389,7 @@ export default function ServicesPage() {
                       <div className="p-5">
                         <h3 className="font-display text-base md:text-lg font-bold text-[#0A0930] mb-1.5 line-clamp-2">{service.title}</h3>
                         <p className="text-gray-500 text-xs md:text-sm leading-relaxed">{service.desc}</p>
-                        <button className="underline-hover mt-3 text-[#B8714A] font-display font-bold text-xs inline-flex items-center gap-1 uppercase tracking-wider">
+                        <button className="underline-hover mt-3 text-[#9C5B5A] font-display font-bold text-xs inline-flex items-center gap-1 uppercase tracking-wider">
                           Learn More <span>→</span>
                         </button>
                       </div>
@@ -411,13 +411,13 @@ export default function ServicesPage() {
           <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(217,159,154,0.10) 1.5px, transparent 1.5px)', backgroundSize: '38px 38px' }} />
           <div ref={itSpot.glowRef} className="absolute inset-0 pointer-events-none transition-[background] duration-200" />
           <div className="absolute left-[-160px] bottom-[-160px] pointer-events-none hidden md:block">
-            <div className="w-[440px] h-[440px] border border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
+            <div className="w-[440px] h-[440px] border border-[#EFD3C9]/10 rounded-full animate-spinSlow" />
           </div>
           <div className="container mx-auto px-6 max-w-6xl relative z-10">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="text-center mb-12">
-              <motion.span variants={fadeUp} className="inline-block font-display text-[#D18F5C] text-xs tracking-[0.35em] uppercase font-bold mb-3">IT & Development</motion.span>
-              <motion.h2 variants={fadeUp} className="font-display text-2xl md:text-4xl font-black text-white">Built With AI at the Core</motion.h2>
-              <motion.div variants={fadeUp} className="w-16 h-1.5 bg-[#D18F5C] mx-auto mt-5 rounded-full" />
+              <motion.span variants={fadeUp} className="inline-block font-display text-[#E0A36A] text-xs tracking-[0.35em] uppercase font-bold mb-3">IT & Development</motion.span>
+              <motion.h2 variants={fadeUp} className="font-display text-2xl md:text-4xl font-black text-white">Built With Modern Technology & Strategy</motion.h2>
+              <motion.div variants={fadeUp} className="w-16 h-1.5 bg-[#E0A36A] mx-auto mt-5 rounded-full" />
             </motion.div>
             <Swiper modules={[Autoplay, Pagination]} spaceBetween={40} slidesPerView={1} breakpoints={{ 768: { slidesPerView: 2 } }}
               autoplay={{ delay: 3500, disableOnInteraction: false }} pagination={{ clickable: true }} className="!pb-14 it-swiper">
@@ -430,9 +430,9 @@ export default function ServicesPage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                       <div className="p-7 flex flex-col flex-1">
-                        <h3 className="font-display text-xl font-bold text-[#0A0930] mb-2 group-hover:text-[#B8714A] transition-colors">{service.title}</h3>
+                        <h3 className="font-display text-xl font-bold text-[#0A0930] mb-2 group-hover:text-[#9C5B5A] transition-colors">{service.title}</h3>
                         <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1">{service.desc}</p>
-                        <div className="underline-hover inline-flex items-center text-[#B8714A] font-display font-bold text-xs uppercase tracking-widest gap-2 w-fit">Learn More <span>→</span></div>
+                        <div className="underline-hover inline-flex items-center text-[#9C5B5A] font-display font-bold text-xs uppercase tracking-widest gap-2 w-fit">Learn More <span>→</span></div>
                       </div>
                     </div>
                   </TiltCard>
@@ -445,7 +445,7 @@ export default function ServicesPage() {
         {/* ══════════════════════════════════════════════
             ONLINE PRESENCE — refined layout
         ══════════════════════════════════════════════ */}
-        <div className="bg-gradient-to-br from-[#D18F5C] to-[#B8714A] text-white py-14 relative overflow-hidden">
+        <div className="bg-gradient-to-br from-[#E0A36A] to-[#9C5B5A] text-white py-14 relative overflow-hidden">
           <div className="absolute inset-0 pointer-events-none opacity-25" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.4) 1.5px, transparent 1.5px)', backgroundSize: '32px 32px' }} />
           <div className="container mx-auto px-4 relative z-10">
             <div className="flex flex-col md:flex-row items-center gap-8">
@@ -460,7 +460,7 @@ export default function ServicesPage() {
                 <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 mt-6">
                   <Image src="/image/op_rev.webp" alt="5 stars" width={140} height={28} className="w-28 md:w-32 h-auto" loading="lazy" />
                   <Magnetic strength={0.2}>
-                    <motion.a href="#marketing-slider" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }} className="bg-white text-[#B8714A] px-6 py-2.5 rounded-full font-display font-bold shadow-lg text-sm inline-block">Partner With Us</motion.a>
+                    <motion.a href="#marketing-slider" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }} className="bg-white text-[#9C5B5A] px-6 py-2.5 rounded-full font-display font-bold shadow-lg text-sm inline-block">Partner With Us</motion.a>
                   </Magnetic>
                 </div>
               </motion.div>
@@ -477,13 +477,13 @@ export default function ServicesPage() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="md:w-1/2 w-full">
-                <span className="inline-block font-display text-[#B8714A] text-xs tracking-[0.35em] uppercase font-bold mb-4">AI-Assisted SEO</span>
+                <span className="inline-block font-display text-[#9C5B5A] text-xs tracking-[0.35em] uppercase font-bold mb-4">Advanced Local & Global SEO</span>
                 <h2 className="font-display text-2xl md:text-4xl font-extrabold text-[#0A0930] leading-tight">Ideas That Actually Rank</h2>
                 <ul className="mt-6 space-y-2.5">
-                  {['Result-oriented strategy, AI-backed', 'Smarter targeting, faster acquisition', 'Affordable, transparent pricing', "Chennai's top-rated local SEO team"].map((text, idx) => (
+                  {['Result-oriented strategy, tech-enabled', 'Smarter targeting, faster acquisition', 'Affordable, transparent pricing', "Chennai's top-rated local SEO team"].map((text, idx) => (
                     <motion.li key={idx} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.07, duration: 0.4 }}
                       className="flex items-start gap-3 text-gray-700 text-sm md:text-base">
-                      <span className="w-5 h-5 bg-[#D18F5C]/10 rounded-full flex items-center justify-center text-[#B8714A] text-xs font-bold mt-0.5 flex-shrink-0">✓</span>
+                      <span className="w-5 h-5 bg-[#E0A36A]/10 rounded-full flex items-center justify-center text-[#9C5B5A] text-xs font-bold mt-0.5 flex-shrink-0">✓</span>
                       {text}
                     </motion.li>
                   ))}
@@ -539,7 +539,7 @@ export default function ServicesPage() {
         {showBackToTop && (
           <motion.button initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}
             whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={scrollToTop}
-            className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#D18F5C] text-white p-2.5 md:p-3.5 rounded-full shadow-xl z-40 hover:bg-[#B8714A] transition-colors text-sm md:text-base">↑</motion.button>
+            className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#E0A36A] text-white p-2.5 md:p-3.5 rounded-full shadow-xl z-40 hover:bg-[#9C5B5A] transition-colors text-sm md:text-base">↑</motion.button>
         )}
       </AnimatePresence>
 

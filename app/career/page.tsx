@@ -16,8 +16,8 @@ import {
 
 /* ══════════════════════════════════════════════════════════
    VAAVE DIGITAL — BRAND PALETTE (shared with services page)
-   Navy      #0A0930  Navy-Deep #12103D  Gold #D18F5C
-   Gold-D    #B8714A  Gold-L    #F0C9A0  Cream #FDFBF8
+   Navy      #0A0930  Navy-Deep #12103D  Gold #E0A36A
+   Gold-D    #9C5B5A  Gold-L    #EFD3C9  Cream #FDFBF8
 ══════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════
@@ -72,7 +72,7 @@ function ScrollProgressBar() {
   return (
     <motion.div
       style={{ scaleX: progress }}
-      className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[1000] bg-gradient-to-r from-[#B8714A] via-[#D18F5C] to-[#F0C9A0]"
+      className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[1000] bg-gradient-to-r from-[#9C5B5A] via-[#E0A36A] to-[#EFD3C9]"
     />
   );
 }
@@ -174,7 +174,7 @@ function SectionBridge({ dark = false, bgClass = '' }: { dark?: boolean; bgClass
         className="flex flex-col items-center gap-1"
       >
         <div className={`w-px h-8 ${line}`} />
-        <FaChevronDown size={12} className="text-[#D18F5C]" />
+        <FaChevronDown size={12} className="text-[#E0A36A]" />
       </motion.div>
     </div>
   );
@@ -257,7 +257,7 @@ function NeuralHeroCanvas() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = near > 0.3 ? `rgba(3,101,140,${op})` : `rgba(217,159,154,${op})`;
+            ctx.strokeStyle = near > 0.3 ? `rgba(224,163,106,${op})` : `rgba(217,159,154,${op})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -269,7 +269,7 @@ function NeuralHeroCanvas() {
         const near = Math.max(0, 1 - mDist / 180);
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r + near * 1.6, 0, Math.PI * 2);
-        ctx.fillStyle = near > 0.4 ? 'rgba(3,101,140,0.9)' : 'rgba(217,159,154,0.55)';
+        ctx.fillStyle = near > 0.4 ? 'rgba(224,163,106,0.9)' : 'rgba(217,159,154,0.55)';
         ctx.fill();
       });
 
@@ -283,8 +283,8 @@ function NeuralHeroCanvas() {
         const py = (1 - t) * (1 - t) * a.y + 2 * (1 - t) * t * my + t * t * b.y;
         ctx.beginPath();
         ctx.arc(px, py, 2.6, 0, Math.PI * 2);
-        ctx.fillStyle = '#34D2C7';
-        ctx.shadowColor = '#34D2C7';
+        ctx.fillStyle = '#E0A36A';
+        ctx.shadowColor = '#E0A36A';
         ctx.shadowBlur = 9;
         ctx.fill();
         ctx.shadowBlur = 0;
@@ -358,7 +358,7 @@ function ApplicationModal({ isOpen, onClose, jobTitle, onSubmit }: any) {
             backgroundImage: 'radial-gradient(circle, rgba(217,159,154,0.08) 1.5px, transparent 1.5px)',
             backgroundSize: '28px 28px',
           }} />
-          <div className="absolute right-[-50px] top-1/2 -translate-y-1/2 w-52 h-52 border border-[#F0C9A0]/10 rounded-full animate-[spin_18s_linear_infinite] pointer-events-none" />
+          <div className="absolute right-[-50px] top-1/2 -translate-y-1/2 w-52 h-52 border border-[#EFD3C9]/10 rounded-full animate-[spin_18s_linear_infinite] pointer-events-none" />
           <div className="relative z-10">
             <span className="inline-block bg-white/10 backdrop-blur-sm border border-white/15 text-white/80 px-3 py-1.5 rounded-full text-[10px] font-display font-bold uppercase tracking-widest mb-6">
               Apply Now
@@ -372,22 +372,22 @@ function ApplicationModal({ isOpen, onClose, jobTitle, onSubmit }: any) {
         <div className="p-6 md:p-10 w-full md:w-[62%] bg-white max-h-[80vh] overflow-y-auto">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid md:grid-cols-2 gap-5">
-              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Full Name</label><input type="text" name="name" placeholder="Your full name" required value={form.name} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition" /></div>
-              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Date of Birth</label><input type="date" name="dob" required value={form.dob} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition" /></div>
+              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Full Name</label><input type="text" name="name" placeholder="Your full name" required value={form.name} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition" /></div>
+              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Date of Birth</label><input type="date" name="dob" required value={form.dob} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition" /></div>
             </div>
             <div className="grid md:grid-cols-2 gap-5">
-              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Gender</label><select name="gender" required value={form.gender} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition"><option value="">Select Gender</option><option>Female</option><option>Male</option><option>Other</option></select></div>
-              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Phone Number</label><input type="tel" name="phone" placeholder="+91 12345 67890" required value={form.phone} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition" /></div>
+              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Gender</label><select name="gender" required value={form.gender} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition"><option value="">Select Gender</option><option>Female</option><option>Male</option><option>Other</option></select></div>
+              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Phone Number</label><input type="tel" name="phone" placeholder="+91 12345 67890" required value={form.phone} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition" /></div>
             </div>
             <div className="grid md:grid-cols-2 gap-5">
-              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Email Address</label><input type="email" name="email" placeholder="you@example.com" required value={form.email} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition" /></div>
-              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Job Title</label><select name="job" required value={form.job} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition"><option value="">Select Job Title</option><option>Social Media Manager</option><option>Social Media Intern</option><option>Telecaller</option></select></div>
+              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Email Address</label><input type="email" name="email" placeholder="you@example.com" required value={form.email} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition" /></div>
+              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Job Title</label><select name="job" required value={form.job} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition"><option value="">Select Job Title</option><option>Social Media Manager</option><option>Social Media Intern</option><option>Telecaller</option></select></div>
             </div>
             <div className="grid md:grid-cols-2 gap-5">
-              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Years of Experience</label><select name="experience" required value={form.experience} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition"><option value="">Select Experience</option><option>0-1</option><option>1-2</option><option>2-3</option><option>3-4</option><option>4-5</option><option>5+</option></select></div>
-              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Upload Resume (PDF/DOC)</label><div className="flex items-center gap-2"><input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} className="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#FDFBF8] file:text-[#D18F5C] hover:file:bg-[#F0C9A0]/30 transition-colors" /></div></div>
+              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Years of Experience</label><select name="experience" required value={form.experience} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition"><option value="">Select Experience</option><option>0-1</option><option>1-2</option><option>2-3</option><option>3-4</option><option>4-5</option><option>5+</option></select></div>
+              <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Upload Resume (PDF/DOC)</label><div className="flex items-center gap-2"><input type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} className="w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#FDFBF8] file:text-[#E0A36A] hover:file:bg-[#EFD3C9]/30 transition-colors" /></div></div>
             </div>
-            <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Cover Letter (optional)</label><textarea name="cover" rows={3} placeholder="Tell us why you'd be a great fit..." value={form.cover} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl resize-none focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition"></textarea></div>
+            <div><label className="block text-sm font-medium text-gray-700 mb-1 font-display">Cover Letter (optional)</label><textarea name="cover" rows={3} placeholder="Tell us why you'd be a great fit..." value={form.cover} onChange={handleChange} className="w-full p-3 border border-gray-200 rounded-xl resize-none focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition"></textarea></div>
             <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} type="submit" className="w-full bg-gradient-to-r from-[#25D366] to-green-600 hover:shadow-xl text-white font-display font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 text-lg"><FaWhatsapp /> Send Application via WhatsApp</motion.button>
           </form>
         </div>
@@ -493,7 +493,7 @@ export default function CareerPage() {
         .glass { background:rgba(255,255,255,0.08); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.15); }
 
         .sweep { position:relative; overflow:hidden; }
-        .sweep::after { content:''; position:absolute; inset:0; border:2px solid #D18F5C; border-radius:inherit; opacity:0; transform:scale(0.95); transition:opacity .3s,transform .3s; }
+        .sweep::after { content:''; position:absolute; inset:0; border:2px solid #E0A36A; border-radius:inherit; opacity:0; transform:scale(0.95); transition:opacity .3s,transform .3s; }
         .sweep:hover::after { opacity:1; transform:scale(1); }
 
         .sheen { position:relative; overflow:hidden; }
@@ -512,7 +512,7 @@ export default function CareerPage() {
       <ScrollProgressBar />
       <GrainOverlay />
 
-      <div className="bg-white text-gray-900 min-h-screen">
+      <div className="bg-[#FDFBF8] text-gray-900 min-h-screen">
 
         {/* ══════════════════════════════════════════════════
             HERO — Deep Navy + Neural Constellation signature
@@ -521,31 +521,31 @@ export default function CareerPage() {
           <NeuralHeroCanvas />
 
           <div className="absolute right-[-120px] top-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="w-[480px] h-[480px] border border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
-            <div className="absolute inset-[70px] border border-[#F0C9A0]/10 rounded-full animate-spinSlowRev" />
+            <div className="w-[480px] h-[480px] border border-[#EFD3C9]/10 rounded-full animate-spinSlow" />
+            <div className="absolute inset-[70px] border border-[#EFD3C9]/10 rounded-full animate-spinSlowRev" />
           </div>
 
-          <div className="absolute top-6 left-6 w-14 h-14 border-t-2 border-l-2 border-[#F0C9A0]/25 rounded-tl-lg" />
-          <div className="absolute top-6 right-6 w-14 h-14 border-t-2 border-r-2 border-[#F0C9A0]/25 rounded-tr-lg" />
-          <div className="absolute bottom-6 left-6 w-14 h-14 border-b-2 border-l-2 border-[#F0C9A0]/25 rounded-bl-lg" />
-          <div className="absolute bottom-6 right-6 w-14 h-14 border-b-2 border-r-2 border-[#F0C9A0]/25 rounded-br-lg" />
+          <div className="absolute top-6 left-6 w-14 h-14 border-t-2 border-l-2 border-[#EFD3C9]/25 rounded-tl-lg" />
+          <div className="absolute top-6 right-6 w-14 h-14 border-t-2 border-r-2 border-[#EFD3C9]/25 rounded-tr-lg" />
+          <div className="absolute bottom-6 left-6 w-14 h-14 border-b-2 border-l-2 border-[#EFD3C9]/25 rounded-bl-lg" />
+          <div className="absolute bottom-6 right-6 w-14 h-14 border-b-2 border-r-2 border-[#EFD3C9]/25 rounded-br-lg" />
 
-          <div className="container mx-auto px-6 lg:px-16 relative z-10 py-20 md:py-28">
+          <div className="container mx-auto px-6 lg:px-16 relative z-10 py-20 md:py-20">
             <motion.div initial="hidden" animate={heroInView ? 'visible' : 'hidden'} variants={stagger}
-              className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+              className="flex flex-col lg:flex-row items-center gap-10 lg:gap-10">
 
               <div className="flex-1 text-center lg:text-left">
-                <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass text-white/80 px-4 py-2 rounded-full text-sm font-display font-semibold mb-6">
+                {/* <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass text-white/80 px-4 py-2 rounded-full text-sm font-display font-semibold mb-6">
                   🚀 Careers at Rainbow Media
-                </motion.div>
+                </motion.div> */}
                 <motion.h1 variants={fadeUp}
                   className="font-display text-white font-black leading-[1.05] mb-6"
                   style={{ fontSize: 'clamp(2.6rem,6.5vw,5.5rem)', textShadow: '0 2px 0 rgba(217,159,154,0.15), 0 20px 60px rgba(0,0,0,0.45)' }}>
                   We make <br />
-                  <span className="text-[#F0C9A0] relative inline-block">
+                  <span className="text-[#EFD3C9] relative inline-block">
                     creative
                     <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 200 8" fill="none">
-                      <path d="M0 4 L200 4" stroke="#D18F5C" strokeWidth="4" strokeLinecap="round" strokeDasharray="4 4"/>
+                      <path d="M0 4 L200 4" stroke="#E0A36A" strokeWidth="4" strokeLinecap="round" strokeDasharray="4 4"/>
                     </svg>
                   </span> <br />
                   things everyday
@@ -557,7 +557,7 @@ export default function CareerPage() {
                   <Magnetic>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
                       onClick={() => openModalForJob('General Application')}
-                      className="sheen group bg-white text-[#B8714A] px-7 py-3 rounded-full font-display font-bold text-base shadow-2xl shadow-black/40 flex items-center gap-2">
+                      className="sheen group bg-white text-[#9C5B5A] px-7 py-3 rounded-full font-display font-bold text-base shadow-2xl shadow-black/40 flex items-center gap-2">
                       <FaWhatsapp /> Apply on WhatsApp
                       <FaArrowRight className="group-hover:translate-x-1 transition" size={13} />
                     </motion.button>
@@ -565,7 +565,7 @@ export default function CareerPage() {
                   <Magnetic strength={0.2}>
                     <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
                       href="#opportunities"
-                      className="glass text-white px-7 py-3 rounded-full font-display font-bold text-base hover:bg-white hover:text-[#B8714A] transition-all duration-300">
+                      className="glass text-white px-7 py-3 rounded-full font-display font-bold text-base hover:bg-white hover:text-[#9C5B5A] transition-all duration-300 flex items-center justify-center">
                       View Openings
                     </motion.a>
                   </Magnetic>
@@ -603,24 +603,24 @@ export default function CareerPage() {
           <div className="container mx-auto px-6 lg:px-16">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={stagger}
               className="text-center max-w-2xl mx-auto mb-14">
-              <motion.span variants={fadeUp} className="inline-block font-display text-[#B8714A] text-xs tracking-[0.35em] uppercase font-bold mb-4">
+              <motion.span variants={fadeUp} className="inline-block font-display text-[#9C5B5A] text-xs tracking-[0.35em] uppercase font-bold mb-4">
                 Why Us
               </motion.span>
               <motion.h2 variants={fadeUp} className="font-display font-extrabold text-[#0A0930]" style={{ fontSize: 'clamp(1.9rem,4.2vw,3rem)' }}>
-                Why Choose <span className="text-[#D18F5C]">Rainbow Media</span>?
+                Why Choose <span className="text-[#E0A36A]">Vaave Digital</span>?
               </motion.h2>
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-              className="grid md:grid-cols-3 gap-8">
+              className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
               {benefits.map((benefit, i) => (
                 <motion.div key={i} variants={fadeUp}>
                   <TiltCard>
-                    <div className="group relative bg-white rounded-2xl p-8 shadow-md hover:shadow-2xl transition-shadow duration-300 border border-gray-100 sweep h-full">
-                      <div className="w-16 h-16 rounded-xl bg-[#FDFBF8] border border-[#D18F5C]/20 flex items-center justify-center text-3xl text-[#D18F5C] mb-6 group-hover:bg-[#D18F5C] group-hover:text-white transition-colors duration-300">
+                    <div className="group relative bg-white rounded-2xl p-4 sm:p-8 shadow-md hover:shadow-2xl transition-shadow duration-300 border border-gray-100 sweep h-full">
+                      <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-xl bg-[#FDFBF8] border border-[#E0A36A]/20 flex items-center justify-center text-xl sm:text-3xl text-[#E0A36A] mb-4 sm:mb-6 group-hover:bg-[#E0A36A] group-hover:text-white transition-colors duration-300">
                         <benefit.icon />
                       </div>
-                      <h3 className="font-display text-2xl font-bold text-gray-800 mb-3">{benefit.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{benefit.desc}</p>
+                      <h3 className="font-display text-sm sm:text-2xl font-bold text-gray-800 mb-1.5 sm:mb-3">{benefit.title}</h3>
+                      <p className="text-gray-600 text-xs sm:text-base leading-normal sm:leading-relaxed">{benefit.desc}</p>
                     </div>
                   </TiltCard>
                 </motion.div>
@@ -647,13 +647,13 @@ export default function CareerPage() {
           }} />
           <div ref={opsSpot.glowRef} className="absolute inset-0 pointer-events-none transition-[background] duration-200" />
           <div className="absolute left-[-160px] bottom-[-160px] pointer-events-none">
-            <div className="w-[420px] h-[420px] border border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
+            <div className="w-[420px] h-[420px] border border-[#EFD3C9]/10 rounded-full animate-spinSlow" />
           </div>
 
           <div className="container mx-auto px-6 lg:px-16 relative z-10">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={stagger}
               className="text-center max-w-3xl mx-auto mb-16">
-              <motion.span variants={fadeUp} className="inline-block font-display text-[#D18F5C] text-xs tracking-[0.35em] uppercase font-bold mb-4">
+              <motion.span variants={fadeUp} className="inline-block font-display text-[#E0A36A] text-xs tracking-[0.35em] uppercase font-bold mb-4">
                 Open Roles
               </motion.span>
               <motion.h2 variants={fadeUp} className="font-display font-extrabold text-white mb-3" style={{ fontSize: 'clamp(1.9rem,4.2vw,3rem)' }}>
@@ -688,37 +688,37 @@ export default function CareerPage() {
                       <div className="md:w-1/2 p-6 md:p-8 lg:p-10 flex flex-col justify-between md:self-stretch">
                         <div>
                           <div className="flex flex-wrap items-center gap-3 mb-3">
-                            <span className="inline-flex items-center gap-1.5 bg-[#D18F5C]/10 text-[#F0C9A0] text-xs font-display font-semibold px-3 py-1 rounded-full">
+                            <span className="inline-flex items-center gap-1.5 bg-[#E0A36A]/10 text-[#EFD3C9] text-xs font-display font-semibold px-3 py-1 rounded-full">
                               <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D18F5C] opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D18F5C]"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E0A36A] opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#E0A36A]"></span>
                               </span>
                               Hiring Now
                             </span>
                             <span className="text-xs text-white/40 font-data">{job.experience}</span>
                           </div>
-                          <h3 className="font-display text-2xl md:text-3xl font-extrabold text-white mb-3 group-hover:text-[#F0C9A0] transition-colors">
+                          <h3 className="font-display text-2xl md:text-3xl font-extrabold text-white mb-3 group-hover:text-[#EFD3C9] transition-colors">
                             {job.title}
                           </h3>
                           <p className="text-white/70 text-sm md:text-base mb-5 leading-relaxed">{job.desc}</p>
                           <div className="flex flex-wrap gap-2 mb-6">
                             {job.skills.map((skill) => (
-                              <span key={skill} className="bg-white/10 text-white/80 text-xs px-3 py-1.5 rounded-full flex items-center gap-1 hover:bg-[#D18F5C]/20 hover:text-[#F0C9A0] transition-colors cursor-default font-display">
+                              <span key={skill} className="bg-white/10 text-white/80 text-xs px-3 py-1.5 rounded-full flex items-center gap-1 hover:bg-[#E0A36A]/20 hover:text-[#EFD3C9] transition-colors cursor-default font-display">
                                 <FaCheckCircle className="text-[10px]" /> {skill}
                               </span>
                             ))}
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-white/70 mb-8 p-4 bg-white/5 rounded-xl font-data">
-                            <div className="flex items-center gap-2"><FaMapMarkerAlt className="text-[#D18F5C] text-base" /> {job.location}</div>
-                            <div className="flex items-center gap-2"><FaClock className="text-[#D18F5C] text-base" /> Walk-in: {job.walkin}</div>
-                            <div className="flex items-center gap-2"><FaPhoneAlt className="text-[#D18F5C] text-base" /> {job.contact}</div>
+                            <div className="flex items-center gap-2"><FaMapMarkerAlt className="text-[#E0A36A] text-base" /> {job.location}</div>
+                            <div className="flex items-center gap-2"><FaClock className="text-[#E0A36A] text-base" /> Walk-in: {job.walkin}</div>
+                            <div className="flex items-center gap-2"><FaPhoneAlt className="text-[#E0A36A] text-base" /> {job.contact}</div>
                           </div>
                         </div>
                         <Magnetic strength={0.2}>
                           <motion.button
                             whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
                             onClick={() => openModalForJob(job.title)}
-                            className="sheen inline-flex items-center justify-center gap-2 bg-white text-[#B8714A] font-display font-bold px-6 py-3 rounded-full transition-all duration-300 w-fit shadow-lg"
+                            className="sheen inline-flex items-center justify-center gap-2 bg-white text-[#9C5B5A] font-display font-bold px-6 py-3 rounded-full transition-all duration-300 w-fit shadow-lg"
                           >
                             <FaPaperPlane className="text-sm" /> Apply Now
                             <FaArrowRight className="text-sm" />
@@ -749,7 +749,7 @@ export default function CareerPage() {
           <div className="container mx-auto px-6 lg:px-16 relative z-10">
             <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
               className="flex flex-col lg:flex-row rounded-3xl overflow-hidden shadow-2xl">
-              <div className="lg:w-2/5 bg-gradient-to-br from-[#D18F5C] to-[#B8714A] p-8 md:p-10 text-white flex flex-col justify-between relative overflow-hidden">
+              <div className="lg:w-2/5 bg-gradient-to-br from-[#E0A36A] to-[#9C5B5A] p-8 md:p-10 text-white flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute inset-0 pointer-events-none" style={{
                   backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.12) 1.5px, transparent 1.5px)',
                   backgroundSize: '28px 28px',
@@ -774,30 +774,30 @@ export default function CareerPage() {
               <div className="lg:w-3/5 bg-white p-8 md:p-10">
                 <form onSubmit={handleMainFormSubmit} className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-5">
-                    <input type="text" placeholder="Full Name" className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition" required />
-                    <input type="date" placeholder="Date of Birth" className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition" required />
+                    <input type="text" placeholder="Full Name" className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition" required />
+                    <input type="date" placeholder="Date of Birth" className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition" required />
                   </div>
                   <div className="grid md:grid-cols-2 gap-5">
-                    <select className="w-full p-3.5 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition"><option>Select Gender</option><option>Female</option><option>Male</option><option>Other</option></select>
-                    <input type="tel" placeholder="Phone Number" className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition" required />
+                    <select className="w-full p-3.5 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition"><option>Select Gender</option><option>Female</option><option>Male</option><option>Other</option></select>
+                    <input type="tel" placeholder="Phone Number" className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition" required />
                   </div>
                   <div className="grid md:grid-cols-2 gap-5">
-                    <input type="email" placeholder="Email Address" className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition" required />
-                    <select className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition"><option>Select Job Title</option><option>Social Media Manager</option><option>Social Media Intern</option><option>Telecaller</option></select>
+                    <input type="email" placeholder="Email Address" className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition" required />
+                    <select className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition"><option>Select Job Title</option><option>Social Media Manager</option><option>Social Media Intern</option><option>Telecaller</option></select>
                   </div>
                   <div className="grid md:grid-cols-2 gap-5">
-                    <select className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition"><option>Years of Experience</option><option>0-1</option><option>1-2</option><option>2-3</option><option>3-4</option><option>4-5</option><option>5+</option></select>
+                    <select className="w-full p-3.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition"><option>Years of Experience</option><option>0-1</option><option>1-2</option><option>2-3</option><option>3-4</option><option>4-5</option><option>5+</option></select>
                     <div className="flex items-center gap-2">
                       <label className="flex-1 bg-gray-50 rounded-xl p-3 text-sm text-gray-500 border border-gray-200 flex items-center gap-2 cursor-pointer hover:bg-[#FDFBF8] transition">
-                        <FaUpload className="text-[#D18F5C]" /> Upload Resume
+                        <FaUpload className="text-[#E0A36A]" /> Upload Resume
                         <input type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => e.target.files && setUploadedFile(e.target.files[0])} />
                       </label>
                       {uploadedFile && <span className="text-xs text-green-600 truncate w-32">{uploadedFile.name}</span>}
                     </div>
                   </div>
-                  <textarea rows={3} placeholder="Cover Letter (optional)" className="w-full p-3.5 border border-gray-200 rounded-xl resize-none focus:ring-2 focus:ring-[#D18F5C] focus:border-[#D18F5C] transition"></textarea>
+                  <textarea rows={3} placeholder="Cover Letter (optional)" className="w-full p-3.5 border border-gray-200 rounded-xl resize-none focus:ring-2 focus:ring-[#E0A36A] focus:border-[#E0A36A] transition"></textarea>
                   <Magnetic strength={0.15}>
-                    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} type="submit" className="sheen w-full bg-gradient-to-r from-[#D18F5C] to-[#B8714A] hover:shadow-xl text-white font-display font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 group text-lg">Submit Application <FaPaperPlane className="group-hover:translate-x-1 transition" /></motion.button>
+                    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} type="submit" className="sheen w-full bg-gradient-to-r from-[#E0A36A] to-[#9C5B5A] hover:shadow-xl text-white font-display font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2 group text-lg">Submit Application <FaPaperPlane className="group-hover:translate-x-1 transition" /></motion.button>
                   </Magnetic>
                 </form>
               </div>
@@ -808,7 +808,7 @@ export default function CareerPage() {
         {/* ══════════════════════════════════════════════════
             WALK-IN BANNER — Gold gradient
         ══════════════════════════════════════════════════ */}
-        <div className="bg-gradient-to-r from-[#D18F5C] to-[#B8714A] text-white py-10 relative overflow-hidden">
+        <div className="bg-gradient-to-r from-[#E0A36A] to-[#9C5B5A] text-white py-10 relative overflow-hidden">
           <div className="absolute inset-0 pointer-events-none opacity-40" style={{
             backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.18) 1.5px, transparent 1.5px)',
             backgroundSize: '30px 30px',
@@ -833,7 +833,7 @@ export default function CareerPage() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={scrollToTop}
-              className="fixed bottom-5 right-5 z-40 bg-[#D18F5C] text-white p-4 rounded-full shadow-xl hover:bg-[#B8714A] transition-all font-display font-bold"
+              className="fixed bottom-5 right-5 z-40 bg-[#E0A36A] text-white p-4 rounded-full shadow-xl hover:bg-[#9C5B5A] transition-all font-display font-bold"
             >
               ↑
             </motion.button>

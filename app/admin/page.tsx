@@ -279,7 +279,9 @@ export default function AdminDashboard() {
           font-size: 2rem;
           font-weight: 700;
           letter-spacing: -0.02em;
-          background: linear-gradient(135deg, #0A0930, #D18F5C);
+          background: linear-gradient(135deg, #E0A36A 0%, #EFD3C9 25%, #CD8E83 50%, #9C5B5A 75%, #E0A36A 100%);
+          background-size: 200% auto;
+          animation: shimmer 4s linear infinite;
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
@@ -307,12 +309,12 @@ export default function AdminDashboard() {
           transition: all 0.2s;
         }
         .form-control-custom:focus {
-          border-color: #D18F5C;
-          box-shadow: 0 0 0 4px rgba(209,143,92,0.1);
+          border-color: #E0A36A;
+          box-shadow: 0 0 0 4px rgba(224,163,106,0.1);
           outline: none;
         }
         .btn-agency-login {
-          background: #D18F5C;
+          background: #E0A36A;
           border: none;
           padding: 0.9rem;
           border-radius: 1.5rem;
@@ -321,13 +323,13 @@ export default function AdminDashboard() {
           color: white;
           width: 100%;
           transition: all 0.2s;
-          box-shadow: 0 6px 14px rgba(209,143,92,0.3);
+          box-shadow: 0 6px 14px rgba(224,163,106,0.3);
           cursor: pointer;
         }
         .btn-agency-login:hover {
-          background: #B8714A;
+          background: #9C5B5A;
           transform: translateY(-2px);
-          box-shadow: 0 10px 20px rgba(209,143,92,0.4);
+          box-shadow: 0 10px 20px rgba(224,163,106,0.4);
         }
 
         /* Dashboard styles */
@@ -369,13 +371,13 @@ export default function AdminDashboard() {
         }
         .menu-link-item:hover {
           background: rgba(255,255,255,0.03);
-          color: #D18F5C;
+          color: #E0A36A;
           transform: translateX(4px);
         }
         .menu-link-item.active {
-          background: #D18F5C;
+          background: #E0A36A;
           color: white;
-          box-shadow: 0 4px 12px rgba(209,143,92,0.2);
+          box-shadow: 0 4px 12px rgba(224,163,106,0.2);
         }
         .logout-brand-btn {
           margin-top: auto;
@@ -407,8 +409,8 @@ export default function AdminDashboard() {
           transition: all 0.2s;
         }
         .search-wrapper:focus-within {
-          border-color: #D18F5C;
-          box-shadow: 0 0 0 3px rgba(209,143,92,0.1);
+          border-color: #E0A36A;
+          box-shadow: 0 0 0 3px rgba(224,163,106,0.1);
         }
         .search-input {
           border: none;
@@ -429,10 +431,10 @@ export default function AdminDashboard() {
           align-items: center;
         }
         .search-reset-btn:hover {
-          color: #D18F5C;
+          color: #E0A36A;
         }
         .btn-add-trigger {
-          background: linear-gradient(135deg, #D18F5C, #B8714A);
+          background: linear-gradient(135deg, #E0A36A, #9C5B5A);
           color: white;
           border: none;
           padding: 0.75rem 1.8rem;
@@ -443,20 +445,20 @@ export default function AdminDashboard() {
           align-items: center;
           gap: 0.6rem;
           transition: all 0.2s;
-          box-shadow: 0 6px 14px rgba(209,143,92,0.25);
+          box-shadow: 0 6px 14px rgba(224,163,106,0.25);
           cursor: pointer;
         }
         .btn-add-trigger:hover {
           transform: translateY(-2px);
-          box-shadow: 0 12px 20px rgba(209,143,92,0.35);
-          background: linear-gradient(135deg, #F0C9A0, #D18F5C);
+          box-shadow: 0 12px 20px rgba(224,163,106,0.35);
+          background: linear-gradient(135deg, #EFD3C9, #E0A36A);
         }
         .workspace-panel-card {
           background: rgba(255,255,255,0.96);
           border-radius: 1.8rem;
           box-shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
           padding: 1.8rem;
-          border: 1px solid rgba(209,143,92,0.1);
+          border: 1px solid rgba(224,163,106,0.1);
         }
         .management-grid-table {
           width: 100%;
@@ -568,7 +570,7 @@ export default function AdminDashboard() {
           max-height: 90vh;
           overflow-y: auto;
           box-shadow: 0 35px 60px -20px rgba(0,0,0,0.3);
-          border: 1px solid rgba(209,143,92,0.2);
+          border: 1px solid rgba(224,163,106,0.2);
           font-family: 'Inter', sans-serif;
           color: #1a202c;
         }
@@ -576,7 +578,7 @@ export default function AdminDashboard() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          border-bottom: 2px solid #D18F5C;
+          border-bottom: 2px solid #E0A36A;
           padding-bottom: 1rem;
           margin-bottom: 2rem;
         }
@@ -584,7 +586,9 @@ export default function AdminDashboard() {
           font-size: 2rem;
           font-weight: 800;
           letter-spacing: -0.02em;
-          background: linear-gradient(135deg, #D18F5C, #B8714A);
+          background: linear-gradient(135deg, #E0A36A 0%, #EFD3C9 25%, #CD8E83 50%, #9C5B5A 75%, #E0A36A 100%);
+          background-size: 200% auto;
+          animation: shimmer 4s linear infinite;
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
@@ -610,23 +614,23 @@ export default function AdminDashboard() {
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          border: 2px solid rgba(209,143,92,0.3);
+          border: 2px solid rgba(224,163,106,0.3);
           transition: all 0.3s ease;
           overflow: hidden;
           position: relative;
           box-shadow: 0 10px 25px -8px rgba(0,0,0,0.1);
         }
         .upload-drop-circle:hover {
-          border-color: #D18F5C;
+          border-color: #E0A36A;
           transform: scale(1.02);
-          box-shadow: 0 15px 30px -8px rgba(209,143,92,0.2);
+          box-shadow: 0 15px 30px -8px rgba(224,163,106,0.2);
         }
         .upload-drop-circle-content {
           text-align: center;
         }
         .upload-drop-circle-content .icon {
           font-size: 2.8rem;
-          color: #D18F5C;
+          color: #E0A36A;
           margin-bottom: 0.5rem;
         }
         .upload-drop-circle-content div {
@@ -646,8 +650,8 @@ export default function AdminDashboard() {
           color: #1a202c;
         }
         .form-control-dashboard:focus {
-          border-color: #D18F5C;
-          box-shadow: 0 0 0 4px rgba(209,143,92,0.12);
+          border-color: #E0A36A;
+          box-shadow: 0 0 0 4px rgba(224,163,106,0.12);
         }
         .form-label {
           display: block;
@@ -674,11 +678,11 @@ export default function AdminDashboard() {
           font-size: 1.1rem;
         }
         .editor-toolbar .tb-icon:hover {
-          color: #D18F5C;
+          color: #E0A36A;
           transform: translateY(-2px);
         }
         .btn-submit-blog {
-          background: linear-gradient(95deg, #D18F5C, #B8714A);
+          background: linear-gradient(95deg, #E0A36A, #9C5B5A);
           border: none;
           padding: 0.9rem 2.5rem;
           border-radius: 3rem;
@@ -687,12 +691,12 @@ export default function AdminDashboard() {
           color: white;
           cursor: pointer;
           transition: all 0.3s ease;
-          box-shadow: 0 8px 20px rgba(209,143,92,0.3);
+          box-shadow: 0 8px 20px rgba(224,163,106,0.3);
         }
         .btn-submit-blog:hover {
           transform: translateY(-3px);
-          box-shadow: 0 15px 25px rgba(209,143,92,0.4);
-          background: linear-gradient(95deg, #F0C9A0, #D18F5C);
+          box-shadow: 0 15px 25px rgba(224,163,106,0.4);
+          background: linear-gradient(95deg, #EFD3C9, #E0A36A);
         }
 
         @media (max-width: 992px) {
@@ -726,7 +730,7 @@ export default function AdminDashboard() {
           <div className="login-card">
             <div className="brand-display-column">
               <Image 
-                src="/image/logo.webp" 
+                src="/image/vaave-digital.webp" 
                 alt="Vaave Digital" 
                 width={300} 
                 height={75} 
@@ -779,7 +783,7 @@ export default function AdminDashboard() {
             <div>
               <div className="sidebar-brand-wrapper">
                 <Image 
-                  src="/image/logo.webp" 
+                  src="/image/vaave-digital.webp" 
                   alt="Vaave Digital" 
                   width={200} 
                   height={50} 
@@ -828,14 +832,14 @@ export default function AdminDashboard() {
             <div className="workspace-panel-card">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
                 <h2 style={{ fontWeight: 800, fontSize: '1.6rem', letterSpacing: '-0.02rem', margin: 0 }}>
-                  Blog <span style={{ color: '#D18F5C' }}>Collection</span>
+                  Blog <span style={{ color: '#E0A36A' }}>Collection</span>
                 </h2>
                 <span className="badge-luxury">{filteredBlogs.length} items</span>
               </div>
 
               {isLoading ? (
                 <div style={{ textAlign: 'center', padding: '5rem 0', color: '#64748b' }}>
-                  <FaSpinner className="animate-spin" style={{ fontSize: '2.5rem', color: '#D18F5C', margin: '0 auto 1rem auto' }} />
+                  <FaSpinner className="animate-spin" style={{ fontSize: '2.5rem', color: '#E0A36A', margin: '0 auto 1rem auto' }} />
                   <p>Loading your collection...</p>
                 </div>
               ) : (

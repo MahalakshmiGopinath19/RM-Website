@@ -3,7 +3,7 @@ import './globals.css';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
 
 export const metadata: Metadata = {
-  title: 'Rainbow Media - AI Integrated Digital & IT Services',
+  title: 'Vaave Digital - AI Integrated Digital & IT Services',
   description:
     'Transforming Ideas into Digital Realities | Web Development, Social Media Marketing, SEO',
   icons: {

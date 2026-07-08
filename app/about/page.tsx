@@ -13,8 +13,8 @@ import 'swiper/css/navigation';
 
 /* ══════════════════════════════════════════════════════════
    VAAVE DIGITAL — BRAND PALETTE (shared with services/career pages)
-   Navy #0A0930   Navy-Deep #12103D   Gold #D18F5C
-   Gold-D #B8714A   Gold-L #F0C9A0   Cream #FDFBF8
+   Navy #0A0930   Navy-Deep #12103D   Gold #E0A36A
+   Gold-D #9C5B5A   Gold-L #EFD3C9   Cream #FDFBF8
 ══════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════
@@ -61,7 +61,7 @@ function ScrollProgressBar() {
   return (
     <motion.div
       style={{ scaleX: progress }}
-      className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[1000] bg-gradient-to-r from-[#B8714A] via-[#D18F5C] to-[#F0C9A0]"
+      className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[1000] bg-gradient-to-r from-[#9C5B5A] via-[#E0A36A] to-[#EFD3C9]"
     />
   );
 }
@@ -142,7 +142,7 @@ function SectionBridge({ dark = false, bgClass = '' }: { dark?: boolean; bgClass
         className="flex flex-col items-center gap-1"
       >
         <div className={`w-px h-8 ${line}`} />
-        <FaChevronDown size={12} className="text-[#D18F5C]" />
+        <FaChevronDown size={12} className="text-[#E0A36A]" />
       </motion.div>
     </div>
   );
@@ -225,7 +225,7 @@ function NeuralHeroCanvas() {
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = near > 0.3 ? `rgba(3,101,140,${op})` : `rgba(217,159,154,${op})`;
+            ctx.strokeStyle = near > 0.3 ? `rgba(224,163,106,${op})` : `rgba(217,159,154,${op})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -237,7 +237,7 @@ function NeuralHeroCanvas() {
         const near = Math.max(0, 1 - mDist / 180);
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r + near * 1.6, 0, Math.PI * 2);
-        ctx.fillStyle = near > 0.4 ? 'rgba(3,101,140,0.9)' : 'rgba(217,159,154,0.55)';
+        ctx.fillStyle = near > 0.4 ? 'rgba(224,163,106,0.9)' : 'rgba(217,159,154,0.55)';
         ctx.fill();
       });
 
@@ -251,8 +251,8 @@ function NeuralHeroCanvas() {
         const py = (1 - t) * (1 - t) * a.y + 2 * (1 - t) * t * my + t * t * b.y;
         ctx.beginPath();
         ctx.arc(px, py, 2.6, 0, Math.PI * 2);
-        ctx.fillStyle = '#34D2C7';
-        ctx.shadowColor = '#34D2C7';
+        ctx.fillStyle = '#E0A36A';
+        ctx.shadowColor = '#E0A36A';
         ctx.shadowBlur = 9;
         ctx.fill();
         ctx.shadowBlur = 0;
@@ -291,10 +291,10 @@ function FAQItem({ question, answer, isOpen, onClick }: any) {
     <div className="border-b border-gray-100 last:border-0">
       <button
         onClick={onClick}
-        className="w-full py-5 flex justify-between items-center text-left text-gray-800 font-display font-semibold text-base md:text-lg hover:text-[#D18F5C] transition group"
+        className="w-full py-5 flex justify-between items-center text-left text-gray-800 font-display font-semibold text-base md:text-lg hover:text-[#E0A36A] transition group"
       >
-        <span className="group-hover:text-[#D18F5C] transition pr-4">{question}</span>
-        <span className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-[#D18F5C] text-white' : 'bg-gray-100 text-gray-400 group-hover:bg-[#FDFBF8] group-hover:text-[#D18F5C]'}`}>
+        <span className="group-hover:text-[#E0A36A] transition pr-4">{question}</span>
+        <span className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? 'bg-[#E0A36A] text-white' : 'bg-gray-100 text-gray-400 group-hover:bg-[#FDFBF8] group-hover:text-[#E0A36A]'}`}>
           {isOpen ? <FaMinus className="text-sm" /> : <FaPlus className="text-sm" />}
         </span>
       </button>
@@ -406,7 +406,7 @@ export default function AboutPage() {
         .glass { background:rgba(255,255,255,0.08); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.15); }
 
         .sweep { position:relative; overflow:hidden; }
-        .sweep::after { content:''; position:absolute; inset:0; border:2px solid #D18F5C; border-radius:inherit; opacity:0; transform:scale(0.95); transition:opacity .3s,transform .3s; }
+        .sweep::after { content:''; position:absolute; inset:0; border:2px solid #E0A36A; border-radius:inherit; opacity:0; transform:scale(0.95); transition:opacity .3s,transform .3s; }
         .sweep:hover::after { opacity:1; transform:scale(1); }
 
         .sheen { position:relative; overflow:hidden; }
@@ -430,7 +430,7 @@ export default function AboutPage() {
           z-index: 10;
         }
         .testimonial-swiper .swiper-slide-active .bg-white\\/95 {
-          background-color: #B8714A;
+          background-color: #9C5B5A;
           color: white;
         }
         .testimonial-swiper .swiper-slide-active .bg-white\\/95 p,
@@ -445,12 +445,12 @@ export default function AboutPage() {
         .testimonial-swiper .swiper-slide-active .bg-white\\/95 .text-red-200 {
           color: rgba(255,255,255,0.4) !important;
         }
-        .testimonial-swiper .swiper-slide-active .bg-white\\/95 .ring-\\[\\#D18F5C\\]\\/20 {
+        .testimonial-swiper .swiper-slide-active .bg-white\\/95 .ring-\\[\\#E0A36A\\]\\/20 {
           ring-color: rgba(255,255,255,0.4) !important;
         }
         .testimonial-swiper .swiper-button-next,
         .testimonial-swiper .swiper-button-prev {
-          color: #B8714A;
+          color: #9C5B5A;
           background: white;
           width: 38px;
           height: 38px;
@@ -475,7 +475,7 @@ export default function AboutPage() {
       <ScrollProgressBar />
       <GrainOverlay />
 
-      <div className="bg-white min-h-screen">
+      <div className="bg-[#FDFBF8] min-h-screen">
 
         {/* ══════════════════════════════════════════════════
             HERO — Deep Navy + Neural Constellation signature
@@ -484,23 +484,23 @@ export default function AboutPage() {
           <NeuralHeroCanvas />
 
           <div className="absolute right-[-140px] top-1/3 pointer-events-none">
-            <div className="w-[420px] h-[420px] border border-[#F0C9A0]/10 rounded-full animate-spinSlow" />
-            <div className="absolute inset-[60px] border border-[#F0C9A0]/10 rounded-full animate-spinSlowRev" />
+            <div className="w-[420px] h-[420px] border border-[#EFD3C9]/10 rounded-full animate-spinSlow" />
+            <div className="absolute inset-[60px] border border-[#EFD3C9]/10 rounded-full animate-spinSlowRev" />
           </div>
 
-          <div className="absolute top-6 left-6 w-14 h-14 border-t-2 border-l-2 border-[#F0C9A0]/25 rounded-tl-lg" />
-          <div className="absolute top-6 right-6 w-14 h-14 border-t-2 border-r-2 border-[#F0C9A0]/25 rounded-tr-lg" />
+          <div className="absolute top-6 left-6 w-14 h-14 border-t-2 border-l-2 border-[#EFD3C9]/25 rounded-tl-lg" />
+          <div className="absolute top-6 right-6 w-14 h-14 border-t-2 border-r-2 border-[#EFD3C9]/25 rounded-tr-lg" />
 
           <div className="container mx-auto px-6 lg:px-16 relative z-10 pt-20 md:pt-28 pb-20 md:pb-24">
             <motion.div initial="hidden" animate={heroInView ? 'visible' : 'hidden'} variants={stagger}
               className="flex flex-col md:flex-row gap-10 items-start">
               <div className="md:w-7/12">
                 <motion.div variants={fadeUp} className="inline-flex items-center gap-2 glass text-white/80 text-sm font-display font-semibold px-4 py-1.5 rounded-full mb-6">
-                  <span className="w-2 h-2 bg-[#D18F5C] rounded-full animate-pulse"></span>
+                  <span className="w-2 h-2 bg-[#E0A36A] rounded-full animate-pulse"></span>
                   AI-Powered Agency
                 </motion.div>
                 <motion.h2 variants={fadeUp} className="font-display text-white font-black leading-tight" style={{ fontSize: 'clamp(2rem,4.5vw,3.4rem)' }}>
-                  Provide the best service with <span className="text-[#F0C9A0]">out‑of‑the‑box AI‑powered</span> ideas
+                  Provide the best service with <span className="text-[#EFD3C9]">out‑of‑the‑box AI‑powered</span> ideas
                 </motion.h2>
               </div>
               <motion.div variants={fadeUp} className="md:w-5/12">
@@ -524,7 +524,7 @@ export default function AboutPage() {
               {/* Stats card – gradient + decor */}
               <motion.div variants={fadeUp} className="md:col-span-2">
                 <TiltCard>
-                  <div className="bg-gradient-to-br from-[#D18F5C] to-[#B8714A] rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition relative overflow-hidden h-full">
+                  <div className="bg-gradient-to-br from-[#E0A36A] to-[#9C5B5A] rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition relative overflow-hidden h-full">
                     <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
                     <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
                     <div className="relative z-10 flex items-start justify-between">
@@ -544,9 +544,9 @@ export default function AboutPage() {
 
               {/* Mission & Vision – redesigned with left border accent */}
               <div className="space-y-5">
-                <motion.div variants={fadeUp} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 group hover:border-[#D18F5C]/30">
+                <motion.div variants={fadeUp} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 group hover:border-[#E0A36A]/30">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#FDFBF8] flex items-center justify-center text-[#D18F5C] flex-shrink-0 group-hover:bg-[#D18F5C] group-hover:text-white transition-all duration-300">
+                    <div className="w-10 h-10 rounded-full bg-[#FDFBF8] flex items-center justify-center text-[#E0A36A] flex-shrink-0 group-hover:bg-[#E0A36A] group-hover:text-white transition-all duration-300">
                       <FaChartLine className="text-lg" />
                     </div>
                     <div>
@@ -555,9 +555,9 @@ export default function AboutPage() {
                     </div>
                   </div>
                 </motion.div>
-                <motion.div variants={fadeUp} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 group hover:border-[#D18F5C]/30">
+                <motion.div variants={fadeUp} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 group hover:border-[#E0A36A]/30">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#FDFBF8] flex items-center justify-center text-[#D18F5C] flex-shrink-0 group-hover:bg-[#D18F5C] group-hover:text-white transition-all duration-300">
+                    <div className="w-10 h-10 rounded-full bg-[#FDFBF8] flex items-center justify-center text-[#E0A36A] flex-shrink-0 group-hover:bg-[#E0A36A] group-hover:text-white transition-all duration-300">
                       <FaGlobe className="text-lg" />
                     </div>
                     <div>
@@ -589,7 +589,7 @@ export default function AboutPage() {
                 <div className="flex flex-wrap justify-center gap-6 md:gap-12">
                   {industries.map((ind, idx) => (
                     <div key={idx} className="flex items-center gap-3 text-white group cursor-default">
-                      <div className="p-2 rounded-lg bg-white/5 group-hover:bg-[#D18F5C]/20 transition">
+                      <div className="p-2 rounded-lg bg-white/5 group-hover:bg-[#E0A36A]/20 transition">
                         <img src={ind.icon} alt={ind.name} className="w-6 h-6" />
                       </div>
                       <span className="text-sm md:text-base font-display font-medium">{ind.name}</span>
@@ -604,10 +604,10 @@ export default function AboutPage() {
         {/* ══════════════════════════════════════════════════
             TESTIMONIAL SLIDER — same Swiper config
         ══════════════════════════════════════════════════ */}
-        <div className="relative bg-cover bg-center bg-no-repeat py-16 md:py-20" style={{ backgroundImage: "url('/image/testi.png')" }}>
+        <div className="relative bg-cover bg-center bg-no-repeat py-16 md:py-20">
           <div className="container mx-auto px-4 text-center">
             <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              className="font-display text-3xl md:text-4xl font-bold text-[#D18F5C] mb-10">What Our Clients Say</motion.h2>
+              className="font-display text-3xl md:text-4xl font-bold text-[#E0A36A] mb-10">What Our Clients Say</motion.h2>
             <Swiper
               modules={[Navigation, Autoplay]}
               slidesPerView={1}
@@ -630,7 +630,7 @@ export default function AboutPage() {
                     </svg>
                     <p className="text-gray-700 text-sm md:text-base leading-relaxed italic flex-1">“{t.quote}”</p>
                     <div className="flex items-center gap-4 mt-6 pt-4 border-t border-gray-100 w-full">
-                      <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-100 relative flex-shrink-0 ring-2 ring-[#D18F5C]/20">
+                      <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-100 relative flex-shrink-0 ring-2 ring-[#E0A36A]/20">
                         <img src={t.icon} alt={t.name} className="w-full h-full object-cover" />
                       </div>
                       <div>
@@ -655,18 +655,18 @@ export default function AboutPage() {
               className="max-w-3xl">
               <motion.div variants={fadeUp} className="glass rounded-2xl p-8">
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">Our Global Journey</h2>
-                <p className="text-white/90 mb-0 leading-relaxed">At Rainbow Media, we believe in a data‑driven approach to innovation. Our global journey reflects the trust clients place in us, and we continue to push boundaries to ensure their success.</p>
+                <p className="text-white/90 mb-0 leading-relaxed">At Vaave Digital, we believe in a data‑driven approach to innovation. Our global journey reflects the trust clients place in us, and we continue to push boundaries to ensure their success.</p>
               </motion.div>
-              <div className="grid md:grid-cols-3 gap-6 mt-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 mt-8">
                 {journeyMilestones.map((milestone, idx) => (
                   <motion.div key={idx} variants={fadeUp}>
                     <TiltCard>
-                      <div className="glass rounded-xl p-5 hover:bg-white/20 transition h-full">
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="w-3 h-3 bg-[#D18F5C] rounded-full shadow-lg shadow-[#D18F5C]/30"></div>
-                          <h4 className="font-data text-2xl font-bold text-white">{milestone.year}</h4>
+                      <div className="glass rounded-xl p-3 sm:p-5 hover:bg-white/20 transition h-full">
+                        <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
+                          <div className="w-2.5 h-2.5 bg-[#E0A36A] rounded-full shadow-lg shadow-[#E0A36A]/30"></div>
+                          <h4 className="font-data text-base sm:text-2xl font-bold text-white">{milestone.year}</h4>
                         </div>
-                        <p className="text-white/80 mt-1 text-sm">{milestone.desc}</p>
+                        <p className="text-white/80 mt-0.5 sm:mt-1 text-[10px] sm:text-sm leading-normal sm:leading-relaxed">{milestone.desc}</p>
                       </div>
                     </TiltCard>
                   </motion.div>
@@ -686,8 +686,8 @@ export default function AboutPage() {
             <div className="grid md:grid-cols-5 gap-12">
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={stagger}
                 className="md:col-span-2">
-                <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-[#D18F5C]/10 text-[#B8714A] text-sm font-display font-semibold px-4 py-1.5 rounded-full border border-[#D18F5C]/20 mb-4">
-                  <span className="w-2 h-2 bg-[#D18F5C] rounded-full"></span>
+                <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-[#E0A36A]/10 text-[#9C5B5A] text-sm font-display font-semibold px-4 py-1.5 rounded-full border border-[#E0A36A]/20 mb-4">
+                  <span className="w-2 h-2 bg-[#E0A36A] rounded-full"></span>
                   FAQ
                 </motion.div>
                 <motion.h2 variants={fadeUp} className="font-display text-3xl md:text-4xl font-bold text-[#0A0930] mb-4">Frequently Asked Questions</motion.h2>
@@ -695,7 +695,7 @@ export default function AboutPage() {
                 <motion.div variants={fadeUp}>
                   <Magnetic strength={0.2}>
                     <motion.a whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} href="/contact"
-                      className="sheen group inline-flex items-center gap-2 bg-[#B8714A] hover:bg-[#D18F5C] text-white px-6 py-3 rounded-full font-display font-semibold transition shadow-md hover:shadow-lg">
+                      className="sheen group inline-flex items-center gap-2 bg-[#9C5B5A] hover:bg-[#E0A36A] text-white px-6 py-3 rounded-full font-display font-semibold transition shadow-md hover:shadow-lg">
                       Contact Our Experts <FaArrowRight className="group-hover:translate-x-1 transition" size={13} />
                     </motion.a>
                   </Magnetic>
@@ -729,7 +729,7 @@ export default function AboutPage() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={scrollToTop}
-              className="fixed bottom-6 right-6 bg-[#D18F5C] text-white p-3 rounded-full shadow-lg z-40 hover:bg-[#B8714A] transition-all hover:shadow-xl font-display font-bold"
+              className="fixed bottom-6 right-6 bg-[#E0A36A] text-white p-3 rounded-full shadow-lg z-40 hover:bg-[#9C5B5A] transition-all hover:shadow-xl font-display font-bold"
             >
               ↑
             </motion.button>
