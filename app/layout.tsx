@@ -1,6 +1,19 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import ConditionalLayout from '@/components/layout/ConditionalLayout';
+import { Outfit, Plus_Jakarta_Sans } from 'next/font/google';
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+  display: 'swap',
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Vaave Digital - AI Integrated Digital & IT Services',
@@ -24,30 +37,9 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         />
-
-        {/* Existing Font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
-          rel="stylesheet"
-        />
-
-        {/* Hero Fonts */}
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
-          rel="stylesheet"
-        />
       </head>
 
-      <body className="bg-[#0A0930] text-white font-['Inter'] antialiased">
+      <body className={`${outfit.variable} ${jakarta.variable} bg-[#020215] text-white font-sans antialiased`}>
         <ConditionalLayout>
           {children}
         </ConditionalLayout>

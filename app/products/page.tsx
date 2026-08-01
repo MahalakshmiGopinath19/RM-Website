@@ -1,377 +1,226 @@
-// app/products/page.tsx - restyled to match the richer-motion design system
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import { motion, AnimatePresence, useMotionValue, useSpring, useInView, animate } from 'framer-motion';
-import { FaArrowRight, FaCheckCircle } from 'react-icons/fa';
+import { useRef, useEffect, useState } from 'react';
+import { motion, useInView, Variants } from 'framer-motion';
+import { FaCheckCircle, FaArrowRight } from 'react-icons/fa';
 
-/* ══════════════════════════════════════════════════════════
-   PALETTE — Navy #0A0930 · Gold #E0A36A · Gold-D #9C5B5A
-   Gold-L #EFD3C9 · Teal #E0A36A · Cream #FDFBF8
-══════════════════════════════════════════════════════════ */
+import ProductGrid from '@/components/products/ProductGrid';
 
-/* ── Ambient layers ───────────────────────────────────────── */
-function GrainOverlay() {
-  return (
-    <div aria-hidden className="fixed inset-0 z-[999] pointer-events-none opacity-[0.035] mix-blend-overlay"
-      style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }} />
-  );
-}
-
-/* ── Magnetic CTA wrapper ─────────────────────────────────── */
-function Magnetic({ children, strength = 0.3 }: { children: React.ReactNode; strength?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0); const y = useMotionValue(0);
-  const sx = useSpring(x, { stiffness: 150, damping: 12, mass: 0.4 });
-  const sy = useSpring(y, { stiffness: 150, damping: 12, mass: 0.4 });
-  return (
-    <motion.div ref={ref} style={{ x: sx, y: sy, display: 'inline-block' }}
-      onMouseMove={e => {
-        const r = ref.current; if (!r) return;
-        const rect = r.getBoundingClientRect();
-        x.set((e.clientX - rect.left - rect.width / 2) * strength);
-        y.set((e.clientY - rect.top - rect.height / 2) * strength);
-      }}
-      onMouseLeave={() => { x.set(0); y.set(0); }}>
-      {children}
-    </motion.div>
-  );
-}
-
-/* ── Cursor spotlight ─────────────────────────────────────── */
-function useSpotlight() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-  const onMouseMove = (e: React.MouseEvent) => {
-    const el = containerRef.current; const glow = glowRef.current;
-    if (!el || !glow) return;
-    const rect = el.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    glow.style.background = `radial-gradient(480px circle at ${x}% ${y}%, rgba(217,159,154,0.16), transparent 55%)`;
-  };
-  const onMouseLeave = () => { if (glowRef.current) glowRef.current.style.background = 'transparent'; };
-  return { containerRef, glowRef, onMouseMove, onMouseLeave };
-}
-
-/* ── 3D tilt wrapper ──────────────────────────────────────── */
-function TiltCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const glareRef = useRef<HTMLDivElement>(null);
-  const rx = useMotionValue(0); const ry = useMotionValue(0);
-  const srx = useSpring(rx, { stiffness: 180, damping: 22 });
-  const sry = useSpring(ry, { stiffness: 180, damping: 22 });
-  return (
-    <motion.div ref={ref}
-      onMouseMove={e => {
-        const rect = ref.current!.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width;
-        const py = (e.clientY - rect.top) / rect.height;
-        ry.set((px - 0.5) * 12); rx.set(-(py - 0.5) * 12);
-        if (glareRef.current) glareRef.current.style.background = `radial-gradient(220px circle at ${px * 100}% ${py * 100}%, rgba(255,255,255,0.22), transparent 60%)`;
-      }}
-      onMouseLeave={() => { rx.set(0); ry.set(0); if (glareRef.current) glareRef.current.style.background = 'transparent'; }}
-      style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-      className={`relative ${className}`}>
-      {children}
-      <div ref={glareRef} className="absolute inset-0 rounded-2xl pointer-events-none transition-[background] duration-150" />
-    </motion.div>
-  );
-}
-
-/* ── Count-up stat ─────────────────────────────────────────── */
-function CountUp({ end, suffix = '' }: { end: number; suffix?: string }) {
-  const [n, setN] = useState(0);
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+function ScrollProgressBar() {
+  const [progress, setProgress] = useState(0);
   useEffect(() => {
-    if (!inView) return;
-    const ctrl = animate(0, end, { duration: 1.5, ease: 'easeOut', onUpdate: v => setN(Math.floor(v)) });
-    return ctrl.stop;
-  }, [inView, end]);
-  return <span ref={ref}>{n}{suffix}</span>;
+    const onScroll = () => {
+      const h = document.documentElement;
+      const scrolled = h.scrollTop;
+      const height = h.scrollHeight - h.clientHeight;
+      setProgress(height > 0 ? scrolled / height : 0);
+    };
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  return (
+    <motion.div
+      style={{ scaleX: progress }}
+      className="fixed top-0 left-0 right-0 h-[3px] origin-left z-[1000] bg-peachAccent"
+    />
+  );
 }
 
-/* ── Minimal drifting-node canvas for the hero ───────────── */
-function PulseCanvas() {
+/* ── Animation Variants ── */
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+};
+
+const stagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
+};
+
+/* ── Interactive Particle Background ── */
+function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
   useEffect(() => {
-    const canvas = canvasRef.current; if (!canvas) return;
-    const ctx = canvas.getContext('2d'); if (!ctx) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
     let animId: number;
-    const resize = () => { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; };
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
     resize();
     window.addEventListener('resize', resize);
-    const N = 28;
-    const nodes = Array.from({ length: N }, () => ({
-      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18, r: Math.random() * 1.4 + 0.7,
+
+    const N = 35;
+    const particles = Array.from({ length: N }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12,
+      r: Math.random() * 1.1 + 0.6,
     }));
+
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      nodes.forEach(n => {
-        if (!reduced) { n.x += n.vx; n.y += n.vy; }
-        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
-        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+      ctx.fillStyle = 'rgba(255, 137, 118, 0.12)';
+      
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
       });
-      for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
-        const a = nodes[i], b = nodes[j];
-        const d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < 120) {
-          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(217,159,154,${(1 - d / 120) * 0.16})`; ctx.lineWidth = 1; ctx.stroke();
-        }
-      }
-      nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fillStyle = 'rgba(240,201,160,0.55)'; ctx.fill(); });
+
       animId = requestAnimationFrame(draw);
     };
+
     draw();
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', resize); };
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', resize);
+    };
   }, []);
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />;
 }
 
-/* ── Variants ─────────────────────────────────────────────── */
-const fadeUp = { hidden: { opacity: 0, y: 32 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } };
-const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.09, delayChildren: 0.08 } } };
-
-/* ══════════════════════════════════════════════════════════
-   PAGE
-══════════════════════════════════════════════════════════ */
 export default function ProductsPage() {
-  const [showBackToTop, setShowBackToTop] = useState(false);
-  const heroSpot = useSpotlight();
-  const ctaSpot = useSpotlight();
-  const heroRef = useRef(null);
-  const heroInView = useInView(heroRef, { once: true, amount: 0.2 });
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true });
+  
+  const gridRef = useRef(null);
+  const gridInView = useInView(gridRef, { once: true, amount: 0.1 });
 
-  useEffect(() => {
-    const handleScroll = () => setShowBackToTop(window.scrollY > 500);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const ctaRef = useRef(null);
+  const ctaInView = useInView(ctaRef, { once: true });
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  const features = ['Bill Smarter', 'Work Faster', 'Bill Efficiently', 'Customizable Billing'];
+  const features = ['Easy to Start', 'Secure & Reliable', 'Built to Scale'];
 
   return (
-    <>
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-        *, *::before, *::after { box-sizing: border-box; }
-        html, body { overscroll-behavior: none; scroll-behavior: smooth; }
-        body { font-family: 'DM Sans', sans-serif; background: #fff; }
-        .font-display { font-family: 'Syne', sans-serif; }
-        .font-data { font-family: 'Space Grotesk', sans-serif; }
+    <div className="bg-[#020215] min-h-screen relative overflow-hidden select-none">
+      <ScrollProgressBar />
+      <ParticleBackground />
 
-        @keyframes spinSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-        @keyframes spinSlowRev { from{transform:rotate(0deg)} to{transform:rotate(-360deg)} }
-        @keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
-        .animate-spinSlow { animation: spinSlow 20s linear infinite; }
-        .animate-spinSlowRev { animation: spinSlowRev 26s linear infinite; }
+      {/* Decorative Blur Flares */}
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-blue-900/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-2/3 left-1/4 w-[450px] h-[450px] bg-peachAccent/5 rounded-full blur-[160px] pointer-events-none" />
 
-        .glass { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); }
-
-        .sheen { position: relative; overflow: hidden; }
-        .sheen::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.55) 48%, transparent 66%); background-size: 200% 100%; opacity: 0; transition: opacity .25s; }
-        .sheen:hover::before { opacity: 1; animation: shimmer 1s ease; }
-
-        .underline-hover { position: relative; }
-        .underline-hover::after { content:''; position:absolute; left:0; bottom:-2px; width:100%; height:2px; background:#E0A36A; transform:scaleX(0); transform-origin:right; transition:transform .3s ease; }
-        .underline-hover:hover::after { transform:scaleX(1); transform-origin:left; }
-
-        @media (prefers-reduced-motion: reduce) {
-          .animate-spinSlow, .animate-spinSlowRev { animation: none !important; }
-        }
-      `}</style>
-
-      <GrainOverlay />
-
-      <div className="bg-[#FDFBF8] min-h-screen">
-
-        {/* ══════════════════════════════════════════════
-            HERO — navy + pulse canvas + spotlight
-        ══════════════════════════════════════════════ */}
-        <div ref={heroRef} className="relative bg-gradient-to-b from-[#0A0930] to-[#12103D] pt-16 md:pt-20 pb-16 md:pb-20 overflow-hidden"
-          onMouseMove={heroSpot.onMouseMove} onMouseLeave={heroSpot.onMouseLeave}>
-          <div ref={heroSpot.containerRef} className="absolute inset-0">
-            <PulseCanvas />
-            <div ref={heroSpot.glowRef} className="absolute inset-0 pointer-events-none transition-[background] duration-200" />
-          </div>
-          {/* faint background image, tinted navy */}
-          <div className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-luminosity" style={{ backgroundImage: "url('/image/prodsec.webp')" }} />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0930] via-[#0A0930]/85 to-transparent" />
-
-          <div className="absolute right-[-140px] top-1/2 -translate-y-1/2 pointer-events-none hidden md:block">
-            <div className="w-[380px] h-[380px] border border-[#EFD3C9]/10 rounded-full animate-spinSlow" />
-            <div className="absolute inset-[60px] border border-[#EFD3C9]/10 rounded-full animate-spinSlowRev" />
-          </div>
-
-          <div className="container mx-auto px-4 relative z-10">
-            <motion.div initial="hidden" animate={heroInView ? 'visible' : 'hidden'} variants={stagger} className="max-w-3xl">
-              <motion.span variants={fadeUp} className="inline-flex items-center gap-2 glass text-white/85 text-xs font-display font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-5">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute h-full w-full rounded-full bg-[#E0A36A] opacity-60" />
-                  <span className="relative rounded-full h-2 w-2 bg-[#E0A36A]" />
-                </span>
-                IT Products
-              </motion.span>
-              <motion.h1 variants={fadeUp} className="font-display lg:text-2xl md:text-3xl text-xl font-extrabold text-white leading-tight"
-                style={{ textShadow: '0 10px 40px rgba(0,0,0,0.4)' }}>
-                Innovative IT Solutions for Tomorrow's Businesses
-              </motion.h1>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* ══════════════════════════════════════════════
-            FEATURE PILLS — cream, magnetic hover
-        ══════════════════════════════════════════════ */}
-        <div className="py-12 bg-[#FDFBF8] border-b border-gray-100">
-          <div className="container mx-auto px-4">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="flex flex-wrap justify-center gap-3">
-              {features.map((feature, idx) => (
-                <motion.span
-                  key={idx}
-                  variants={fadeUp}
-                  whileHover={{ scale: 1.06, backgroundColor: '#E0A36A', color: '#fff', borderColor: '#E0A36A' }}
-                  className="px-6 py-2.5 text-[#0A0930] bg-white rounded-full text-sm md:text-base font-display font-semibold border-2 border-gray-200 transition-all duration-200 cursor-default select-none shadow-sm"
-                >
-                  {feature}
-                </motion.span>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-
-        {/* ══════════════════════════════════════════════
-            PRODUCT SHOWCASE — tilt card + gold accents
-        ══════════════════════════════════════════════ */}
-        <div className="bg-[#FDFBF8] py-16 md:py-20">
-          <div className="container mx-auto px-4 max-w-6xl">
-            <div className="flex flex-col md:flex-row items-center gap-14">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="md:w-1/2 w-full"
-              >
-                <TiltCard>
-                  <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-white border border-gray-100">
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#E0A36A]/10 to-transparent pointer-events-none" />
-                    <img
-                      src="/image/imageprod.webp"
-                      alt="BILL IT NOW Dashboard"
-                      className="w-full h-auto object-cover"
-                    />
-                  </div>
-                </TiltCard>
-              </motion.div>
-
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={stagger}
-                className="md:w-1/2 w-full text-center md:text-left"
-              >
-                <motion.div variants={fadeUp} className="inline-block px-3 py-1 rounded-full bg-[#0A0930] text-[#EFD3C9] text-xs font-display font-bold uppercase tracking-widest mb-4">
-                  Smarter Automated Billing
-                </motion.div>
-                <motion.h2 variants={fadeUp} className="font-display text-4xl md:text-5xl font-extrabold text-[#0A0930] tracking-tight">BILL IT NOW —</motion.h2>
-                <motion.p variants={fadeUp} className="text-xl text-gray-600 font-medium mt-2">Redefine Your Billing Experience</motion.p>
-                <motion.ul variants={stagger} className="mt-8 space-y-3 text-gray-600">
-                  {[
-                    'Billing Made Seamless, Business Made Simple',
-                    'Effortless Billing, Powerful Results',
-                    'Your All-in-One Billing Solution',
-                  ].map((text, idx) => (
-                    <motion.li key={idx} variants={fadeUp} className="flex items-center gap-3 justify-center md:justify-start">
-                      <FaCheckCircle className="text-[#E0A36A] text-lg flex-shrink-0" />
-                      <span>{text}</span>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-                <motion.div variants={fadeUp} className="mt-10">
-                  <Magnetic strength={0.22}>
-                    <motion.a
-                      href="https://billitnow-productpage.rainbowmedia.co.in/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-                      className="sheen group inline-flex items-center gap-2 bg-[#E0A36A] hover:bg-[#9C5B5A] text-white px-8 py-3.5 rounded-full font-display font-bold transition-colors duration-300 shadow-lg"
-                    >
-                      Explore Now <FaArrowRight className="transition-transform group-hover:translate-x-1" />
-                    </motion.a>
-                  </Magnetic>
-                </motion.div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-
-        {/* ══════════════════════════════════════════════
-            CALL TO ACTION — navy, spotlight + decorative rings
-        ══════════════════════════════════════════════ */}
-        <div ref={ctaSpot.containerRef} onMouseMove={ctaSpot.onMouseMove} onMouseLeave={ctaSpot.onMouseLeave}
-          className="relative overflow-hidden bg-[#0A0930] py-16 md:py-24">
-          <div ref={ctaSpot.glowRef} className="absolute inset-0 pointer-events-none transition-all duration-200" />
-          <div className="absolute inset-0 opacity-30 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)', backgroundSize: '34px 34px' }} />
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-[600px] h-[600px] rounded-full border border-white/5 animate-spinSlow" />
-            <div className="absolute w-[420px] h-[420px] rounded-full border border-white/5 animate-spinSlowRev" />
-          </div>
-          <div className="absolute -top-20 -left-20 w-48 h-48 rounded-full border border-[#EFD3C9]/10 pointer-events-none" />
-          <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full border border-[#EFD3C9]/10 pointer-events-none" />
-
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-                <motion.h2 variants={fadeUp} className="font-display text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">Ready to Streamline Your Billing?</motion.h2>
-                <motion.p variants={fadeUp} className="text-white/70 text-base md:text-lg mb-8 max-w-xl mx-auto font-light">
-                  Join hundreds of businesses already using BILL IT NOW to save time and reduce errors.
-                </motion.p>
-                <motion.div variants={fadeUp}>
-                  <Magnetic strength={0.22}>
-                    <motion.a
-                      href="https://wa.me/917305821333"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.96 }}
-                      className="sheen group inline-flex items-center gap-2 bg-[#E0A36A] hover:bg-[#9C5B5A] text-white px-8 py-4 rounded-full font-display font-bold shadow-xl text-base"
-                    >
-                      Explore Now <FaArrowRight className="transition-transform group-hover:translate-x-1" />
-                    </motion.a>
-                  </Magnetic>
-                </motion.div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ══════════════════════════════════════════════
-          BACK TO TOP
-      ══════════════════════════════════════════════ */}
-      <AnimatePresence>
-        {showBackToTop && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={scrollToTop}
-            className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#E0A36A] text-white p-2.5 md:p-3.5 rounded-full shadow-xl z-40 hover:bg-[#9C5B5A] transition-colors text-sm md:text-base"
+      {/* HEADER SECTION */}
+      <section ref={headerRef} className="relative pt-10 md:pt-4 lg:pt-0 pb-10 md:pb-14 border-b border-white/5">
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
+          <motion.div 
+            initial="hidden" 
+            animate={headerInView ? 'visible' : 'hidden'} 
+            variants={stagger}
+            className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-center"
           >
-            ↑
-          </motion.button>
-        )}
-      </AnimatePresence>
-    </>
+            {/* Left Side — Mascot Pointing Image */}
+            <motion.div variants={fadeUp} className="lg:col-span-5 flex justify-center lg:justify-start order-2 lg:order-1 lg:-ml-10 xl:-ml-16">
+              <motion.img
+                src="/image/mascot_pointing.png"
+                alt="Vaave Digital Mascot Pointing"
+                className="w-80 sm:w-[440px] md:w-[500px] lg:w-[580px] xl:w-[660px] h-auto object-contain drop-shadow-[0_20px_50px_rgba(201,149,108,0.3)] select-none"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </motion.div>
+
+            {/* Right Side — Content */}
+            <div className="lg:col-span-7 text-center lg:text-left order-1 lg:order-2 lg:-ml-8 xl:-ml-12">
+              <motion.span variants={fadeUp} className="inline-block bg-peachAccent/10 text-peachAccent border border-peachAccent/20 px-4 py-1.5 rounded-full text-xs font-display font-extrabold uppercase tracking-widest mb-3">
+                Our Products
+              </motion.span>
+              
+              <motion.h1 variants={fadeUp} className="font-display text-white font-black tracking-tight leading-[0.98] mb-4" style={{ fontSize: 'clamp(2.8rem, 5.5vw, 5.2rem)', textShadow: '0 20px 60px rgba(0,0,0,0.45)' }}>
+                <span className="whitespace-nowrap">Powerful Products.</span> <br />
+                <span className="text-gradient-peach relative whitespace-nowrap">
+                  Built for Real Impact.
+                  <span className="absolute bottom-1 left-0 w-full h-[6px] bg-peachAccent/10 rounded-full blur-[2px]" />
+                </span>
+              </motion.h1>
+
+              <motion.p variants={fadeUp} className="text-[#acabcb] text-base md:text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed mb-6 font-medium">
+                We design and operate cloud products that streamline complex operations, clinical workflows, and customer communication.
+              </motion.p>
+
+              {/* Benefit Bullets */}
+              <motion.div variants={stagger} className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6">
+                {features.map((feat) => (
+                  <motion.div key={feat} variants={fadeUp} className="flex items-center gap-2 text-white/95 text-sm md:text-base font-semibold">
+                    <FaCheckCircle className="text-peachAccent text-base sm:text-lg" />
+                    {feat}
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* PRODUCT SHOWCASE GRID */}
+      <section ref={gridRef} className="py-24 border-b border-white/5 bg-[#030218]/20">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <motion.div 
+            initial="hidden"
+            animate={gridInView ? 'visible' : 'hidden'}
+            variants={stagger}
+          >
+            <ProductGrid />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FOOTER BANNER CTA */}
+      <section ref={ctaRef} className="py-24 relative overflow-hidden bg-[#030218]/30">
+        <div className="absolute inset-0 pointer-events-none opacity-20" style={{
+          backgroundImage: 'radial-gradient(circle, rgba(255,137,118,0.1) 1.5px, transparent 1.5px)',
+          backgroundSize: '36px 36px',
+        }} />
+
+        <div className="container mx-auto px-6 max-w-4xl relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={ctaInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6 }}
+            className="glass-panel py-8 px-8 md:py-10 md:px-12 rounded-3xl border border-white/10 text-center relative overflow-hidden shadow-2xl"
+          >
+            <div className="absolute top-0 right-0 w-32 h-32 bg-peachAccent/5 rounded-full blur-2xl pointer-events-none" />
+            
+            <span className="inline-block bg-peachAccent/10 text-peachAccent border border-peachAccent/20 px-3.5 py-1.5 rounded-full text-xs font-display font-bold uppercase tracking-widest mb-4">
+              Get Started
+            </span>
+
+            <h2 className="text-4xl md:text-5xl font-black text-white leading-tight tracking-tight mb-4">
+              One Vision. Many Solutions. <br />
+              <span className="text-gradient-peach">Together.</span>
+            </h2>
+
+            <p className="text-[#acabcb] text-base md:text-lg max-w-xl mx-auto mb-8 leading-relaxed font-medium">
+              Want to request a custom API integration or request a clinical demo? Get in touch with our product team.
+            </p>
+
+            <motion.a
+              href="/contact"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-3 bg-gradient-rosegold hover-bg-gradient-rosegold text-darkBg px-8 py-4 rounded-full font-display font-extrabold text-sm tracking-wide shadow-lg shadow-peachAccent/10 transition-colors duration-300"
+            >
+              Talk to Our Team
+              <FaArrowRight size={12} />
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+    </div>
   );
 }

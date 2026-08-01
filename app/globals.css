@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Premium styling overrides */
+@layer base {
+  html, body {
+    @apply bg-[#0D0D2B] text-[#acabcb];
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-white font-display;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0D0D2B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f1f4d;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C9956C;
+}
+
+/* Animations */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(0.8); }
@@ -15,6 +48,11 @@
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+@keyframes rotate-ring {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .animate-pulse-dot {
   animation: pulse-dot 1.8s ease-in-out infinite;
 }
@@ -25,3 +63,87 @@
   background-size: 200% auto;
   animation: shimmer 4s linear infinite;
 }
+.animate-rotate-ring {
+  animation: rotate-ring 25s linear infinite;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(20, 20, 58, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(61, 43, 142, 0.25);
+  border-color: rgba(201, 149, 108, 0.35);
+  box-shadow: 0 10px 30px -10px rgba(201, 149, 108, 0.15);
+}
+
+/* Custom Gradients */
+.text-gradient-peach {
+  background: linear-gradient(to top, #C9956C 0%, #EFD3C9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient-radial {
+  background: radial-gradient(circle at center, var(--tw-gradient-stops));
+}
+
+/* Orbit Path Animations */
+@keyframes orbit-move {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
+}
+
+.orbit-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.orbiting-dot-1 {
+  width: 8px;
+  height: 8px;
+  background: #00D4FF;
+  border-radius: 50%;
+  position: absolute;
+  offset-path: ellipse(48% 22% at 50% 52%);
+  animation: orbit-move 15s linear infinite;
+  box-shadow: 0 0 10px #00D4FF, 0 0 20px #00D4FF;
+}
+
+.orbiting-dot-2 {
+  width: 8px;
+  height: 8px;
+  background: #C9956C;
+  border-radius: 50%;
+  position: absolute;
+  offset-path: ellipse(48% 22% at 50% 52%);
+  animation: orbit-move 15s linear infinite;
+  animation-delay: -7.5s;
+  box-shadow: 0 0 10px #C9956C, 0 0 20px #C9956C;
+}
+
+/* Rose Gold Gradient Buttons */
+.bg-gradient-rosegold {
+  background: linear-gradient(135deg, #C9956C 0%, #EFD3C9 100%) !important;
+}
+
+.hover-bg-gradient-rosegold {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-bg-gradient-rosegold:hover {
+  background: linear-gradient(135deg, #EFD3C9 0%, #C9956C 100%) !important;
+  box-shadow: 0 10px 25px -5px rgba(201, 149, 108, 0.4);
+}
+
+

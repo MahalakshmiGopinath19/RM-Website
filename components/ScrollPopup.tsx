@@ -121,7 +121,7 @@ export default function VaaveScrollPopup() {
           aria-modal="true"
           aria-labelledby="popup-title"
           onClick={(e) => e.stopPropagation()}
-          className={`relative w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl overflow-hidden pointer-events-auto transition-all duration-200 bg-[#0A0928] border border-[#C98F72]/20 shadow-[0_0_60px_-15px_rgba(201,143,114,0.35)] ${
+          className={`relative w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl overflow-hidden pointer-events-auto transition-all duration-200 bg-[#0A0928] border border-[#C9956C]/20 shadow-[0_0_60px_-15px_rgba(201,149,108,0.35)] ${
             isClosing
               ? 'opacity-0 translate-y-4 sm:scale-95'
               : 'opacity-100 translate-y-0 sm:scale-100 animate-scaleUp'
@@ -131,7 +131,7 @@ export default function VaaveScrollPopup() {
           <div className="relative px-6 pt-7 pb-6 overflow-hidden">
             {/* ambient glow */}
             <div className="pointer-events-none absolute -top-16 -right-10 w-48 h-48 rounded-full bg-[#5CD3F0]/10 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 -left-10 w-48 h-48 rounded-full bg-[#C98F72]/10 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -left-10 w-48 h-48 rounded-full bg-[#C9956C]/10 blur-3xl" />
 
             {/* swoosh accent, echoes the logo arc */}
             <svg
@@ -150,8 +150,8 @@ export default function VaaveScrollPopup() {
               </circle>
               <defs>
                 <linearGradient id="arcGradient" x1="0" y1="0" x2="100" y2="0">
-                  <stop offset="0%" stopColor="#8B5A45" />
-                  <stop offset="100%" stopColor="#E3B693" />
+                  <stop offset="0%" stopColor="#a1724a" />
+                  <stop offset="100%" stopColor="#EFD3C9" />
                 </linearGradient>
               </defs>
             </svg>
@@ -159,24 +159,24 @@ export default function VaaveScrollPopup() {
             <button
               onClick={closeModal}
               aria-label="Close"
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-[#E3B693] text-lg leading-none hover:bg-white/10 hover:text-white transition"
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-[#EFD3C9] text-lg leading-none hover:bg-white/10 hover:text-white transition"
             >
               &times;
             </button>
 
             <h4
               id="popup-title"
-              className="mt-8 text-2xl font-bold tracking-tight bg-gradient-to-r from-[#E3B693] via-[#C98F72] to-[#8B5A45] bg-clip-text text-transparent"
+              className="mt-8 text-2xl font-bold tracking-tight bg-gradient-to-r from-[#EFD3C9] via-[#C9956C] to-[#a1724a] bg-clip-text text-transparent"
             >
               Let's Build Something Great
             </h4>
 
             <div className="flex items-center gap-3 mt-2">
-              <span className="h-px w-6 bg-[#C98F72]/40" />
-              <p className="text-[11px] tracking-[0.2em] text-[#C98F72]/70 uppercase">
+              <span className="h-px w-6 bg-[#C9956C]/40" />
+              <p className="text-[11px] tracking-[0.2em] text-[#C9956C]/70 uppercase">
                 Book a free consultation
               </p>
-              <span className="h-px flex-1 bg-[#C98F72]/40" />
+              <span className="h-px flex-1 bg-[#C9956C]/40" />
             </div>
           </div>
 
@@ -196,7 +196,7 @@ export default function VaaveScrollPopup() {
                   className={`w-full bg-white/5 border rounded-md px-4 py-2.5 text-[#F5F0E6] placeholder:text-[#F5F0E6]/35 transition focus:outline-none focus:ring-1 ${
                     errors.name
                       ? 'border-red-400/60 focus:ring-red-400/60'
-                      : 'border-white/10 focus:border-[#C98F72]/60 focus:ring-[#C98F72]/40'
+                      : 'border-white/10 focus:border-[#C9956C]/60 focus:ring-[#C9956C]/40'
                   }`}
                 />
                 {errors.name && (
@@ -218,7 +218,7 @@ export default function VaaveScrollPopup() {
                   className={`w-full bg-white/5 border rounded-md px-4 py-2.5 text-[#F5F0E6] placeholder:text-[#F5F0E6]/35 transition focus:outline-none focus:ring-1 ${
                     errors.phone
                       ? 'border-red-400/60 focus:ring-red-400/60'
-                      : 'border-white/10 focus:border-[#C98F72]/60 focus:ring-[#C98F72]/40'
+                      : 'border-white/10 focus:border-[#C9956C]/60 focus:ring-[#C9956C]/40'
                   }`}
                 />
                 {errors.phone && (
@@ -240,7 +240,7 @@ export default function VaaveScrollPopup() {
                   className={`w-full bg-white/5 border rounded-md px-4 py-2.5 text-[#F5F0E6] placeholder:text-[#F5F0E6]/35 resize-none transition focus:outline-none focus:ring-1 ${
                     errors.message
                       ? 'border-red-400/60 focus:ring-red-400/60'
-                      : 'border-white/10 focus:border-[#C98F72]/60 focus:ring-[#C98F72]/40'
+                      : 'border-white/10 focus:border-[#C9956C]/60 focus:ring-[#C9956C]/40'
                   }`}
                 />
                 {errors.message && (
@@ -255,7 +255,7 @@ export default function VaaveScrollPopup() {
                 disabled={isSubmitting}
                 className="group relative w-full overflow-hidden rounded-md py-3 font-semibold text-[#0A0928] transition disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{
-                  background: 'linear-gradient(90deg, #E3B693, #C98F72 45%, #E3B693 90%)',
+                  background: 'linear-gradient(90deg, #EFD3C9, #C9956C 45%, #EFD3C9 90%)',
                   backgroundSize: '200% 100%',
                 }}
               >

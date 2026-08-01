@@ -18,6 +18,8 @@ export default function Stepper({
   nextButtonText = 'Continue',
   disableStepIndicators = false,
   renderStepIndicator,
+  autoPlay = true,
+  autoPlayInterval = 5000,
   ...rest
 }: {
   children: React.ReactNode;
@@ -34,10 +36,13 @@ export default function Stepper({
   nextButtonText?: string;
   disableStepIndicators?: boolean;
   renderStepIndicator?: (props: { step: number; currentStep: number; onStepClick: (step: number) => void }) => React.ReactNode;
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
   [key: string]: unknown;
 }) {
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [direction, setDirection] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const stepsArray = Children.toArray(children);
   const totalSteps = stepsArray.length;
   const isCompleted = currentStep > totalSteps;
@@ -52,28 +57,50 @@ export default function Stepper({
     }
   };
 
+  /* ── 5 Second Auto-Advance Timer ── */
+  React.useEffect(() => {
+    if (!autoPlay || isPaused || totalSteps === 0) return;
+    const interval = setInterval(() => {
+      setDirection(1);
+      setCurrentStep((prev) => {
+        const next = prev >= totalSteps ? 1 : prev + 1;
+        onStepChange(next);
+        return next;
+      });
+    }, autoPlayInterval);
+
+    return () => clearInterval(interval);
+  }, [autoPlay, autoPlayInterval, isPaused, totalSteps, onStepChange]);
+
   const handleBack = () => {
     if (currentStep > 1) {
       setDirection(-1);
       updateStep(currentStep - 1);
+    } else {
+      setDirection(-1);
+      updateStep(totalSteps);
     }
   };
 
   const handleNext = () => {
-    if (!isLastStep) {
-      setDirection(1);
-      updateStep(currentStep + 1);
-    }
+    setDirection(1);
+    const nextStep = currentStep >= totalSteps ? 1 : currentStep + 1;
+    updateStep(nextStep);
   };
 
   const handleComplete = () => {
     setDirection(1);
-    updateStep(totalSteps + 1);
+    updateStep(1);
   };
 
   return (
     <div className="outer-container" {...rest}>
-      <div className={`step-circle-container ${stepCircleContainerClassName}`} style={{ border: '1px solid #222' }}>
+      <div
+        className={`step-circle-container ${stepCircleContainerClassName}`}
+        style={{ border: '1px solid #222' }}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         <div className={`step-indicator-row ${stepContainerClassName}`}>
           {stepsArray.map((_, index) => {
             const stepNumber = index + 1;
@@ -246,7 +273,7 @@ function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators }
 
 function StepConnector({ isComplete }: { isComplete: boolean }) {
   const lineVariants = {
-    incomplete: { width: 0, backgroundColor: 'transparent' },
+    incomplete: { width: 0, backgroundColor: 'rgba(224, 163, 106, 0)' },
     complete: { width: '100%', backgroundColor: '#E0A36A' }
   };
 

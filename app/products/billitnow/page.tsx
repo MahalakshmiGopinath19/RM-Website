@@ -70,8 +70,17 @@ export default function BillitNowPage() {
 
   const handleWhatsAppSubmit = (data: any) => {
     const whatsappNumber = '917305821333';
-    const msg = `Hello Rainbow Media! I'm interested in BILL IT NOW demo.%0A%0A*Name:* ${data.name}%0A*Email:* ${data.email}%0A*Phone:* ${data.phone}%0A*Business:* ${data.business}%0A*Message:* ${data.message}`;
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+    const lines = [
+      'Hi! I am interested in booking a free demo for Bill It Now.',
+      '',
+      `Name: ${data.name}`,
+      `Email: ${data.email}`,
+      `Phone: ${data.phone}`,
+      `Type of Business: ${data.business}`,
+      `Message: ${data.message || 'Not provided'}`
+    ];
+    const message = lines.join('\n');
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const plans = [
