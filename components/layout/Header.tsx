@@ -162,46 +162,46 @@ export default function Header() {
       {/* Consultation Modal */}
       {showModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto py-8 animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-start sm:items-center justify-center bg-black/75 backdrop-blur-md p-3 sm:p-4 overflow-y-auto py-6 sm:py-8 animate-fadeIn"
           onClick={(e) => { if (e.target === e.currentTarget) setShowModal(false); }}
         >
-          <div className="bg-darkPanel rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden flex flex-col md:flex-row animate-slideUp relative border border-white/10">
+          <div className="bg-darkPanel rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden flex flex-col md:flex-row animate-slideUp relative border border-white/10 my-auto max-h-[90vh] md:max-h-none overflow-y-auto">
 
             {/* Close button */}
             <button 
               onClick={() => setShowModal(false)} 
-              className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-[#acabcb] hover:text-white transition-colors"
+              className="absolute top-3 right-3 z-30 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-[#acabcb] hover:text-white transition-colors"
             >
               ✕
             </button>
 
             {/* Left side: branding/reasons panel */}
-            <div className="bg-[#030218] p-10 md:p-12 w-full md:w-[44%] relative flex flex-col justify-center overflow-hidden border-r border-white/5">
+            <div className="bg-[#030218] p-6 sm:p-8 md:p-12 w-full md:w-[44%] relative flex flex-col justify-center overflow-hidden border-b md:border-b-0 md:border-r border-white/5">
               <div className="absolute inset-0 pointer-events-none opacity-20" style={{
                 backgroundImage: 'radial-gradient(circle, rgba(255,137,118,0.15) 1.5px, transparent 1.5px)',
                 backgroundSize: '24px 24px',
               }} />
               <div className="absolute -right-20 top-1/2 -translate-y-1/2 w-52 h-52 border border-peachAccent/5 rounded-full animate-rotate-ring pointer-events-none" />
 
-              <div className="relative z-10">
-                <span className="inline-block bg-peachAccent/10 text-peachAccent border border-peachAccent/20 px-3 py-1 rounded-full text-[10px] font-display font-bold uppercase tracking-widest mb-6">
+              <div className="relative z-10 pt-2 sm:pt-0">
+                <span className="inline-block bg-peachAccent/10 text-peachAccent border border-peachAccent/20 px-3 py-1 rounded-full text-[10px] font-display font-bold uppercase tracking-widest mb-3 sm:mb-6">
                   Why Choose us
                 </span>
-                <h2 className="text-2xl md:text-3xl font-display font-extrabold text-white mb-6 leading-tight">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-extrabold text-white mb-3 sm:mb-6 leading-tight">
                   Accelerate Your Digital Success
                 </h2>
-                <p className="mb-8 text-[#acabcb] text-sm leading-relaxed">
+                <p className="mb-4 sm:mb-8 text-[#acabcb] text-xs sm:text-sm leading-relaxed">
                   We integrate predictive analytics, smart automation, and creative strategies to help your brand lead and scale in the digital world.
                 </p>
 
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 bg-white/5 text-white px-4 py-3 rounded-full text-xs font-semibold border border-white/5">
+                <div className="space-y-2.5 sm:space-y-4">
+                  <div className="flex items-center gap-3 bg-white/5 text-white px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full text-xs font-semibold border border-white/5">
                     <span className="text-peachAccent"><FaHeartbeat /></span> Results-Driven AI Strategy
                   </div>
-                  <div className="flex items-center gap-3 bg-white/5 text-white px-4 py-3 rounded-full text-xs font-semibold border border-white/5">
+                  <div className="flex items-center gap-3 bg-white/5 text-white px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full text-xs font-semibold border border-white/5">
                     <span className="text-peachAccent"><FaLayerGroup /></span> Multi-Platform Excellence
                   </div>
-                  <div className="flex items-center gap-3 bg-white/5 text-white px-4 py-3 rounded-full text-xs font-semibold border border-white/5">
+                  <div className="flex items-center gap-3 bg-white/5 text-white px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full text-xs font-semibold border border-white/5">
                     <span className="text-peachAccent"><FaSync /></span> Continuous Growth Optimization
                   </div>
                 </div>
@@ -209,64 +209,64 @@ export default function Header() {
             </div>
 
             {/* Right side: Form */}
-            <div className="p-10 md:p-12 w-full md:w-[56%] bg-darkPanel flex flex-col justify-center">
-              <div className="mb-8">
+            <div className="p-6 sm:p-8 md:p-12 w-full md:w-[56%] bg-darkPanel flex flex-col justify-center">
+              <div className="mb-4 sm:mb-8">
                 <Image src="/image/vaave-digital.webp" alt="Vaave Digital" width={140} height={38} />
               </div>
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-5">
                 <div>
-                  <label className="block text-xs font-semibold text-[#acabcb] uppercase tracking-wider mb-2">Service Interested In</label>
+                  <label className="block text-xs font-semibold text-[#acabcb] uppercase tracking-wider mb-1.5 sm:mb-2">Service Interested In</label>
                   <select
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full bg-[#030218] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-peachAccent text-sm transition-colors"
+                    className="w-full bg-[#030218] border border-white/10 rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-3 text-white focus:outline-none focus:border-peachAccent text-xs sm:text-sm transition-colors"
                   >
                     {serviceOptions.map(opt => <option key={opt}>{opt}</option>)}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#acabcb] uppercase tracking-wider mb-2">Your Name</label>
+                  <label className="block text-xs font-semibold text-[#acabcb] uppercase tracking-wider mb-1.5 sm:mb-2">Your Name</label>
                   <input
                     type="text"
                     name="name"
                     placeholder="Enter your full name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full bg-[#030218] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-peachAccent text-sm transition-colors"
+                    className="w-full bg-[#030218] border border-white/10 rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-3 text-white placeholder-white/30 focus:outline-none focus:border-peachAccent text-xs sm:text-sm transition-colors"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#acabcb] uppercase tracking-wider mb-2">Contact Number</label>
+                  <label className="block text-xs font-semibold text-[#acabcb] uppercase tracking-wider mb-1.5 sm:mb-2">Contact Number</label>
                   <input
                     type="tel"
                     name="contact"
                     placeholder="Enter your phone number"
                     value={formData.contact}
                     onChange={handleChange}
-                    className="w-full bg-[#030218] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-peachAccent text-sm transition-colors"
+                    className="w-full bg-[#030218] border border-white/10 rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-3 text-white placeholder-white/30 focus:outline-none focus:border-peachAccent text-xs sm:text-sm transition-colors"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#acabcb] uppercase tracking-wider mb-2">Message / Requirements</label>
+                  <label className="block text-xs font-semibold text-[#acabcb] uppercase tracking-wider mb-1.5 sm:mb-2">Message / Requirements</label>
                   <textarea
                     name="message"
                     placeholder="Tell us about your requirements"
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full bg-[#030218] border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-peachAccent text-sm resize-none transition-colors"
+                    className="w-full bg-[#030218] border border-white/10 rounded-lg px-3.5 py-2.5 sm:px-4 sm:py-3 text-white placeholder-white/30 focus:outline-none focus:border-peachAccent text-xs sm:text-sm resize-none transition-colors"
                     rows={2}
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-rosegold hover-bg-gradient-rosegold text-darkBg py-4 rounded-full font-display font-extrabold text-sm transition-colors duration-300 shadow-lg"
+                  className="w-full bg-gradient-rosegold hover-bg-gradient-rosegold text-darkBg py-3.5 sm:py-4 rounded-full font-display font-extrabold text-xs sm:text-sm transition-colors duration-300 shadow-lg"
                 >
                   Submit & Get Started
                 </button>

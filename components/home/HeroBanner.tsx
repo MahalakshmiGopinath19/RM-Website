@@ -220,11 +220,11 @@ function NeuralHeroCanvas() {
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />;
 }
 
-function CosmicOrbits({ uid = 'orb', orbitOffsetPx = 0 }: { uid?: string; orbitOffsetPx?: number }) {
+function CosmicOrbits({ uid = 'orb' }: { uid?: string }) {
   const gradId = `orbit-gradient-${uid}`;
   const animName = `orbit-flow-${uid}`;
   return (
-    <div className="relative w-[680px] sm:w-[840px] md:w-[1000px] h-[720px] flex items-center justify-center scale-[0.78] sm:scale-85 md:scale-95 lg:scale-100 origin-center transition-transform duration-300 select-none">
+    <div className="relative w-full max-w-[1000px] lg:max-w-[1200px] xl:max-w-[1280px] aspect-[1000/720] flex items-center justify-center select-none mx-auto">
       {/* Dynamic inline styles for the traveling comet path keyframe */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -234,11 +234,8 @@ function CosmicOrbits({ uid = 'orb', orbitOffsetPx = 0 }: { uid?: string; orbitO
         }
       `}} />
 
-      {/* SVG Background Orbits — shifted up by orbitOffsetPx (mobile only) */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0 overflow-visible"
-        style={orbitOffsetPx ? { transform: `translateY(-${orbitOffsetPx}px)` } : undefined}
-      >
+      {/* SVG Background Orbits */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-visible">
         <svg viewBox="0 0 1000 720" className="w-full h-full overflow-visible">
           <defs>
             {/* Orbit Gradient: Rose Gold to Blue */}
@@ -292,53 +289,52 @@ function CosmicOrbits({ uid = 'orb', orbitOffsetPx = 0 }: { uid?: string; orbitO
 
       {/* Left Pill (Any Industry. Every Business.) */}
       <div
-        className="absolute left-[-80px] -translate-y-1/2 z-10 w-[140px] md:w-[165px] flex items-center gap-2 md:gap-3 bg-[#030218]/75 backdrop-blur-md border border-white/10 hover:border-peachAccent/40 rounded-full px-3 py-2.5 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(255,137,118,0.08)]"
-        style={{ top: 320 - orbitOffsetPx }}
+        className="absolute left-[1.5%] sm:left-[3.5%] md:left-[5%] top-[44.4%] -translate-y-1/2 z-30 w-[115px] xs:w-[130px] sm:w-[150px] md:w-[175px] lg:w-[190px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-peachAccent/40 rounded-full px-2 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3.5 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(255,137,118,0.08)]"
       >
-        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-peachAccent/10 border border-peachAccent/20 flex items-center justify-center flex-shrink-0 text-peachAccent shadow-[0_0_10px_rgba(255,137,118,0.1)] group-hover:scale-105 transition-transform">
-          <FaUsers size={14} className="md:size-[16px]" />
+        <div className="w-6 h-6 xs:w-7 xs:h-7 md:w-10 md:h-10 rounded-full bg-peachAccent/10 border border-peachAccent/20 flex items-center justify-center flex-shrink-0 text-peachAccent shadow-[0_0_10px_rgba(255,137,118,0.1)] group-hover:scale-105 transition-transform">
+          <FaUsers size={11} className="xs:size-[12px] md:size-[16px]" />
         </div>
-        <div className="flex flex-col text-left">
-          <span className="text-white text-[11px] md:text-xs font-bold font-display leading-tight">Any Industry.</span>
-          <span className="text-[#acabcb] text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5">Every Business.</span>
+        <div className="flex flex-col text-left overflow-hidden">
+          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight truncate">Any Industry.</span>
+          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 truncate">Every Business.</span>
         </div>
       </div>
 
       {/* Center Circle with kinetic color rotation */}
-      <div className="absolute left-1/2 top-[320px] -translate-x-1/2 -translate-y-1/2 w-56 h-56 md:w-72 md:h-72 rounded-full flex items-center justify-center z-20">
+      <div className="absolute left-1/2 top-[44.4%] -translate-x-1/2 -translate-y-1/2 w-[36%] sm:w-[32%] md:w-[33%] lg:w-[36%] max-w-[360px] aspect-square rounded-full flex items-center justify-center z-20">
         {/* Glow halo */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-peachAccent/20 to-electricCyan/20 blur-xl animate-pulse" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-peachAccent/25 to-electricCyan/25 blur-2xl animate-pulse" />
 
         {/* Outer clockwise ring */}
-        <div className="absolute inset-0 rounded-full p-[2px] overflow-hidden">
+        <div className="absolute inset-0 rounded-full p-[2.5px] overflow-hidden">
           <div
             className="absolute inset-[-50%] rounded-full animate-[spin_8s_linear_infinite]"
             style={{
               background: 'conic-gradient(from 0deg, #ff8976, #3d2b8e, #06b6d4, #ff8976)',
             }}
           />
-          <div className="absolute inset-[2px] bg-[#020215] rounded-full" />
+          <div className="absolute inset-[2.5px] bg-[#020215] rounded-full" />
         </div>
 
         {/* Inner counter-clockwise ring */}
-        <div className="absolute inset-2.5 rounded-full p-[1.5px] overflow-hidden">
+        <div className="absolute inset-2 sm:inset-3 rounded-full p-[2px] overflow-hidden">
           <div
             className="absolute inset-[-50%] rounded-full animate-[spin_12s_linear_infinite_reverse]"
             style={{
               background: 'conic-gradient(from 0deg, #06b6d4, #3d2b8e, #ff8976, #06b6d4)',
             }}
           />
-          <div className="absolute inset-[1.5px] bg-[#060928] rounded-full" />
+          <div className="absolute inset-[2px] bg-[#060928] rounded-full" />
         </div>
 
         {/* Brand Logo inside */}
-        <div className="absolute inset-5 rounded-full bg-[#060928]/95 border border-white/5 shadow-inner flex items-center justify-center p-4 group cursor-pointer overflow-hidden">
-          <div className="w-[90%] h-[90%] flex items-center justify-center relative">
+        <div className="absolute inset-3.5 sm:inset-6 rounded-full bg-[#060928]/95 border border-white/10 shadow-inner flex items-center justify-center p-3 sm:p-5 md:p-6 group cursor-pointer overflow-hidden">
+          <div className="w-[92%] h-[92%] flex items-center justify-center relative">
             <Image
               src="/image/vaave-digital.png"
               alt="Vaave Digital Logo"
-              width={220}
-              height={70}
+              width={260}
+              height={85}
               className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-108"
               priority
             />
@@ -348,29 +344,27 @@ function CosmicOrbits({ uid = 'orb', orbitOffsetPx = 0 }: { uid?: string; orbitO
 
       {/* Right Pill (From Scratch to Success Story.) */}
       <div
-        className="absolute right-[-80px] -translate-y-1/2 z-10 w-[140px] md:w-[165px] flex items-center gap-2 md:gap-3 bg-[#030218]/75 backdrop-blur-md border border-white/10 hover:border-electricCyan/40 rounded-full px-3 py-2.5 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(6,182,212,0.08)]"
-        style={{ top: 320 - orbitOffsetPx }}
+        className="absolute right-[1.5%] sm:right-[3.5%] md:right-[5%] top-[44.4%] -translate-y-1/2 z-30 w-[115px] xs:w-[130px] sm:w-[150px] md:w-[165px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-electricCyan/40 rounded-full px-2 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(6,182,212,0.08)]"
       >
-        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-electricCyan/10 border border-electricCyan/20 flex items-center justify-center flex-shrink-0 text-electricCyan shadow-[0_0_10px_rgba(6,182,212,0.1)] group-hover:scale-105 transition-transform">
-          <FaChartLine size={13} className="md:size-[15px]" />
+        <div className="w-6 h-6 xs:w-7 xs:h-7 md:w-10 md:h-10 rounded-full bg-electricCyan/10 border border-electricCyan/20 flex items-center justify-center flex-shrink-0 text-electricCyan shadow-[0_0_10px_rgba(6,182,212,0.1)] group-hover:scale-105 transition-transform">
+          <FaChartLine size={10} className="xs:size-[11px] md:size-[15px]" />
         </div>
-        <div className="flex flex-col text-left">
-          <span className="text-white text-[11px] md:text-xs font-bold font-display leading-tight">From Scratch to</span>
-          <span className="text-[#acabcb] text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5">Success Story.</span>
+        <div className="flex flex-col text-left overflow-hidden">
+          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight truncate">From Scratch to</span>
+          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 truncate">Success Story.</span>
         </div>
       </div>
 
       {/* Bottom Pill (Our Strategies. Your Growth.) */}
       <div
-        className="absolute left-1/2 -translate-x-1/2 z-20 w-[140px] md:w-[165px] flex items-center gap-2 md:gap-3 bg-[#030218]/75 backdrop-blur-md border border-white/10 hover:border-peachAccent/40 rounded-full px-3 py-2.5 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(255,137,118,0.08)]"
-        style={{ bottom: 160 + orbitOffsetPx }}
+        className="absolute left-1/2 -translate-x-1/2 top-[90.5%] -translate-y-1/2 z-30 w-[115px] xs:w-[130px] sm:w-[150px] md:w-[165px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-peachAccent/40 rounded-full px-2 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(255,137,118,0.08)]"
       >
-        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-peachAccent/10 border border-peachAccent/20 flex items-center justify-center flex-shrink-0 text-peachAccent shadow-[0_0_10px_rgba(255,137,118,0.1)] group-hover:scale-105 transition-transform">
-          <FaBullseye size={14} className="md:size-[16px]" />
+        <div className="w-6 h-6 xs:w-7 xs:h-7 md:w-10 md:h-10 rounded-full bg-peachAccent/10 border border-peachAccent/20 flex items-center justify-center flex-shrink-0 text-peachAccent shadow-[0_0_10px_rgba(255,137,118,0.1)] group-hover:scale-105 transition-transform">
+          <FaBullseye size={11} className="xs:size-[12px] md:size-[16px]" />
         </div>
-        <div className="flex flex-col text-left">
-          <span className="text-white text-[11px] md:text-xs font-bold font-display leading-tight">Our Strategies.</span>
-          <span className="text-[#acabcb] text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5">Your Growth.</span>
+        <div className="flex flex-col text-left overflow-hidden">
+          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight truncate">Our Strategies.</span>
+          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 truncate">Your Growth.</span>
         </div>
       </div>
     </div>
@@ -400,7 +394,7 @@ export default function HeroBanner({ setShowModal }: HeroBannerProps) {
         <div className="absolute bottom-12 right-6 w-14 h-14 border-b-2 border-r-2 border-white/5 rounded-tr-lg" />
 
         {/* ── MOBILE LAYOUT (< lg) ── */}
-        <div className="lg:hidden container mx-auto px-6 relative z-10 pt-2 flex flex-col items-center text-center">
+        <div className="lg:hidden container mx-auto px-4 sm:px-6 relative z-10 pt-2 flex flex-col items-center text-center">
 
           {/* Mobile Text */}
           <motion.div
@@ -460,14 +454,14 @@ export default function HeroBanner({ setShowModal }: HeroBannerProps) {
             </motion.div>
           </motion.div>
 
-          {/* Mobile Orbital — negative margin closes gap above; reduced height trims dead space below */}
-          <div className="w-full flex justify-center items-center relative overflow-visible -mt-6" style={{ height: '460px' }}>
-            <CosmicOrbits uid="mob" orbitOffsetPx={26} />
+          {/* Mobile Orbital */}
+          <div className="w-full max-w-[440px] sm:max-w-xl mx-auto flex justify-center items-center relative overflow-visible my-4">
+            <CosmicOrbits uid="mob" />
           </div>
         </div>
 
         {/* ── DESKTOP LAYOUT (lg+) ── */}
-        <div className="hidden lg:block container mx-auto px-16 relative z-10 lg:-mt-14">
+        <div className="hidden lg:block container mx-auto px-16 relative z-10 lg:pt-6 xl:pt-10">
           <div className="flex flex-row items-center gap-8">
 
             {/* Left Column */}
@@ -476,7 +470,7 @@ export default function HeroBanner({ setShowModal }: HeroBannerProps) {
               initial="hidden"
               animate={heroInView ? 'visible' : 'hidden'}
               variants={stagger}
-              className="w-7/12 flex flex-col text-left"
+              className="w-6/12 xl:w-5/12 flex flex-col text-left relative z-20"
             >
               <motion.div variants={fadeUp} className="mb-4">
                 <span className="font-display text-3xl font-black tracking-[0.15em] bg-clip-text text-transparent bg-gradient-to-t from-peachAccent to-[#EFD3C9]">
@@ -532,8 +526,8 @@ export default function HeroBanner({ setShowModal }: HeroBannerProps) {
             </motion.div>
 
             {/* Right Column */}
-            <div className="w-5/12 flex justify-center items-center relative min-h-[660px] -translate-x-16">
-              <CosmicOrbits uid="dsk" orbitOffsetPx={0} />
+            <div className="w-6/12 xl:w-7/12 flex justify-center items-center relative min-h-[700px] lg:-mr-10 xl:-mr-16 lg:translate-y-6 xl:translate-y-10">
+              <CosmicOrbits uid="dsk" />
             </div>
 
           </div>
