@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     'Transforming Ideas into Digital Realities | Web Development, Social Media Marketing, SEO',
   icons: {
-    icon: '/image/RM favicon.png',
+    icon: '/image/logo.webp',
   },
 };
 

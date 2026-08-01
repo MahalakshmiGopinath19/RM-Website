@@ -49,7 +49,7 @@ function TiltCard({ children, className = '' }: { children: React.ReactNode; cla
 const marketingServices = [
   { title: 'Social Media Marketing', image: '/image/oms-1.webp', desc: 'Data-driven content and social campaigns that turn followers into loyal customers.' },
   { title: 'Branding', image: '/image/bcd.webp', desc: 'Strategic brand identity, visual guidelines, positioning and logo design.' },
-  { title: 'Creative Designing', image: '/image/hero-stack.webp', desc: 'Eye-catching graphic assets, banners and high-converting marketing collateral.' },
+  { title: 'Creative Designing', image: '/image/Hero-Stack.webp', desc: 'Eye-catching graphic assets, banners and high-converting marketing collateral.' },
   { title: 'Video Editing', image: '/image/v_edit.webp', desc: 'Professional short-form reels, promos & long-form video storytelling.' },
   { title: 'Google My Business', image: '/image/gmb.webp', desc: 'Local map pack optimization, reviews strategy & local customer acquisition.' },
   { title: 'Google Ads', image: '/image/oms-3.webp', desc: 'Targeted Search, Display & Shopping PPC campaigns with maximum ROI.' },

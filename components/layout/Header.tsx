@@ -71,16 +71,16 @@ export default function Header() {
     <>
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#020215]/90 backdrop-blur-md border-b border-white/5 py-2 shadow-lg' : 'bg-transparent py-4'}`}>
         <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center">
-          
+
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 transform transition duration-300 hover:opacity-90">
-            <Image 
-              src="/image/vaave-digital.webp" 
-              alt="Vaave Digital Logo" 
-              width={280} 
-              height={77} 
-              className="w-auto h-[56px] md:h-[76px]" 
-              priority 
+            <Image
+              src="/image/vaave-digital.png"
+              alt="Vaave Digital Logo"
+              width={280}
+              height={77}
+              className="w-auto h-[56px] md:h-[76px]"
+              priority
             />
           </Link>
 
@@ -117,8 +117,8 @@ export default function Header() {
           </div>
 
           {/* Mobile hamburger button */}
-          <button 
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden text-white focus:outline-none text-2xl"
           >
             {mobileMenuOpen ? '✕' : '☰'}
@@ -168,8 +168,8 @@ export default function Header() {
           <div className="bg-darkPanel rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden flex flex-col md:flex-row animate-slideUp relative border border-white/10 my-auto max-h-[90vh] md:max-h-none overflow-y-auto">
 
             {/* Close button */}
-            <button 
-              onClick={() => setShowModal(false)} 
+            <button
+              onClick={() => setShowModal(false)}
               className="absolute top-3 right-3 z-30 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-[#acabcb] hover:text-white transition-colors"
             >
               ✕
