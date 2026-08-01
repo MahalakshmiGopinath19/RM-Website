@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { motion, useInView, AnimatePresence, Variants } from 'framer-motion';
 import { FaPlus, FaMinus, FaChevronDown, FaArrowRight } from 'react-icons/fa';
 
@@ -289,31 +290,68 @@ export default function AboutPage() {
       <GrainOverlay />
 
       {/* HERO */}
-      <section ref={heroRef} className="relative bg-gradient-to-b from-[#020215] to-[#030218] overflow-hidden">
+      <section ref={heroRef} className="relative bg-gradient-to-b from-[#020215] to-[#030218] pt-10 md:pt-14 lg:pt-16 pb-12 md:pb-16 overflow-hidden">
         <NeuralHeroCanvas />
 
-        <div className="absolute right-[-140px] top-1/3 pointer-events-none">
+        <div className="absolute right-[-140px] top-1/2 -translate-y-1/2 pointer-events-none hidden md:block">
           <div className="w-[420px] h-[420px] border border-white/5 rounded-full animate-spinSlow" />
-          <div className="absolute inset-[60px] border border-white/5 rounded-full animate-[spinSlowRev_24s_linear_infinite]" />
+          <div className="absolute inset-[60px] border border-white/5 rounded-full animate-[spinSlowRev_26s_linear_infinite]" />
         </div>
 
-        <div className="absolute top-6 left-6 w-14 h-14 border-t-2 border-l-2 border-white/5 rounded-tl-lg" />
-        <div className="absolute top-6 right-6 w-14 h-14 border-t-2 border-r-2 border-white/5 rounded-tr-lg" />
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
+          <motion.div 
+            initial="hidden" 
+            animate={heroInView ? 'visible' : 'hidden'} 
+            variants={stagger}
+            className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+          >
+            {/* Left Column — Text Content */}
+            <div className="lg:col-span-7 text-center lg:text-left order-1">
+              <motion.span variants={fadeUp} className="inline-flex items-center gap-2 bg-peachAccent/10 text-peachAccent border border-peachAccent/20 px-4 py-1.5 rounded-full text-xs font-display font-extrabold uppercase tracking-widest mb-4">
+                Our Capabilities
+              </motion.span>
 
-        <div className="container mx-auto px-6 lg:px-16 relative z-10 pt-20 md:pt-28 pb-20 md:pb-24">
-          <motion.div initial="hidden" animate={heroInView ? 'visible' : 'hidden'} variants={stagger}
-            className="flex flex-col items-center text-center max-w-4xl mx-auto">
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-peachAccent/10 text-peachAccent border border-peachAccent/20 px-4 py-1.5 rounded-full mb-6 text-sm font-semibold">
-              <span className="w-2 h-2 bg-peachAccent rounded-full animate-pulse"></span>
-              AI-Powered Agency
-            </motion.div>
-            <motion.h2 variants={fadeUp} className="font-display text-white font-black leading-[0.95] mb-6" style={{ fontSize: 'clamp(3.2rem,7vw,5.5rem)', textShadow: '0 20px 60px rgba(0,0,0,0.45)' }}>
-              Provide the best service with <span className="text-gradient-peach">out‑of‑the‑box AI‑powered</span> ideas
-            </motion.h2>
-            <motion.div variants={fadeUp} className="w-full max-w-2xl">
-              <p className="text-[#acabcb]/85 text-base md:text-lg leading-relaxed font-medium">
-                We are a passionate team of digital marketing enthusiasts dedicated to helping businesses succeed in the digital world. With years of experience and a deep understanding of the ever-evolving online landscape, we stay at the forefront of AI‑integrated trends and technologies.
-              </p>
+              <motion.h1 variants={fadeUp}
+                className="font-display font-black text-white leading-[0.98] mb-4"
+                style={{ fontSize: 'clamp(2.8rem, 5.2vw, 5.2rem)', textShadow: '0 20px 60px rgba(0,0,0,0.45)' }}>
+                Chennai's Most Trusted{' '}
+                <span className="text-gradient-peach relative">Digital Experts</span>
+              </motion.h1>
+
+              <motion.p variants={fadeUp} className="text-[#acabcb] text-base md:text-lg max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed mb-6">
+                Next-gen marketing and IT solutions, powered by tech, delivered by experts.
+              </motion.p>
+
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                <Link href="/products">
+                  <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
+                    className="inline-block bg-gradient-rosegold hover-bg-gradient-rosegold text-darkBg px-7 py-3.5 rounded-full font-display font-black shadow-2xl text-sm md:text-base transition-colors duration-300 cursor-pointer">
+                    Explore Our Products →
+                  </motion.span>
+                </Link>
+                <motion.a href="https://wa.me/917305821333?text=Hi%20Vaave%20Digital!%20I%20would%20like%20to%20get%20a%20free%20audit%20for%20my%20business." target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
+                  className="inline-block border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 text-white px-7 py-3.5 rounded-full font-display font-extrabold text-sm md:text-base transition-all">
+                  Get Free Consult
+                </motion.a>
+              </motion.div>
+            </div>
+
+            {/* Right Column — Mascot Flying Image */}
+            <motion.div variants={fadeUp} className="lg:col-span-5 flex justify-center lg:justify-end order-2 overflow-visible">
+              <motion.img
+                src="/image/mascot_flying.png"
+                alt="Vaave Mascot Flying"
+                className="w-80 sm:w-[480px] md:w-[540px] lg:w-[620px] xl:w-[700px] h-auto object-contain drop-shadow-[0_25px_60px_rgba(201,149,108,0.35)] select-none lg:-mr-12 xl:-mr-16"
+                animate={{
+                  y: [-15, 15, -15],
+                  rotate: [-2, 2, -2]
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 6,
+                  ease: 'easeInOut'
+                }}
+              />
             </motion.div>
           </motion.div>
         </div>

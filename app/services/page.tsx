@@ -212,7 +212,7 @@ export default function ServicesPage() {
       <GrainOverlay />
 
       {/* HERO */}
-      <div ref={heroRef} className="relative bg-gradient-to-b from-[#020215] to-[#030218] pt-20 md:pt-28 pb-16 md:pb-20 overflow-hidden"
+      <div ref={heroRef} className="relative bg-gradient-to-b from-[#020215] to-[#030218] pt-10 md:pt-14 lg:pt-16 pb-12 md:pb-16 overflow-hidden"
         onMouseMove={heroSpot.onMouseMove} onMouseLeave={heroSpot.onMouseLeave}>
         <div ref={heroSpot.containerRef} className="absolute inset-0">
           <PulseCanvas />
@@ -223,76 +223,41 @@ export default function ServicesPage() {
           <div className="absolute inset-[60px] border border-white/5 rounded-full animate-[spinSlowRev_26s_linear_infinite]" />
         </div>
 
-        {/* Desktop Floating Mascot */}
-        <div className="absolute right-6 md:right-16 lg:right-24 top-1/2 -translate-y-1/2 pointer-events-none z-20 hidden md:block w-64 lg:w-[450px] aspect-square">
-          <motion.img
-            src="/image/mascot_flying.png"
-            alt="Vaave Mascot Flying"
-            className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(201,149,108,0.25)] select-none"
-            animate={{
-              y: [-15, 15, -15],
-              rotate: [-2, 2, -2]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 6,
-              ease: 'easeInOut'
-            }}
-          />
-        </div>
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
+          <motion.div 
+            initial="hidden" 
+            animate={heroInView ? 'visible' : 'hidden'} 
+            variants={stagger}
+            className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center"
+          >
+            {/* Left Column — Text Content */}
+            <div className="lg:col-span-6 text-center lg:text-left order-1">
+              <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-peachAccent/10 text-peachAccent border border-peachAccent/20 px-4 py-1.5 rounded-full mb-4 text-xs font-semibold">
+                <span className="w-2 h-2 bg-peachAccent rounded-full animate-pulse"></span>
+                AI-Powered Agency
+              </motion.div>
+              <motion.h1 variants={fadeUp} className="font-display text-white font-black leading-[0.98] mb-4" style={{ fontSize: 'clamp(2.6rem, 5vw, 5rem)', textShadow: '0 20px 60px rgba(0,0,0,0.45)' }}>
+                Provide the best service with <span className="text-gradient-peach">out‑of‑the‑box AI‑powered</span> ideas
+              </motion.h1>
+              <motion.div variants={fadeUp} className="w-full max-w-2xl mx-auto lg:mx-0">
+                <p className="text-[#acabcb]/85 text-base md:text-lg leading-relaxed font-medium">
+                  We are a passionate team of digital marketing enthusiasts dedicated to helping businesses succeed in the digital world. With years of experience and a deep understanding of the ever-evolving online landscape, we stay at the forefront of AI‑integrated trends and technologies.
+                </p>
+              </motion.div>
+            </div>
 
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-6 text-center relative z-10">
-          <motion.div initial="hidden" animate={heroInView ? 'visible' : 'hidden'} variants={stagger}>
-            <motion.span variants={fadeUp} className="inline-flex items-center gap-2 bg-peachAccent/10 text-peachAccent border border-peachAccent/20 px-4 py-1.5 rounded-full text-xs font-display font-extrabold uppercase tracking-widest mb-6">
-              Our Capabilities
-            </motion.span>
-
-            <motion.h1 variants={fadeUp}
-              className="font-display font-black text-white leading-[0.95] max-w-4xl mx-auto"
-              style={{ fontSize: 'clamp(3.2rem,7vw,5.5rem)', textShadow: '0 20px 60px rgba(0,0,0,0.45)' }}>
-              Chennai's Most Trusted{' '}
-              <span className="text-gradient-peach relative">Digital Experts</span>
-            </motion.h1>
-
-            <motion.p variants={fadeUp} className="text-[#acabcb] text-base md:text-lg max-w-lg mx-auto mt-5 font-medium leading-relaxed">
-              Next-gen marketing and IT solutions, powered by tech, delivered by experts.
-            </motion.p>
-
-            <motion.div variants={fadeUp} className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Magnetic>
-                <Link href="/products">
-                  <motion.span whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-                    className="inline-block bg-gradient-rosegold hover-bg-gradient-rosegold text-darkBg px-7 py-3.5 rounded-full font-display font-black shadow-2xl text-sm md:text-base transition-colors duration-300 cursor-pointer">
-                    Explore Our Products →
-                  </motion.span>
-                </Link>
-              </Magnetic>
-              <Magnetic strength={0.2}>
-                <motion.a href="https://wa.me/917305821333?text=Hi%20Vaave%20Digital!%20I%20would%20like%20to%20get%20a%20free%20audit%20for%20my%20business." target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-                  className="inline-block border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 text-white px-7 py-3.5 rounded-full font-display font-extrabold text-sm md:text-base transition-all">
-                  Get Free Consult
-                </motion.a>
-              </Magnetic>
+            {/* Right Column — Mascot Innovation Image (Big Size) */}
+            <motion.div variants={fadeUp} className="lg:col-span-6 flex justify-center lg:justify-end order-2 overflow-visible">
+              <motion.img
+                src="/image/mascot_innovation.png"
+                alt="Vaave Digital Mascot Innovation"
+                className="w-[420px] sm:w-[560px] md:w-[700px] lg:w-[860px] xl:w-[980px] 2xl:w-[1080px] h-auto object-contain drop-shadow-[0_25px_60px_rgba(201,149,108,0.4)] select-none lg:-mr-16 xl:-mr-24"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              />
             </motion.div>
-
-            {/* Mobile/Tablet Floating Mascot (Positioned below content with increased size) */}
-            <motion.img
-              variants={fadeUp}
-              src="/image/mascot_flying.png"
-              alt="Vaave Mascot Flying"
-              className="w-64 h-64 sm:w-72 sm:h-72 object-contain mx-auto mt-8 md:hidden block drop-shadow-[0_20px_40px_rgba(201,149,108,0.3)] select-none"
-              animate={{
-                y: [-8, 8, -8],
-                rotate: [-1, 1, -1]
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 5,
-                ease: 'easeInOut'
-              }}
-            />
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
       <ServiceSlider openModal={openModal} />

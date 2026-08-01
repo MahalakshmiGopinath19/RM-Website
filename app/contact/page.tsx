@@ -110,15 +110,15 @@ export default function ContactPage() {
       <div className="absolute top-2/3 right-1/4 w-[450px] h-[450px] bg-peachAccent/5 rounded-full blur-[160px] pointer-events-none" />
 
       {/* HEADER SECTION */}
-      <section ref={headerRef} className="relative pt-0 pb-2 md:pt-2 md:pb-4 border-b border-white/5">
-        <div className="container mx-auto px-6 max-w-6xl relative z-10">
+      <section ref={headerRef} className="relative pt-0 md:-mt-8 lg:-mt-12 pb-2 md:pb-4 border-b border-white/5">
+        <div className="container mx-auto px-6 max-w-7xl relative z-10">
           <motion.div 
             initial="hidden" 
             animate={headerInView ? 'visible' : 'hidden'} 
             variants={stagger}
             className="grid lg:grid-cols-12 gap-6 md:gap-8 items-center"
           >
-            <div className="lg:col-span-7 text-center lg:text-left">
+            <div className="lg:col-span-6 text-center lg:text-left">
               <motion.span variants={fadeUp} className="inline-block bg-peachAccent/10 text-peachAccent border border-peachAccent/20 px-4 py-1.5 rounded-full text-xs font-display font-extrabold uppercase tracking-widest mb-3">
                 Contact us
               </motion.span>
@@ -136,11 +136,11 @@ export default function ContactPage() {
               </motion.p>
             </div>
 
-            <motion.div variants={fadeUp} className="lg:col-span-5 flex justify-center lg:justify-end">
+            <motion.div variants={fadeUp} className="lg:col-span-6 flex justify-center lg:justify-end overflow-visible">
               <motion.img
                 src="/image/mascot_calling.png"
                 alt="Vaave Digital Mascot Calling"
-                className="w-80 sm:w-96 md:w-[480px] lg:w-[540px] xl:w-[600px] h-auto object-contain drop-shadow-[0_20px_50px_rgba(201,149,108,0.3)] select-none"
+                className="w-[400px] sm:w-[540px] md:w-[680px] lg:w-[840px] xl:w-[960px] h-auto object-contain drop-shadow-[0_25px_60px_rgba(201,149,108,0.4)] select-none lg:-mr-12 xl:-mr-20"
                 animate={{ y: [0, -12, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               />
