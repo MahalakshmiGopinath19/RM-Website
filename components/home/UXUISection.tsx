@@ -51,7 +51,7 @@ export default function UXUISection() {
               We build complete digital ecosystems powered by predictive analytics, smart automation, and data‑driven creativity — driving relentless revenue and trust for brands across Globe.
             </motion.p>
             <motion.div variants={stagger} className="flex flex-wrap gap-3">
-              {['100% Risk‑Free', 'No Contracts', 'Fast 24h Setup', 'AI‑Powered', '500+ Clients'].map((b, i) => (
+              {['AI‑Powered', 'Fast Setup', '3000+ Clients'].map((b, i) => (
                 <motion.span key={i} variants={fadeUp}
                   whileHover={{ scale: 1.07, backgroundColor: '#ff8976', color: '#ffffff', borderColor: '#ff8976' }}
                   style={{ color: '#1e293b', borderColor: '#cbd5e1', backgroundColor: '#f1f5f9' }}

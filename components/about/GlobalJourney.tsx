@@ -25,7 +25,7 @@ export default function GlobalJourney() {
 
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="flex flex-col lg:flex-row justify-start">
-          
+
           {/* Left Column: Journey Narrative Card */}
           <motion.div
             initial="hidden"
@@ -42,7 +42,7 @@ export default function GlobalJourney() {
                 Our Global Journey
               </h2>
               <div className="w-16 h-1 bg-gradient-rosegold mb-8 rounded-full" />
-              
+
               <div className="space-y-6 text-[#acabcb]/95 text-base sm:text-lg leading-relaxed font-medium">
                 <p>
                   Since our inception in <strong>2018</strong>, Vaave Digital has pioneered end-to-end digital marketing, branding, AI-integrated customized software, and AI automation. We empower modern brands to expand their horizons through data-driven strategies, intelligent customer acquisition funnels, and premium digital architectures.
@@ -51,7 +51,7 @@ export default function GlobalJourney() {
                   Our journey began with a bold vision to revolutionize local enterprises within <strong>India</strong>. By delivering exceptional, measurable ROI and building future-proof digital assets, we quickly established ourselves as industry leaders.
                 </p>
                 <p>
-                  Today, Vaave Digital has scaled globally. We operate as a trusted performance agency accelerating growth for market leaders across <strong>India</strong>, and expanding our cross-border operations into the high-growth hubs of <strong>Dubai</strong> and <strong>Singapore</strong>.
+                  Today, Vaave Digital has scaled globally. We operate as a trusted performance agency accelerating growth for market leaders across <strong>India</strong>, and expanding our cross-border operations into the high-growth hubs <strong>Globally</strong>.
                 </p>
               </div>
             </div>

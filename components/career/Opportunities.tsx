@@ -76,53 +76,13 @@ function Magnetic({ children, strength = 0.3 }: { children: React.ReactNode; str
 
 const jobs = [
   {
-    title: 'Social Media Manager',
-    image: '/image/carimage3.webp',
-    desc: 'Manage multi‑platform social media campaigns, analyze performance, and grow engagement.',
-    location: 'Chennai',
-    experience: '3+ years',
-    skills: ['Strategy', 'Analytics', 'Content', 'Team Management'],
-    walkin: '11:00 AM - 1:00 PM',
-    contact: '+91 73058 21333'
-  },
-  {
-    title: 'Creative Designer',
-    image: '/image/uxui-1.webp',
-    desc: 'Design engaging brand assets, social media graphics, banners, and promotional visual content.',
-    location: 'Chennai',
-    experience: '1+ years',
-    skills: ['Figma', 'Photoshop', 'Illustrator', 'Branding'],
-    walkin: '11:00 AM - 1:00 PM',
-    contact: '+91 73058 21333'
-  },
-  {
-    title: 'Video Editor',
-    image: '/image/video-editor.jpg',
-    desc: 'Create high-impact marketing videos, reels, motion graphics, and engaging social edits.',
-    location: 'Chennai',
-    experience: '1+ years',
-    skills: ['Premiere Pro', 'After Effects', 'Reels Editing', 'Storytelling'],
-    walkin: '11:00 AM - 1:00 PM',
-    contact: '+91 73058 21333'
-  },
-  {
-    title: 'Ads Manager',
-    image: '/image/ads-manager.jpg',
-    desc: 'Plan, run, and optimize targeted Meta and Google Ad campaigns for maximum growth & ROI.',
-    location: 'Chennai',
-    experience: '2+ years',
-    skills: ['Meta Ads', 'Google Ads', 'PPC Strategy', 'ROI Optimization'],
-    walkin: '11:00 AM - 1:00 PM',
-    contact: '+91 73058 21333'
-  },
-  {
     title: 'Social Media Intern',
     image: '/image/carimage1.webp',
     desc: 'Assist in creating content, scheduling posts, and supporting the marketing team.',
     location: 'Chennai',
     experience: 'Freshers/0+ years',
     skills: ['Social Media', 'Content Writing', 'Communication', 'Quick Learning'],
-    walkin: '11:00 AM - 1:00 PM',
+    walkin: '11:00 AM - 5:00 PM',
     contact: '+91 73058 21333'
   },
   {
@@ -132,7 +92,47 @@ const jobs = [
     location: 'Chennai',
     experience: 'Freshers/0+ years',
     skills: ['Communication', 'Active Listening', 'Problem-Solving', 'Persuasion'],
-    walkin: '11:00 AM - 1:00 PM',
+    walkin: '11:00 AM - 5:00 PM',
+    contact: '+91 73058 21333'
+  },
+  {
+    title: 'Social Media Manager',
+    image: '/image/carimage3.webp',
+    desc: 'Manage multi‑platform social media campaigns, analyze performance, and grow engagement.',
+    location: 'Chennai',
+    experience: '3+ years',
+    skills: ['Strategy', 'Analytics', 'Content', 'Team Management'],
+    walkin: '11:00 AM - 5:00 PM',
+    contact: '+91 73058 21333'
+  },
+  {
+    title: 'Creative Designer',
+    image: '/image/uxui-1.webp',
+    desc: 'Design engaging brand assets, social media graphics, banners, and promotional visual content.',
+    location: 'Chennai',
+    experience: '1+ years',
+    skills: ['Figma', 'Photoshop', 'Illustrator', 'Branding'],
+    walkin: '11:00 AM - 5:00 PM',
+    contact: '+91 73058 21333'
+  },
+  {
+    title: 'Video Editor',
+    image: '/image/video-editor.jpg',
+    desc: 'Create high-impact marketing videos, reels, motion graphics, and engaging social edits.',
+    location: 'Chennai',
+    experience: '1+ years',
+    skills: ['Premiere Pro', 'After Effects', 'Reels Editing', 'Storytelling'],
+    walkin: '11:00 AM - 5:00 PM',
+    contact: '+91 73058 21333'
+  },
+  {
+    title: 'Ads Manager',
+    image: '/image/ads-manager.jpg',
+    desc: 'Plan, run, and optimize targeted Meta and Google Ad campaigns for maximum growth & ROI.',
+    location: 'Chennai',
+    experience: '2+ years',
+    skills: ['Meta Ads', 'Google Ads', 'PPC Strategy', 'ROI Optimization'],
+    walkin: '11:00 AM - 5:00 PM',
     contact: '+91 73058 21333'
   }
 ];

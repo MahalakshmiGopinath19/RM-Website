@@ -26,6 +26,8 @@ export default function Footer() {
     'Website Design',
     'Content Marketing',
     'Google My Business',
+    'AI-integrated customized software',
+    'AI automation'
   ];
 
   const searchTerms = [

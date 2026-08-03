@@ -112,22 +112,22 @@ export default function QuickConnectForm({ setShowModal }: QuickConnectFormProps
                 backgroundSize: '32px 32px',
               }} />
               <div ref={adsSpot.glowRef} className="absolute inset-0 pointer-events-none transition-[background] duration-200" />
-              
+
               <div className="relative z-10">
                 <div className="inline-flex items-center gap-2 bg-peachAccent/10 border border-peachAccent/20 text-peachAccent px-4 py-1.5 rounded-full text-[10px] font-display font-bold tracking-[0.3em] uppercase mb-8">
                   <span className="w-1.5 h-1.5 rounded-full bg-peachAccent animate-pulse" /> Scaling Results
                 </div>
                 <h2 className="font-display text-white font-black leading-[1.05] mb-5 font-display"
                   style={{ fontSize: 'clamp(2rem,4vw,3.2rem)' }}>
-                  Experts in<br /><span className="text-gradient-peach">Digital Advertising</span>
+                  Experts in<br /><span className="text-gradient-peach">AI-Integrated Digital Advertising</span>
                 </h2>
                 <p className="text-[#acabcb]/85 text-base leading-relaxed mb-10 max-w-md font-medium">
-                  Maximize returns with data‑backed targeting, iterative creative testing, and precision bid management.
+                  Maximize returns with AI‑powered data‑backed targeting, iterative creative testing, and precision bid management.
                 </p>
                 <div className="space-y-3.5 mb-10">
                   {[
                     { icon: '🎯', t: 'Targeted Campaigns', d: 'Precision audience modeling to capture intent.' },
-                    { icon: '📈', t: '2000+ Campaigns', d: 'Proven framework scaled across industries.' },
+                    { icon: '📈', t: '5000+ Campaigns', d: 'Proven framework scaled across industries.' },
                     { icon: '⚡', t: 'Real‑Time Tracking', d: 'Continuous ROAS optimization at every step.' },
                   ].map((item, i) => (
                     <motion.div key={i} whileHover={{ x: 6 }}
@@ -166,29 +166,6 @@ export default function QuickConnectForm({ setShowModal }: QuickConnectFormProps
                   alt="Digital Advertising AI Bot"
                   className="w-full h-auto object-contain drop-shadow-2xl hover:scale-[1.03] transition-transform duration-500"
                 />
-              </div>
-
-              <div className="grid grid-cols-3 gap-4 w-full max-w-[580px] lg:max-w-[620px]">
-                {[{ n: 500, s: '+', l: 'Clients' }, { n: 2000, s: '+', l: 'Campaigns' }, { n: 99, s: '%', l: 'Satisfaction' }]
-                  .map((st, i) => (
-                    <motion.div
-                      key={i}
-                      whileHover={{ y: -4, scale: 1.03 }}
-                      className="group relative overflow-hidden bg-[#050720] border border-white/10 hover:border-peachAccent/40 rounded-xl p-4 text-center shadow-md cursor-pointer transition-all duration-300"
-                    >
-                      {/* Rose Gold Gradient Hover Layer */}
-                      <div className="absolute inset-0 bg-gradient-rosegold opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-                      <div className="relative z-10">
-                        <div className="font-data text-2xl font-bold text-white group-hover:text-[#030218] transition-colors duration-300">
-                          <CountUp end={st.n} suffix={st.s} />
-                        </div>
-                        <div className="font-display text-[9px] text-[#acabcb] group-hover:text-[#030218]/90 uppercase tracking-widest mt-1 font-extrabold transition-colors duration-300">
-                          {st.l}
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
               </div>
             </motion.div>
           </div>

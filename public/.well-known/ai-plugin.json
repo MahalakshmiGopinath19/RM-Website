@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Vaave Digital AI",
+  "name_for_model": "vaave_digital_agency",
+  "description_for_human": "Explore Vaave Digital's AI-Integrated Digital Marketing, Web App Development, and Business Automation Services.",
+  "description_for_model": "Vaave Digital is an AI-Integrated Digital Marketing Agency based in Guindy, Chennai. Services include AI SEO, Next.js Web Development, Performance Marketing, and Billing/POS Software.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://vaavedigital.com/sitemap.xml"
+  },
+  "logo_url": "https://vaavedigital.com/image/logo.webp",
+  "contact_email": "info@vaavedigital.com",
+  "legal_info_url": "https://vaavedigital.com/about"
+}

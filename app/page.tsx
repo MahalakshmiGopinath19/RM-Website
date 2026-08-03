@@ -176,7 +176,6 @@ export default function HomePage() {
       <ScrollProgressBar />
       <GrainOverlay />
 
-
       <HeroBanner setShowModal={setShowModal} />
 
       <UXUISection />

@@ -45,7 +45,7 @@ export default function ProductGrid() {
   return (
     <div className="space-y-16">
       {/* 1. BILL IT NOW (Blue Accent Dashboard) */}
-      <motion.div 
+      <motion.div
         variants={fadeUp}
         className="glass-panel rounded-3xl border border-white/5 py-6 px-8 md:py-8 md:px-12 flex flex-col lg:flex-row gap-8 lg:gap-12 items-center relative overflow-hidden group hover:border-blue-500/20 transition-all duration-300"
       >
@@ -54,18 +54,30 @@ export default function ProductGrid() {
 
         <div className="w-full lg:w-1/2 space-y-4">
           <span className="inline-block bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3.5 py-1.5 rounded-full text-xs font-display font-bold uppercase tracking-widest">
-            Automated Invoicing
+            Billing Software
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">Bill It Now</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
+            Billing Simplified. <br />
+            <span className="text-gradient-peach">Business Amplified.</span>
+          </h2>
           <p className="text-[#acabcb] text-base md:text-lg leading-relaxed font-medium">
-            Simplify invoicing and collect payments easily. A complete billing and tax compliance automation engine built specifically for modern Indian businesses and service providers.
+            The all-in-one billing and business management software built for retailers, salons, clinics, restaurants, and growing businesses.
           </p>
-          <div className="pt-2">
+          <p className="text-[#acabcb]/80 text-sm md:text-base leading-relaxed font-normal">
+            Create GST invoices, manage inventory, track expenses, monitor sales, and access powerful reports—all from one easy-to-use platform.
+          </p>
+          <div className="pt-3 flex flex-wrap gap-3">
             <button
-              onClick={() => window.open('https://wa.me/917305821333?text=Interested%20in%20Bill%20It%20Now%20Billing%20Software', '_blank')}
-              className="inline-flex items-center gap-2.5 bg-blue-500 hover:bg-blue-600 text-white px-7 py-3.5 rounded-full font-display font-extrabold text-sm md:text-base tracking-wider transition-colors shadow-lg shadow-blue-500/10"
+              onClick={() => window.open('https://wa.me/917305821333?text=Hi%20Vaave%20Digital!%20I%20want%20to%20Start%20a%20Free%20Trial%20for%20Billing%20Software', '_blank')}
+              className="inline-flex items-center gap-2 bg-gradient-rosegold hover-bg-gradient-rosegold text-darkBg px-6 py-3 rounded-full font-display font-extrabold text-xs md:text-sm tracking-wider transition-all shadow-lg shadow-peachAccent/10 cursor-pointer"
             >
-              Explore Bill It Now <FaArrowRight size={12} />
+              Start Free Trial <FaArrowRight size={11} />
+            </button>
+            <button
+              onClick={() => window.open('https://wa.me/917305821333?text=Hi%20Vaave%20Digital!%20I%20want%20to%20Book%20a%20Demo%20for%20Billing%20Software', '_blank')}
+              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/15 px-6 py-3 rounded-full font-display font-extrabold text-xs md:text-sm tracking-wider transition-all cursor-pointer"
+            >
+              Book a Demo
             </button>
           </div>
         </div>
@@ -86,7 +98,7 @@ export default function ProductGrid() {
       </motion.div>
 
       {/* 2. PHYSIODESK (Teal Accent Mobile View) */}
-      <motion.div 
+      <motion.div
         variants={fadeUp}
         className="glass-panel rounded-3xl border border-white/5 py-6 px-8 md:py-8 md:px-12 flex flex-col lg:flex-row-reverse gap-8 lg:gap-12 items-center relative overflow-hidden group hover:border-teal-500/20 transition-all duration-300"
       >
@@ -95,7 +107,7 @@ export default function ProductGrid() {
 
         <div className="w-full lg:w-1/2 space-y-4">
           <span className="inline-block bg-teal-500/10 text-teal-400 border border-teal-500/20 px-3.5 py-1.5 rounded-full text-xs font-display font-bold uppercase tracking-widest">
-            Clinic Management
+            Clinic Management Software
           </span>
           <h2 className="text-4xl md:text-5xl font-black text-white leading-tight">PhysioDesk</h2>
           <p className="text-[#acabcb] text-base md:text-lg leading-relaxed font-medium">

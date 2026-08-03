@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, useInView, Variants, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import Image from 'next/image';
-import { FaArrowRight, FaWhatsapp, FaUsers, FaChartLine, FaBullseye } from 'react-icons/fa';
+import { FaArrowRight, FaWhatsapp } from 'react-icons/fa';
 
 /* ── Animation Variants ── */
 const fadeUp: Variants = {
@@ -287,26 +287,13 @@ function CosmicOrbits({ uid = 'orb' }: { uid?: string }) {
         </svg>
       </div>
 
-      {/* Left Pill (Any Industry. Every Business.) */}
-      <div
-        className="absolute left-[0.5%] sm:left-[2%] md:left-[3.5%] top-[44.4%] -translate-y-1/2 z-30 w-auto min-w-[125px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-peachAccent/40 rounded-full px-2.5 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(255,137,118,0.08)]"
-      >
-        <div className="w-6 h-6 xs:w-7 xs:h-7 md:w-10 md:h-10 rounded-full bg-peachAccent/10 border border-peachAccent/20 flex items-center justify-center flex-shrink-0 text-peachAccent shadow-[0_0_10px_rgba(255,137,118,0.1)] group-hover:scale-105 transition-transform">
-          <FaUsers size={11} className="xs:size-[12px] md:size-[16px]" />
-        </div>
-        <div className="flex flex-col text-left">
-          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight whitespace-nowrap">Any Industry.</span>
-          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 whitespace-nowrap">Every Business.</span>
-        </div>
-      </div>
-
-      {/* Center Circle with kinetic color rotation */}
-      <div className="absolute left-1/2 top-[44.4%] -translate-x-1/2 -translate-y-1/2 w-[36%] sm:w-[32%] md:w-[33%] lg:w-[36%] max-w-[360px] aspect-square rounded-full flex items-center justify-center z-20">
+      {/* 3D Mascot Centerpiece in Big Size with kinetic glowing aura */}
+      <div className="absolute left-1/2 top-[44.4%] -translate-x-1/2 -translate-y-1/2 w-[65%] sm:w-[55%] md:w-[50%] lg:w-[52%] max-w-[500px] aspect-square flex items-center justify-center z-20 pointer-events-none">
         {/* Glow halo */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-peachAccent/25 to-electricCyan/25 blur-2xl animate-pulse" />
+        <div className="absolute inset-2 rounded-full bg-gradient-to-r from-peachAccent/35 via-electricCyan/25 to-peachAccent/35 blur-3xl animate-pulse" />
 
         {/* Outer clockwise ring */}
-        <div className="absolute inset-0 rounded-full p-[2.5px] overflow-hidden">
+        <div className="absolute inset-[10%] rounded-full p-[2.5px] overflow-hidden opacity-80">
           <div
             className="absolute inset-[-50%] rounded-full animate-[spin_8s_linear_infinite]"
             style={{
@@ -317,54 +304,49 @@ function CosmicOrbits({ uid = 'orb' }: { uid?: string }) {
         </div>
 
         {/* Inner counter-clockwise ring */}
-        <div className="absolute inset-2 sm:inset-3 rounded-full p-[2px] overflow-hidden">
+        <div className="absolute inset-[16%] rounded-full p-[2px] overflow-hidden opacity-85">
           <div
             className="absolute inset-[-50%] rounded-full animate-[spin_12s_linear_infinite_reverse]"
             style={{
               background: 'conic-gradient(from 0deg, #06b6d4, #3d2b8e, #ff8976, #06b6d4)',
             }}
           />
-          <div className="absolute inset-[2px] bg-[#060928] rounded-full" />
+          <div className="absolute inset-[2px] bg-[#060928]/80 rounded-full" />
         </div>
 
-        {/* Brand Logo inside */}
-        <div className="absolute inset-3.5 sm:inset-6 rounded-full bg-[#060928]/95 border border-white/10 shadow-inner flex items-center justify-center p-3 sm:p-5 md:p-6 group cursor-pointer overflow-hidden">
-          <div className="w-[92%] h-[92%] flex items-center justify-center relative">
-            <Image
-              src="/image/vaave-digital.png"
-              alt="Vaave Digital Logo"
-              width={260}
-              height={85}
-              className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-108"
-              priority
-            />
+        {/* Vbot Speech Bubble Greeting */}
+        <motion.div
+          initial={{ opacity: 0, y: 15, scale: 0.85 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.6, type: 'spring', stiffness: 200 }}
+          className="absolute -top-12 sm:-top-16 right-0 sm:right-4 md:right-8 z-40 pointer-events-auto"
+        >
+          <div className="relative bg-[#050720]/95 border border-peachAccent/40 hover:border-peachAccent shadow-[0_0_25px_rgba(201,149,108,0.3)] backdrop-blur-md rounded-2xl px-3.5 py-2.5 sm:px-5 sm:py-3.5 max-w-[210px] sm:max-w-[260px] text-left transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="w-2 h-2 rounded-full bg-peachAccent animate-ping" />
+              <span className="font-display font-black text-xs sm:text-sm text-peachAccent">
+                Vanakkam! 🙏
+              </span>
+            </div>
+            <p className="text-white text-[11px] sm:text-xs font-semibold font-display leading-snug">
+              I'm <span className="text-peachAccent font-extrabold">Vbot</span>, your AI Digital Partner at Vaave Digital! 🤖✨
+            </p>
+
+            {/* Speech Bubble Tail Pointer */}
+            <div className="absolute -bottom-2 left-8 w-4 h-4 bg-[#050720] border-r border-b border-peachAccent/40 transform rotate-45" />
           </div>
-        </div>
-      </div>
+        </motion.div>
 
-      {/* Right Pill (From Scratch to Success Story.) */}
-      <div
-        className="absolute right-[0.5%] sm:right-[2%] md:right-[3.5%] top-[44.4%] -translate-y-1/2 z-30 w-auto min-w-[135px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-electricCyan/40 rounded-full px-2.5 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(6,182,212,0.08)]"
-      >
-        <div className="w-6 h-6 xs:w-7 xs:h-7 md:w-10 md:h-10 rounded-full bg-electricCyan/10 border border-electricCyan/20 flex items-center justify-center flex-shrink-0 text-electricCyan shadow-[0_0_10px_rgba(6,182,212,0.1)] group-hover:scale-105 transition-transform">
-          <FaChartLine size={10} className="xs:size-[11px] md:size-[15px]" />
-        </div>
-        <div className="flex flex-col text-left">
-          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight whitespace-nowrap">From Scratch to</span>
-          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 whitespace-nowrap">Success Story.</span>
-        </div>
-      </div>
-
-      {/* Bottom Pill (Our Strategies. Your Growth.) */}
-      <div
-        className="absolute left-1/2 -translate-x-1/2 top-[90.5%] -translate-y-1/2 z-30 w-auto min-w-[130px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-peachAccent/40 rounded-full px-2.5 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(255,137,118,0.08)]"
-      >
-        <div className="w-6 h-6 xs:w-7 xs:h-7 md:w-10 md:h-10 rounded-full bg-peachAccent/10 border border-peachAccent/20 flex items-center justify-center flex-shrink-0 text-peachAccent shadow-[0_0_10px_rgba(255,137,118,0.1)] group-hover:scale-105 transition-transform">
-          <FaBullseye size={11} className="xs:size-[12px] md:size-[16px]" />
-        </div>
-        <div className="flex flex-col text-left">
-          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight whitespace-nowrap">Our Strategies.</span>
-          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 whitespace-nowrap">Your Growth.</span>
+        {/* Big 3D Mascot Image */}
+        <div className="relative z-10 w-full h-full flex items-center justify-center pointer-events-auto">
+          <Image
+            src="/image/mascot_vanakam.png"
+            alt="Vaave Digital AI Mascot Vbot"
+            width={600}
+            height={720}
+            className="w-auto h-[105%] max-h-[380px] sm:max-h-[460px] md:max-h-[520px] lg:max-h-[580px] object-contain drop-shadow-[0_15px_45px_rgba(255,137,118,0.45)] drop-shadow-[0_0_60px_rgba(6,182,212,0.35)] hover:scale-105 transition-transform duration-500 cursor-pointer"
+            priority
+          />
         </div>
       </div>
     </div>
