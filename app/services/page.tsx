@@ -234,14 +234,14 @@ export default function ServicesPage() {
             <div className="lg:col-span-6 text-center lg:text-left order-1">
               <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-peachAccent/10 text-peachAccent border border-peachAccent/20 px-4 py-1.5 rounded-full mb-4 text-xs font-semibold">
                 <span className="w-2 h-2 bg-peachAccent rounded-full animate-pulse"></span>
-                AI-Powered Agency
+                AI‑Integrated Digital Marketing Agency
               </motion.div>
               <motion.h1 variants={fadeUp} className="font-display text-white font-black leading-[0.98] mb-4" style={{ fontSize: 'clamp(2.6rem, 5vw, 5rem)', textShadow: '0 20px 60px rgba(0,0,0,0.45)' }}>
                 Provide the best service with <span className="text-gradient-peach">out‑of‑the‑box AI‑powered</span> ideas
               </motion.h1>
               <motion.div variants={fadeUp} className="w-full max-w-2xl mx-auto lg:mx-0">
                 <p className="text-[#acabcb]/85 text-base md:text-lg leading-relaxed font-medium">
-                  We are a passionate team of digital marketing enthusiasts dedicated to helping businesses succeed in the digital world. With years of experience and a deep understanding of the ever-evolving online landscape, we stay at the forefront of AI‑integrated trends and technologies.
+                  We are a passionate team of AI-integrated digital marketing experts dedicated to helping businesses succeed in the digital world. With years of experience and a deep understanding of the ever-evolving online landscape, we stay at the forefront of AI‑integrated trends and technologies.
                 </p>
               </motion.div>
             </div>

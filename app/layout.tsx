@@ -16,9 +16,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Vaave Digital - AI Integrated Digital & IT Services',
+  title: 'Vaave Digital - AI-Integrated Digital Marketing Agency',
   description:
-    'Transforming Ideas into Digital Realities | Web Development, Social Media Marketing, SEO',
+    'Transforming Ideas into Digital Realities | AI-Integrated Digital Marketing Agency, Web Development, SEO',
   icons: {
     icon: '/image/logo.webp',
   },

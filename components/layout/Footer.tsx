@@ -29,7 +29,7 @@ export default function Footer() {
   ];
 
   const searchTerms = [
-    'Digital marketing agency in Chennai', 'SEO company in Guindy',
+    'AI-integrated digital marketing agency in Chennai', 'SEO company in Guindy',
     'Social media marketing Guindy', 'GMB & local SEO experts', 'PPC agency Chennai',
   ];
 
@@ -62,7 +62,7 @@ export default function Footer() {
                 <Image src="/image/vaave-digital.webp" alt="Vaave Digital" width={180} height={50} className="w-auto h-11" />
               </div>
               <p className="text-[#acabcb]/70 text-sm leading-relaxed max-w-xs">
-                A Chennai-based digital marketing studio helping brands grow with
+                A Chennai-based AI-integrated digital marketing agency helping brands grow with
                 strategy, creative, and performance — all under one roof.
               </p>
               <div className="flex gap-3 pt-1">

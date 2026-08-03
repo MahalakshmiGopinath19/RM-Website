@@ -132,7 +132,7 @@ export default function ContactPage() {
               </motion.h1>
 
               <motion.p variants={fadeUp} className="text-[#acabcb] text-base md:text-lg max-w-2xl leading-relaxed mx-auto lg:mx-0 font-medium">
-                Have a digital marketing objective or IT product vision? Connect with our team to explore roadmap possibilities.
+                Have an AI-integrated digital marketing objective or IT product vision? Connect with our team to explore roadmap possibilities.
               </motion.p>
             </div>
 

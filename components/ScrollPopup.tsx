@@ -110,9 +110,9 @@ export default function VaaveScrollPopup() {
         aria-hidden="true"
       />
 
-      {/* Modal */}
+      {/* Modal Container */}
       <div
-        className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-4 pointer-events-none"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 pointer-events-none overflow-y-auto"
         onClick={closeModal}
       >
         <div
@@ -121,21 +121,21 @@ export default function VaaveScrollPopup() {
           aria-modal="true"
           aria-labelledby="popup-title"
           onClick={(e) => e.stopPropagation()}
-          className={`relative w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl overflow-hidden pointer-events-auto transition-all duration-200 bg-[#0A0928] border border-[#C9956C]/20 shadow-[0_0_60px_-15px_rgba(201,149,108,0.35)] ${
+          className={`relative w-full max-w-[340px] xs:max-w-sm sm:max-w-md rounded-2xl overflow-hidden pointer-events-auto transition-all duration-200 bg-[#0A0928] border border-[#C9956C]/20 shadow-[0_0_60px_-15px_rgba(201,149,108,0.35)] max-h-[90vh] sm:max-h-none overflow-y-auto my-auto ${
             isClosing
               ? 'opacity-0 translate-y-4 sm:scale-95'
               : 'opacity-100 translate-y-0 sm:scale-100 animate-scaleUp'
           }`}
         >
           {/* Header */}
-          <div className="relative px-6 pt-7 pb-6 overflow-hidden">
+          <div className="relative px-5 sm:px-6 pt-5 sm:pt-7 pb-4 sm:pb-6 overflow-hidden">
             {/* ambient glow */}
             <div className="pointer-events-none absolute -top-16 -right-10 w-48 h-48 rounded-full bg-[#5CD3F0]/10 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-20 -left-10 w-48 h-48 rounded-full bg-[#C9956C]/10 blur-3xl" />
 
-            {/* swoosh accent, echoes the logo arc */}
+            {/* swoosh accent */}
             <svg
-              className="absolute top-4 left-6 w-24 h-10 opacity-70"
+              className="absolute top-3 left-4 sm:top-4 sm:left-6 w-20 h-8 sm:w-24 sm:h-10 opacity-70"
               viewBox="0 0 100 40"
               fill="none"
             >
@@ -159,21 +159,21 @@ export default function VaaveScrollPopup() {
             <button
               onClick={closeModal}
               aria-label="Close"
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-[#EFD3C9] text-lg leading-none hover:bg-white/10 hover:text-white transition"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 text-[#EFD3C9] text-lg leading-none hover:bg-white/10 hover:text-white transition"
             >
               &times;
             </button>
 
             <h4
               id="popup-title"
-              className="mt-8 text-2xl font-bold tracking-tight bg-gradient-to-r from-[#EFD3C9] via-[#C9956C] to-[#a1724a] bg-clip-text text-transparent"
+              className="mt-4 sm:mt-6 text-xl sm:text-2xl font-bold tracking-tight bg-gradient-to-r from-[#EFD3C9] via-[#C9956C] to-[#a1724a] bg-clip-text text-transparent"
             >
               Let's Build Something Great
             </h4>
 
-            <div className="flex items-center gap-3 mt-2">
-              <span className="h-px w-6 bg-[#C9956C]/40" />
-              <p className="text-[11px] tracking-[0.2em] text-[#C9956C]/70 uppercase">
+            <div className="flex items-center gap-2 sm:gap-3 mt-1.5 sm:mt-2">
+              <span className="h-px w-4 sm:w-6 bg-[#C9956C]/40" />
+              <p className="text-[10px] sm:text-[11px] tracking-[0.18em] sm:tracking-[0.2em] text-[#C9956C]/70 uppercase">
                 Book a free consultation
               </p>
               <span className="h-px flex-1 bg-[#C9956C]/40" />
@@ -181,8 +181,8 @@ export default function VaaveScrollPopup() {
           </div>
 
           {/* Form */}
-          <div className="px-6 pb-6">
-            <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
+          <div className="px-5 sm:px-6 pb-5 sm:pb-6">
+            <form onSubmit={handleSubmit} noValidate className="space-y-2.5 sm:space-y-3.5">
               <div>
                 <input
                   ref={nameInputRef}
@@ -193,14 +193,14 @@ export default function VaaveScrollPopup() {
                   onChange={handleChange}
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? 'name-error' : undefined}
-                  className={`w-full bg-white/5 border rounded-md px-4 py-2.5 text-[#F5F0E6] placeholder:text-[#F5F0E6]/35 transition focus:outline-none focus:ring-1 ${
+                  className={`w-full bg-white/5 border rounded-md px-3.5 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm text-[#F5F0E6] placeholder:text-[#F5F0E6]/35 transition focus:outline-none focus:ring-1 ${
                     errors.name
                       ? 'border-red-400/60 focus:ring-red-400/60'
                       : 'border-white/10 focus:border-[#C9956C]/60 focus:ring-[#C9956C]/40'
                   }`}
                 />
                 {errors.name && (
-                  <p id="name-error" className="mt-1 text-xs text-red-300">
+                  <p id="name-error" className="mt-1 text-[11px] text-red-300">
                     {errors.name}
                   </p>
                 )}
@@ -215,14 +215,14 @@ export default function VaaveScrollPopup() {
                   onChange={handleChange}
                   aria-invalid={!!errors.phone}
                   aria-describedby={errors.phone ? 'phone-error' : undefined}
-                  className={`w-full bg-white/5 border rounded-md px-4 py-2.5 text-[#F5F0E6] placeholder:text-[#F5F0E6]/35 transition focus:outline-none focus:ring-1 ${
+                  className={`w-full bg-white/5 border rounded-md px-3.5 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm text-[#F5F0E6] placeholder:text-[#F5F0E6]/35 transition focus:outline-none focus:ring-1 ${
                     errors.phone
                       ? 'border-red-400/60 focus:ring-red-400/60'
                       : 'border-white/10 focus:border-[#C9956C]/60 focus:ring-[#C9956C]/40'
                   }`}
                 />
                 {errors.phone && (
-                  <p id="phone-error" className="mt-1 text-xs text-red-300">
+                  <p id="phone-error" className="mt-1 text-[11px] text-red-300">
                     {errors.phone}
                   </p>
                 )}
@@ -232,19 +232,19 @@ export default function VaaveScrollPopup() {
                 <textarea
                   name="message"
                   placeholder="How can we help you?"
-                  rows={3}
+                  rows={2}
                   value={formData.message}
                   onChange={handleChange}
                   aria-invalid={!!errors.message}
                   aria-describedby={errors.message ? 'message-error' : undefined}
-                  className={`w-full bg-white/5 border rounded-md px-4 py-2.5 text-[#F5F0E6] placeholder:text-[#F5F0E6]/35 resize-none transition focus:outline-none focus:ring-1 ${
+                  className={`w-full bg-white/5 border rounded-md px-3.5 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm text-[#F5F0E6] placeholder:text-[#F5F0E6]/35 resize-none transition focus:outline-none focus:ring-1 ${
                     errors.message
                       ? 'border-red-400/60 focus:ring-red-400/60'
                       : 'border-white/10 focus:border-[#C9956C]/60 focus:ring-[#C9956C]/40'
                   }`}
                 />
                 {errors.message && (
-                  <p id="message-error" className="mt-1 text-xs text-red-300">
+                  <p id="message-error" className="mt-1 text-[11px] text-red-300">
                     {errors.message}
                   </p>
                 )}
@@ -253,7 +253,7 @@ export default function VaaveScrollPopup() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="group relative w-full overflow-hidden rounded-md py-3 font-semibold text-[#0A0928] transition disabled:opacity-70 disabled:cursor-not-allowed"
+                className="group relative w-full overflow-hidden rounded-md py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-[#0A0928] transition disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{
                   background: 'linear-gradient(90deg, #EFD3C9, #C9956C 45%, #EFD3C9 90%)',
                   backgroundSize: '200% 100%',
@@ -277,7 +277,7 @@ export default function VaaveScrollPopup() {
                 <span className="absolute inset-0 bg-[position:100%_0] bg-[length:200%_100%] opacity-0 group-hover:opacity-100 group-hover:bg-[position:0_0] transition-all duration-500" />
               </button>
 
-              <p className="text-center text-[11px] text-[#F5F0E6]/40">
+              <p className="text-center text-[10px] sm:text-[11px] text-[#F5F0E6]/40">
                 Opens WhatsApp with your details pre-filled
               </p>
             </form>

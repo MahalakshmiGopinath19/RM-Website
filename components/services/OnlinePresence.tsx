@@ -112,7 +112,7 @@ export default function OnlinePresence({ openModal }: OnlinePresenceProps) {
             <motion.h2 variants={fadeUp} className="font-display text-3xl md:text-5xl lg:text-[50px] font-black tracking-tight bg-gradient-to-r from-[#a86538] via-[#C9956C] to-[#e8c3b5] bg-clip-text text-transparent">Built With Modern Technology & Strategy</motion.h2>
             <motion.div variants={fadeUp} className="w-16 h-1.5 bg-gradient-to-r from-[#C9956C] to-[#a86538] mx-auto mt-5 rounded-full" />
           </motion.div>
-          
+
           <Swiper modules={[Autoplay, Pagination]} spaceBetween={40} slidesPerView={1} breakpoints={{ 768: { slidesPerView: 2 } }}
             autoplay={{ delay: 3500, disableOnInteraction: false }} pagination={{ clickable: true }} className="!pb-14 it-swiper">
             {itServices.map((service, idx) => (
