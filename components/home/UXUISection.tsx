@@ -19,7 +19,7 @@ export default function UXUISection() {
     <section className="bg-white py-4 lg:py-6 relative overflow-hidden" style={{ backgroundColor: '#ffffff' }}>
       <div className="container mx-auto px-6 lg:px-16 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-12">
-          
+
           {/* Left Content */}
           <motion.div
             initial="hidden"
@@ -48,7 +48,7 @@ export default function UXUISection() {
             <motion.p variants={fadeUp}
               className="text-xl leading-relaxed max-w-3xl mb-10 font-medium"
               style={{ color: '#475569' }}>
-              We build complete digital ecosystems powered by predictive analytics, smart automation, and data‑driven creativity — driving relentless revenue and trust for brands across India.
+              We build complete digital ecosystems powered by predictive analytics, smart automation, and data‑driven creativity — driving relentless revenue and trust for brands across Globe.
             </motion.p>
             <motion.div variants={stagger} className="flex flex-wrap gap-3">
               {['100% Risk‑Free', 'No Contracts', 'Fast 24h Setup', 'AI‑Powered', '500+ Clients'].map((b, i) => (
@@ -82,7 +82,7 @@ export default function UXUISection() {
                   background: "radial-gradient(circle, rgba(201,149,108,0.25) 0%, rgba(61,43,142,0.1) 50%, transparent 70%)"
                 }}
               />
-              
+
               {/* 3D Glowing Aura Layer 2 (Clockwise rotation & pulsing blur) */}
               <motion.div
                 animate={{

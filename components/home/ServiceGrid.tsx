@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
 
@@ -18,8 +19,8 @@ const stagger: Variants = {
 /* ── Rose Gold palette ── */
 const CARD_BG   = 'linear-gradient(135deg, #C9956C 0%, #e8b090 50%, #b87040 100%)';
 const CARD_BG_B = 'linear-gradient(135deg, #b86f3f 0%, #C9956C 60%, #e8b090 100%)';
-const TEXT_DARK = '#3b1a08';   // deep brown — max contrast on rose gold
-const TEXT_MID  = '#6b3520';   // medium brown for subtitles / tags
+const TEXT_DARK = '#050720';   // Navy Blue — max contrast & ultra professional
+const TEXT_MID  = '#1a2355';   // Medium Navy Blue for subtitles / tags
 const ARROW_BG  = 'rgba(255,255,255,0.25)';
 const ARROW_BORDER = 'rgba(255,255,255,0.4)';
 
@@ -136,19 +137,19 @@ export default function ServiceGrid({ setShowModal }: ServiceGridProps) {
                       <h3 className="font-display font-bold text-xs sm:text-2xl mt-1 sm:mt-2 mb-1 sm:mb-4 leading-tight"
                         style={{ color: TEXT_DARK }}>{s.title}</h3>
                       <p className="text-[10px] sm:text-sm leading-snug sm:leading-relaxed line-clamp-3 sm:line-clamp-none font-medium"
-                        style={{ color: '#5a2e10' }}>{s.desc}</p>
+                        style={{ color: '#050720' }}>{s.desc}</p>
                     </div>
                     <div className="relative z-10">
                       {s.href ? (
                         <a href={s.href} target="_blank" rel="noopener noreferrer"
                           className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-6 sm:py-3 rounded-full font-display font-extrabold text-[9px] sm:text-sm mt-2 sm:mt-6 w-fit transition-all duration-300 shadow-md"
-                          style={{ backgroundColor: TEXT_DARK, color: '#fdf6f0' }}>
+                          style={{ backgroundColor: TEXT_DARK, color: '#ffffff' }}>
                           {s.cta} <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px] sm:text-[11px]" />
                         </a>
                       ) : (
                         <button onClick={() => setShowModal(true)}
                           className="group inline-flex items-center gap-1.5 px-4 py-2 sm:px-6 sm:py-3 rounded-full font-display font-extrabold text-[9px] sm:text-sm mt-2 sm:mt-6 w-fit transition-all duration-300 shadow-md"
-                          style={{ backgroundColor: TEXT_DARK, color: '#fdf6f0' }}>
+                          style={{ backgroundColor: TEXT_DARK, color: '#ffffff' }}>
                           {s.cta} <FaArrowRight className="group-hover:translate-x-1 transition-transform text-[8px] sm:text-[11px]" />
                         </button>
                       )}
@@ -161,28 +162,30 @@ export default function ServiceGrid({ setShowModal }: ServiceGridProps) {
 
           {/* Ghost card — More Services */}
           <motion.div variants={fadeUp}>
-            <motion.div whileHover={{ y: -6 }}
-              className="h-[250px] sm:h-[380px] rounded-2xl border-2 border-dashed border-[#C9956C]/50 hover:border-white flex flex-col items-center justify-center gap-3 sm:gap-5 group transition-all duration-300"
-              style={{ backgroundColor: '#fde8d8' }}>
-              <motion.div
-                whileHover={{ rotate: 90 }}
-                transition={{ duration: 0.3 }}
-                className="w-9 h-9 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-colors duration-300"
-                style={{ backgroundColor: 'rgba(201,149,108,0.2)', border: '1px solid #C9956C' }}>
-                <span className="font-display text-sm sm:text-2xl font-black leading-none" style={{ color: '#3b1a08' }}>+</span>
+            <Link href="/services" className="block h-full cursor-pointer">
+              <motion.div whileHover={{ y: -6 }}
+                className="h-[250px] sm:h-[380px] rounded-2xl border-2 border-dashed border-[#050720]/40 hover:border-[#050720] flex flex-col items-center justify-center gap-3 sm:gap-5 group transition-all duration-300"
+                style={{ backgroundColor: '#fde8d8' }}>
+                <motion.div
+                  whileHover={{ rotate: 90 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-9 h-9 sm:w-14 sm:h-14 rounded-full flex items-center justify-center transition-colors duration-300"
+                  style={{ backgroundColor: 'rgba(5,7,32,0.1)', border: '1px solid #050720' }}>
+                  <span className="font-display text-sm sm:text-2xl font-black leading-none" style={{ color: '#050720' }}>+</span>
+                </motion.div>
+                <div className="text-center px-2 sm:px-8">
+                  <p className="font-display font-bold text-xs sm:text-lg transition-colors" style={{ color: '#050720' }}>More Services</p>
+                  <p className="text-[9px] sm:text-sm mt-0.5 sm:mt-1 leading-normal sm:leading-relaxed line-clamp-2 sm:line-clamp-none font-medium" style={{ color: '#1a2355' }}>
+                    Custom solutions for any business need
+                  </p>
+                </div>
+                <span
+                  className="font-display text-[9px] sm:text-xs font-bold tracking-wider sm:tracking-widest uppercase group-hover:underline flex items-center gap-1"
+                  style={{ color: '#050720' }}>
+                  Explore Services →
+                </span>
               </motion.div>
-              <div className="text-center px-2 sm:px-8">
-                <p className="font-display font-bold text-xs sm:text-lg transition-colors" style={{ color: '#3b1a08' }}>More Services</p>
-                <p className="text-[9px] sm:text-sm mt-0.5 sm:mt-1 leading-normal sm:leading-relaxed line-clamp-2 sm:line-clamp-none font-medium" style={{ color: '#7a4520' }}>
-                  Custom solutions for any business need
-                </p>
-              </div>
-              <button onClick={() => setShowModal(true)}
-                className="font-display text-[9px] sm:text-xs font-bold tracking-wider sm:tracking-widest uppercase hover:underline"
-                style={{ color: '#C9956C' }}>
-                Get in touch →
-              </button>
-            </motion.div>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

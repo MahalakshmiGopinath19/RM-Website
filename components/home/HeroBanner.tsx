@@ -289,14 +289,14 @@ function CosmicOrbits({ uid = 'orb' }: { uid?: string }) {
 
       {/* Left Pill (Any Industry. Every Business.) */}
       <div
-        className="absolute left-[1.5%] sm:left-[3.5%] md:left-[5%] top-[44.4%] -translate-y-1/2 z-30 w-[115px] xs:w-[130px] sm:w-[150px] md:w-[175px] lg:w-[190px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-peachAccent/40 rounded-full px-2 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3.5 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(255,137,118,0.08)]"
+        className="absolute left-[0.5%] sm:left-[2%] md:left-[3.5%] top-[44.4%] -translate-y-1/2 z-30 w-auto min-w-[125px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-peachAccent/40 rounded-full px-2.5 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(255,137,118,0.08)]"
       >
         <div className="w-6 h-6 xs:w-7 xs:h-7 md:w-10 md:h-10 rounded-full bg-peachAccent/10 border border-peachAccent/20 flex items-center justify-center flex-shrink-0 text-peachAccent shadow-[0_0_10px_rgba(255,137,118,0.1)] group-hover:scale-105 transition-transform">
           <FaUsers size={11} className="xs:size-[12px] md:size-[16px]" />
         </div>
-        <div className="flex flex-col text-left overflow-hidden">
-          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight truncate">Any Industry.</span>
-          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 truncate">Every Business.</span>
+        <div className="flex flex-col text-left">
+          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight whitespace-nowrap">Any Industry.</span>
+          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 whitespace-nowrap">Every Business.</span>
         </div>
       </div>
 
@@ -344,27 +344,27 @@ function CosmicOrbits({ uid = 'orb' }: { uid?: string }) {
 
       {/* Right Pill (From Scratch to Success Story.) */}
       <div
-        className="absolute right-[1.5%] sm:right-[3.5%] md:right-[5%] top-[44.4%] -translate-y-1/2 z-30 w-[115px] xs:w-[130px] sm:w-[150px] md:w-[165px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-electricCyan/40 rounded-full px-2 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(6,182,212,0.08)]"
+        className="absolute right-[0.5%] sm:right-[2%] md:right-[3.5%] top-[44.4%] -translate-y-1/2 z-30 w-auto min-w-[135px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-electricCyan/40 rounded-full px-2.5 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(6,182,212,0.08)]"
       >
         <div className="w-6 h-6 xs:w-7 xs:h-7 md:w-10 md:h-10 rounded-full bg-electricCyan/10 border border-electricCyan/20 flex items-center justify-center flex-shrink-0 text-electricCyan shadow-[0_0_10px_rgba(6,182,212,0.1)] group-hover:scale-105 transition-transform">
           <FaChartLine size={10} className="xs:size-[11px] md:size-[15px]" />
         </div>
-        <div className="flex flex-col text-left overflow-hidden">
-          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight truncate">From Scratch to</span>
-          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 truncate">Success Story.</span>
+        <div className="flex flex-col text-left">
+          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight whitespace-nowrap">From Scratch to</span>
+          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 whitespace-nowrap">Success Story.</span>
         </div>
       </div>
 
       {/* Bottom Pill (Our Strategies. Your Growth.) */}
       <div
-        className="absolute left-1/2 -translate-x-1/2 top-[90.5%] -translate-y-1/2 z-30 w-[115px] xs:w-[130px] sm:w-[150px] md:w-[165px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-peachAccent/40 rounded-full px-2 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(255,137,118,0.08)]"
+        className="absolute left-1/2 -translate-x-1/2 top-[90.5%] -translate-y-1/2 z-30 w-auto min-w-[130px] flex items-center gap-1.5 xs:gap-2 md:gap-3 bg-[#030218]/90 backdrop-blur-md border border-white/10 hover:border-peachAccent/40 rounded-full px-2.5 py-1.5 xs:px-3 xs:py-2 md:px-4 md:py-3 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] group hover:shadow-[0_0_20px_rgba(255,137,118,0.08)]"
       >
         <div className="w-6 h-6 xs:w-7 xs:h-7 md:w-10 md:h-10 rounded-full bg-peachAccent/10 border border-peachAccent/20 flex items-center justify-center flex-shrink-0 text-peachAccent shadow-[0_0_10px_rgba(255,137,118,0.1)] group-hover:scale-105 transition-transform">
           <FaBullseye size={11} className="xs:size-[12px] md:size-[16px]" />
         </div>
-        <div className="flex flex-col text-left overflow-hidden">
-          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight truncate">Our Strategies.</span>
-          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 truncate">Your Growth.</span>
+        <div className="flex flex-col text-left">
+          <span className="text-white text-[9px] xs:text-[10px] md:text-xs font-bold font-display leading-tight whitespace-nowrap">Our Strategies.</span>
+          <span className="text-[#acabcb] text-[8px] xs:text-[9px] md:text-[10px] font-semibold leading-tight mt-0.5 whitespace-nowrap">Your Growth.</span>
         </div>
       </div>
     </div>
@@ -415,7 +415,7 @@ export default function HeroBanner({ setShowModal }: HeroBannerProps) {
                 <span className="relative rounded-full h-2.5 w-2.5 bg-electricCyan" />
               </div>
               <span className="font-display text-white/85 text-[10px] tracking-[0.3em] uppercase font-bold">
-                AI‑Integrated Digital Agency
+                AI‑Integrated Digital Marketing Agency
               </span>
             </motion.div>
 
@@ -433,23 +433,18 @@ export default function HeroBanner({ setShowModal }: HeroBannerProps) {
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col items-center gap-3 w-full max-w-xs">
-              <button
-                onClick={() => setShowModal(true)}
-                className="relative group overflow-hidden rounded-full p-[1px] w-full focus:outline-none transition-all duration-300 active:scale-95"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-peachAccent via-[#ffbfa3] to-electricCyan rounded-full" />
-                <div className="relative px-8 py-3.5 bg-[#020215] rounded-full text-white font-display text-sm font-bold tracking-wide flex items-center justify-center gap-2 group-hover:bg-transparent transition-colors duration-300">
-                  Get Free Audit <FaArrowRight size={11} />
-                </div>
-              </button>
               <a
                 href="https://wa.me/917305821333"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3.5 w-full rounded-full border border-white/10 text-[#acabcb] font-display text-sm font-semibold tracking-wide flex items-center justify-center gap-2 bg-white/[0.02]"
+                className="relative group overflow-hidden rounded-full p-[1px] w-full focus:outline-none transition-all duration-300 active:scale-95 shadow-[0_0_20px_rgba(255,137,118,0.15)] hover:shadow-[0_0_25px_rgba(255,137,118,0.25)]"
               >
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                WhatsApp Now
+                <span className="absolute inset-0 bg-gradient-to-r from-peachAccent via-[#ffbfa3] to-electricCyan rounded-full animate-pulse" />
+                <div className="relative px-8 py-3.5 bg-[#020215] rounded-full text-white font-display text-sm font-bold tracking-wide flex items-center justify-center gap-2.5 transition-colors duration-300 group-hover:bg-transparent">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+                  WhatsApp Now
+                  <FaArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
+                </div>
               </a>
             </motion.div>
           </motion.div>
@@ -502,26 +497,21 @@ export default function HeroBanner({ setShowModal }: HeroBannerProps) {
               </motion.p>
 
               <motion.div variants={fadeUp} className="flex flex-row items-center gap-4">
-                <button
-                  onClick={() => setShowModal(true)}
-                  className="relative group overflow-hidden rounded-full p-[1px] focus:outline-none transition-all duration-300 active:scale-95 shadow-[0_0_20px_rgba(255,137,118,0.15)] hover:shadow-[0_0_25px_rgba(255,137,118,0.25)]"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-peachAccent via-[#ffbfa3] to-electricCyan rounded-full animate-pulse" />
-                  <div className="relative px-8 py-4 bg-[#020215] rounded-full text-white font-display text-sm font-bold tracking-wide flex items-center justify-center gap-3 transition-colors duration-300 group-hover:bg-transparent">
-                    Get Free Audit
-                    <FaArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </button>
-
-                <a
-                  href="https://wa.me/917305821333"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 rounded-full border border-white/10 hover:border-white/20 text-[#acabcb] hover:text-white font-display text-sm font-semibold tracking-wide flex items-center justify-center gap-3 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300"
-                >
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  WhatsApp Now
-                </a>
+                <Magnetic>
+                  <a
+                    href="https://wa.me/917305821333"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative group overflow-hidden rounded-full p-[1px] focus:outline-none transition-all duration-300 active:scale-95 shadow-[0_0_20px_rgba(255,137,118,0.15)] hover:shadow-[0_0_25px_rgba(255,137,118,0.25)] block"
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-peachAccent via-[#ffbfa3] to-electricCyan rounded-full animate-pulse" />
+                    <div className="relative px-8 py-4 bg-[#020215] rounded-full text-white font-display text-sm font-bold tracking-wide flex items-center justify-center gap-3 transition-colors duration-300 group-hover:bg-transparent">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+                      WhatsApp Now
+                      <FaArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </a>
+                </Magnetic>
               </motion.div>
             </motion.div>
 

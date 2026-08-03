@@ -12,7 +12,7 @@ export default function Footer() {
 
   const navigate = [
     { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
+    { name: 'Journey', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Products', href: '/products' },
     { name: 'Careers', href: '/career' },

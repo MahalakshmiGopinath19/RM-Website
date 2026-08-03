@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaArrowRight, FaHeartbeat, FaLayerGroup, FaSync } from 'react-icons/fa';
+import { FaArrowRight, FaPhoneAlt, FaEnvelope, FaHeartbeat, FaLayerGroup, FaSync } from 'react-icons/fa';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -53,7 +53,7 @@ export default function Header() {
 
   const menuItems = [
     { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
+    { name: 'Journey', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Products', href: '/products' },
     { name: 'Careers', href: '/career' },
@@ -69,8 +69,29 @@ export default function Header() {
 
   return (
     <>
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#020215]/90 backdrop-blur-md border-b border-white/5 py-2 shadow-lg' : 'bg-transparent py-4'}`}>
-        <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center">
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#020215]/95 backdrop-blur-md border-b border-white/5 shadow-lg' : 'bg-[#020215]/80 backdrop-blur-sm'}`}>
+        
+        {/* Top Contact Bar */}
+        <div className="border-b border-white/10 bg-black/40 py-1.5 px-6 lg:px-12 text-xs font-display text-[#acabcb]">
+          <div className="container mx-auto flex justify-between items-center">
+            <div className="flex items-center gap-4 sm:gap-6">
+              <a href="tel:+917305821333" className="flex items-center gap-1.5 hover:text-peachAccent transition-colors">
+                <FaPhoneAlt size={10} className="text-peachAccent" />
+                <span className="font-semibold">+91 73058 21333</span>
+              </a>
+              <a href="mailto:info@vaavedigital.com" className="flex items-center gap-1.5 hover:text-peachAccent transition-colors">
+                <FaEnvelope size={10} className="text-peachAccent" />
+                <span className="font-semibold">info@vaavedigital.com</span>
+              </a>
+            </div>
+            <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-widest text-white/40">
+              AI-Integrated Digital Agency
+            </span>
+          </div>
+        </div>
+
+        {/* Main Header */}
+        <div className="container mx-auto px-6 lg:px-12 py-2 flex justify-between items-center">
 
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 transform transition duration-300 hover:opacity-90">
@@ -79,7 +100,7 @@ export default function Header() {
               alt="Vaave Digital Logo"
               width={280}
               height={77}
-              className="w-auto h-[56px] md:h-[76px]"
+              className="w-auto h-[50px] md:h-[66px]"
               priority
             />
           </Link>
@@ -109,7 +130,7 @@ export default function Header() {
               onClick={() => setShowModal(true)}
               className="group flex items-center gap-3 rounded-full border border-white/10 hover:border-peachAccent/40 bg-white/5 hover:bg-white/10 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 shadow-md"
             >
-              Get a Free Consultation
+              Free Consultation
               <span className="flex w-6 h-6 rounded-full bg-gradient-rosegold items-center justify-center text-darkBg text-xs group-hover:translate-x-0.5 transition-transform duration-300">
                 <FaArrowRight />
               </span>
@@ -146,18 +167,29 @@ export default function Header() {
                 onClick={() => { setShowModal(true); setMobileMenuOpen(false); }}
                 className="mt-2 group flex items-center justify-center gap-3 w-full bg-white/5 hover:bg-white/10 border border-white/10 rounded-full py-3 text-sm font-bold text-white transition-all duration-300"
               >
-                Get a Free Consultation
+                Free Consultation
                 <span className="flex w-6 h-6 rounded-full bg-gradient-rosegold items-center justify-center text-darkBg text-xs">
                   <FaArrowRight />
                 </span>
               </button>
+
+              <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5 text-xs font-display text-[#acabcb]">
+                <a href="tel:+917305821333" className="flex items-center gap-2 hover:text-peachAccent transition-colors">
+                  <FaPhoneAlt size={11} className="text-peachAccent" />
+                  <span>+91 73058 21333</span>
+                </a>
+                <a href="mailto:info@vaavedigital.com" className="flex items-center gap-2 hover:text-peachAccent transition-colors">
+                  <FaEnvelope size={11} className="text-peachAccent" />
+                  <span>info@vaavedigital.com</span>
+                </a>
+              </div>
             </div>
           </div>
         )}
       </header>
 
       {/* Spacer to push content below fixed header */}
-      <div className="h-[76px] md:h-[92px]"></div>
+      <div className="h-[96px] md:h-[110px]"></div>
 
       {/* Consultation Modal */}
       {showModal && (

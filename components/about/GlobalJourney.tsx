@@ -45,7 +45,7 @@ export default function GlobalJourney() {
               
               <div className="space-y-6 text-[#acabcb]/95 text-base sm:text-lg leading-relaxed font-medium">
                 <p>
-                  Since our inception in <strong>2018</strong>, Vaave Digital has pioneered data-driven and AI-integrated digital marketing strategies designed to push traditional boundaries. We empower modern brands to expand their horizons through advanced performance audits, intelligent customer acquisition funnels, and premium UI/UX design architectures.
+                  Since our inception in <strong>2018</strong>, Vaave Digital has pioneered end-to-end digital marketing, branding, AI-integrated customized software, and AI automation. We empower modern brands to expand their horizons through data-driven strategies, intelligent customer acquisition funnels, and premium digital architectures.
                 </p>
                 <p>
                   Our journey began with a bold vision to revolutionize local enterprises within <strong>India</strong>. By delivering exceptional, measurable ROI and building future-proof digital assets, we quickly established ourselves as industry leaders.

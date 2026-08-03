@@ -368,7 +368,7 @@ export default function AboutPage() {
             className="text-center max-w-4xl mx-auto">
             
             <motion.span variants={fadeUp} className="inline-block bg-[#050720]/5 text-[#050720] border border-[#050720]/15 px-4 py-1.5 rounded-full text-xs font-display font-extrabold uppercase tracking-widest mb-4">
-              About VAAVE DIGITAL
+              VAAVE DIGITAL Journey
             </motion.span>
 
             <motion.h2 variants={fadeUp} className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[46px] font-black tracking-tight leading-[1.1] text-slate-900 mb-8">
@@ -413,9 +413,9 @@ export default function AboutPage() {
               </div>
 
               <div className="relative z-10 flex-shrink-0">
-                <a href="https://wa.me/917305821333?text=Hi%20Vaave%20Digital!%20I%20want%20to%20learn%20more%20about%20your%20services." target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-gradient-rosegold text-[#050720] px-6 py-3.5 rounded-full font-display font-black text-sm shadow-xl hover:brightness-110 transition-all">
+                <Link href="/contact" className="inline-flex items-center gap-2 bg-gradient-rosegold text-[#050720] px-6 py-3.5 rounded-full font-display font-black text-sm shadow-xl hover:brightness-110 transition-all">
                   Partner With Us <FaArrowRight size={13} />
-                </a>
+                </Link>
               </div>
             </motion.div>
 
